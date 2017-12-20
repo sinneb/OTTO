@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>engine-props.hpp</title>
+</head>
+<body>
+<article id="standardese-engine-props.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>engine-props.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">memory</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">algorithm</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">cmath</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">limits</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">type_traits</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">plog&#x2F;Log.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;jsonfile.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">engines</span>
+    <span class="pun">{</span>
+        <span class="kwd">inline</span> <span class="kwd">namespace</span> <span class="typ dec var fun">mode</span>
+        <span class="pun">{</span>
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <span class="typ dec var fun">is_mode</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">T</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">inline</span> <span class="typ dec var fun">bool</span> <span class="kwd">is_mode_v</span> <span class="pun">=</span> <span class="kwd">is_mode</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Tag</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::mode_for_tag%3CT,Tag,Enable%3E"><span class="typ dec var fun">mode_for_tag</span></a><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Tag</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+            <span class="kwd">using</span> <span class="typ dec var fun">mode_for_tag_m</span> <span class="pun">=</span> typename mode_for_tag&lt;T, Tag, Enable&gt;::mode<span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::def"><span class="typ dec var fun">def</span></a><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::sized_step"><span class="typ dec var fun">sized_step</span></a><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <span class="typ dec var fun">sized_step_mode</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::mode_for_tag%3CT,Tag,Enable%3E"><span class="typ dec var fun">mode_for_tag</span></a><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">,</span> <span class="kwd">sized_step</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">enable_if_t</span><span class="pun">&lt;</span><span class="kwd">util</span><span class="pun">::</span><span class="kwd">is_number_or_enum_v</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;&gt;</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::wrap"><span class="typ dec var fun">wrap</span></a><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <span class="typ dec var fun">wrap_mode</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <span class="typ dec var fun">exp_mode</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::exp"><span class="typ dec var fun">exp</span></a><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <span class="typ dec var fun">log2_mode</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::log2"><span class="typ dec var fun">log2</span></a><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <span class="typ dec var fun">pow2_mode</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::pow2"><span class="typ dec var fun">pow2</span></a><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::toggle"><span class="typ dec var fun">toggle</span></a><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <span class="typ dec var fun">toggle_mode</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::plain_set"><span class="typ dec var fun">plain_set</span></a><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <span class="typ dec var fun">plain_set_mode</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::mode_for_tag%3CT,Tag,Enable%3E"><span class="typ dec var fun">mode_for_tag</span></a><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">,</span> <span class="kwd">wrap</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">enable_if_t</span><span class="pun">&lt;</span><span class="kwd">util</span><span class="pun">::</span><span class="kwd">is_number_or_enum_v</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;&gt;</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::mode_for_tag%3CT,Tag,Enable%3E"><span class="typ dec var fun">mode_for_tag</span></a><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">,</span> <span class="kwd">def</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">enable_if_t</span><span class="pun">&lt;</span><span class="kwd">util</span><span class="pun">::</span><span class="kwd">is_number_or_enum_v</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;&gt;</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::mode_for_tag%3CT,Tag,Enable%3E"><span class="typ dec var fun">mode_for_tag</span></a><span class="pun">&lt;</span><span class="typ dec var fun">bool</span><span class="pun">,</span> <span class="kwd">def</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::mode_for_tag%3CT,Tag,Enable%3E"><span class="typ dec var fun">mode_for_tag</span></a><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">string</span><span class="pun">,</span> <span class="kwd">def</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Tag</span><span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_engine-props.html#standardese-otto::engines::mode::mode_for_tag%3CT,Tag,Enable%3E"><span class="typ dec var fun">mode_for_tag</span></a><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">,</span> <span class="kwd">Tag</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">void_t</span><span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">Tag</span><span class="pun">::</span><span class="typ dec var fun">template</span>  <span class="kwd">mode</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;&gt;</span><span class="pun">&gt;</span><span class="pun">;</span>
+        <span class="pun">}</span>
+
+        <span class="kwd">struct</span> <span class="typ dec var fun">PropertyBase</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">to_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <span class="typ dec var fun">otto::engines::PropertyBase</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">pb</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">from_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <span class="typ dec var fun">otto::engines::PropertyBase</span><span class="pun">&amp;</span> <span class="typ dec var fun">pb</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">Properties</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">mode_tag</span> <span class="pun">=</span> mode::def<span class="pun">,</span> <span class="kwd">bool</span> <span class="typ dec var fun">_store</span> <span class="pun">=</span> <span class="typ dec var fun">true</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">mode_type</span> <span class="pun">=</span> typename mode::mode_for_tag_m&lt;T,mode_tag&gt;<span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">Property</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::engines" class="standardese-entity-documentation">
+<section id="standardese-otto::engines::mode" class="standardese-entity-documentation">
+<section id="standardese-otto::engines::mode::mode_for_tag&lt;T,Tag,Enable&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::mode_for_tag</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Tag</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">mode_for_tag</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::mode_for_tag&lt;T,Tag,Enable&gt;-brief" class="standardese-brief-section">Has a member typedef <code>mode</code>, selected based on the type and the tag.</p>
+<p>Specialize this for each mode</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::def" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::def</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">def</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::def-brief" class="standardese-brief-section">Pass to mode_for_tag, to get the default mode for a type
+Specialize <code>mode_for_tag</code> with at least this for each new type</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::sized_step" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::sized_step</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">sized_step</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::sized_step-brief" class="standardese-brief-section">Steps up&#x2F;down by <code>step</code>, until <code>min</code>&#x2F;<code>max</code> is reached, then stops</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::wrap" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::wrap</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">wrap</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::wrap-brief" class="standardese-brief-section">Like <code>sized_step</code>, but wraps around when <code>max</code> or <code>min</code> reached</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::exp" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::exp</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">exp</span>
+<span class="pun">{</span>
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">mode</span> <span class="pun">=</span> <span class="typ dec var fun">std::enable_if_t</span><span class="pun">&lt;</span>util::is_number_or_enum_v&lt;T&gt;, exp_mode&lt;T&gt;<span class="pun">&gt;</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::exp-brief" class="standardese-brief-section">Like <code>sized_step</code>, But steps exponentially</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::log2" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::log2</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">log2</span>
+<span class="pun">{</span>
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">mode</span> <span class="pun">=</span> <span class="typ dec var fun">std::enable_if_t</span><span class="pun">&lt;</span>util::is_number_or_enum_v&lt;T&gt;, log2_mode&lt;T&gt;<span class="pun">&gt;</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::log2-brief" class="standardese-brief-section">Keep a cached value of <code>log2(value)</code> avaliable at <code>mode.log2()</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::pow2" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::pow2</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">pow2</span>
+<span class="pun">{</span>
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">mode</span> <span class="pun">=</span> <span class="typ dec var fun">std::enable_if_t</span><span class="pun">&lt;</span>util::is_number_or_enum_v&lt;T&gt;, pow2_mode&lt;T&gt;<span class="pun">&gt;</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::pow2-brief" class="standardese-brief-section">Keep a cached value of <code>pow(2, value)</code> avaliable at <code>mode.pow2()</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::toggle" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::toggle</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">toggle</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::toggle-brief" class="standardese-brief-section">Default mode for Bool</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::mode::plain_set" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::mode::plain_set</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">plain_set</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::mode::plain_set-brief" class="standardese-brief-section">Non-numeric</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

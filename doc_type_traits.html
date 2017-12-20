@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>type_traits.hpp</title>
+</head>
+<body>
+<article id="standardese-type_traits.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>type_traits.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">iterator</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">type_traits</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">variant.hpp</span><span class="pre">&gt;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::is_number%3CT,Enable%3E"><span class="typ dec var fun">is_number</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::is_number%3CT,Enable%3E"><span class="typ dec var fun">is_number</span></a><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">enable_if_t</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">is_arithmetic_v</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;</span> <span class="pun">&amp;&amp;</span> <span class="pun">!</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">is_same_v</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">,</span> <span class="typ dec var fun">bool</span><span class="pun">&gt;&gt;</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">T</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">inline</span> <span class="typ dec var fun">bool</span> <span class="kwd">is_number_v</span> <span class="pun">=</span> <span class="kwd">is_number</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">is_number_or_enum</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">is_number_or_enum</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">enable_if_t</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">is_enum_v</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;</span> <span class="pun">||</span> <span class="kwd">is_number_v</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;&gt;</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">T</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">inline</span> <span class="typ dec var fun">bool</span> <span class="kwd">is_number_or_enum_v</span> <span class="pun">=</span> <span class="kwd">is_number_or_enum</span><span class="pun">&lt;</span><span class="kwd">T</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Ls</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::overloaded%3CLs%3E"><span class="typ dec var fun">overloaded</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Var</span><span class="pun">,</span> <span class="kwd">class</span> <span class="pun">...</span> <span class="typ dec var fun">Lambdas</span><span class="pun">&gt;</span>
+        <span class="kwd">auto</span> <a href="doc_type_traits.html#standardese-otto::util::match%3CVar,Lambdas%3E(Var&amp;&amp;,Lambdas...)"><span class="typ dec var fun">match</span></a><span class="pun">(</span><span class="typ dec var fun">Var</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">v</span><span class="pun">,</span> Lambdas... <span class="typ dec var fun">ls</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">bool</span> <span class="typ dec var fun">b</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T1</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T2</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::select_type%3Cb,T1,T2%3E"><span class="typ dec var fun">select_type</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T1</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T2</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::select_type%3Cb,T1,T2%3E"><span class="typ dec var fun">select_type</span></a><span class="pun">&lt;</span><span class="typ dec var fun">true</span><span class="pun">,</span> <span class="kwd">T1</span><span class="pun">,</span> <span class="kwd">T2</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T1</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T2</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::select_type%3Cb,T1,T2%3E"><span class="typ dec var fun">select_type</span></a><span class="pun">&lt;</span><span class="typ dec var fun">false</span><span class="pun">,</span> <span class="kwd">T1</span><span class="pun">,</span> <span class="kwd">T2</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">bool</span> <span class="typ dec var fun">b</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T1</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T2</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">select_type_t</span> <span class="pun">=</span> typename select_type&lt;b, T1, T2&gt;::type<span class="pun">;</span>
+
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">bool</span> <span class="kwd">b</span><span class="pun">,</span> <span class="typ dec var fun">typename</span> <span class="kwd">T1</span><span class="pun">,</span> <span class="typ dec var fun">typename</span> <span class="kwd">T2</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">bool</span> <span class="kwd">select_type_v</span> <span class="pun">=</span> <span class="kwd">select_type</span><span class="pun">&lt;</span><span class="kwd">b</span><span class="pun">,</span> <span class="kwd">T1</span><span class="pun">,</span> <span class="kwd">T2</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">type</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">category</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::is_iterator%3Citer,type,category,Enable%3E"><span class="typ dec var fun">is_iterator</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">type</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">category</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::is_iterator%3Citer,type,category,Enable%3E"><span class="typ dec var fun">is_iterator</span></a><span class="pun">&lt;</span><span class="kwd">iter</span><span class="pun">,</span> <span class="kwd">type</span><span class="pun">,</span> <span class="kwd">category</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">enable_if_t</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">is_same_v</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">remove_reference_t</span><span class="pun">&lt;</span><span class="kwd">iter</span><span class="pun">&gt;</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">iterator_traits</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">remove_reference_t</span><span class="pun">&lt;</span><span class="kwd">iter</span><span class="pun">&gt;&gt;</span><span class="pun">::</span><span class="kwd">value_type</span><span class="pun">&gt;</span> <span class="pun">&amp;&amp;</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">is_base_of_v</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">remove_reference_t</span><span class="pun">&lt;</span><span class="kwd">iter</span><span class="pun">&gt;</span><span class="pun">,</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">iterator_traits</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">remove_reference_t</span><span class="pun">&lt;</span><span class="kwd">iter</span><span class="pun">&gt;&gt;</span><span class="pun">::</span><span class="kwd">iterator_category</span><span class="pun">&gt;&gt;</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">iter</span><span class="pun">,</span> <span class="typ dec var fun">typename</span> <span class="kwd">type</span><span class="pun">,</span> <span class="typ dec var fun">typename</span> <span class="kwd">category</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">bool</span> <span class="kwd">is_iterator_v</span> <span class="pun">=</span> <span class="kwd">is_iterator</span><span class="pun">&lt;</span><span class="kwd">iter</span><span class="pun">,</span> <span class="kwd">type</span><span class="pun">,</span> <span class="kwd">category</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::int_n_bytes%3CN%3E"><span class="typ dec var fun">int_n_bytes</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::int_n_bytes%3CN%3E"><span class="typ dec var fun">int_n_bytes</span></a><span class="pun">&lt;</span><span class="lit">1</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::int_n_bytes%3CN%3E"><span class="typ dec var fun">int_n_bytes</span></a><span class="pun">&lt;</span><span class="lit">2</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::int_n_bytes%3CN%3E"><span class="typ dec var fun">int_n_bytes</span></a><span class="pun">&lt;</span><span class="lit">4</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_type_traits.html#standardese-otto::util::int_n_bytes%3CN%3E"><span class="typ dec var fun">int_n_bytes</span></a><span class="pun">&lt;</span><span class="lit">8</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">int_n_bytes_t</span> <span class="pun">=</span> typename int_n_bytes&lt;N&gt;::type<span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">int_n_bytes_u_t</span> <span class="pun">=</span> typename int_n_bytes&lt;N&gt;::utype<span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">F</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">is_invocable</span> <span class="pun">=</span> <span class="typ dec var fun">mpark::lib::is_invocable</span><span class="pun">&lt;</span>F, Args...<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">F</span><span class="pun">,</span> <span class="typ dec var fun">typename</span><span class="pun">...</span><span class="kwd">Args</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">bool</span> <span class="kwd">is_invocable_v</span> <span class="pun">=</span> <span class="kwd">mpark</span><span class="pun">::</span><span class="kwd">lib</span><span class="pun">::</span><span class="kwd">is_invocable</span><span class="pun">&lt;</span><span class="kwd">F</span><span class="pun">,</span> <span class="kwd">Args</span><span class="pun">...</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">R</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">F</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">is_invocable_r</span> <span class="pun">=</span> <span class="typ dec var fun">mpark::lib::is_invocable_r</span><span class="pun">&lt;</span>R, F, Args...<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">R</span><span class="pun">,</span> <span class="typ dec var fun">typename</span> <span class="kwd">F</span><span class="pun">,</span> <span class="typ dec var fun">typename</span><span class="pun">...</span><span class="kwd">Args</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">bool</span> <span class="kwd">is_invocable_r_v</span> <span class="pun">=</span> <span class="kwd">mpark</span><span class="pun">::</span><span class="kwd">lib</span><span class="pun">::</span><span class="kwd">is_invocable_r</span><span class="pun">&lt;</span><span class="kwd">R</span><span class="pun">,</span> <span class="kwd">F</span><span class="pun">,</span> <span class="kwd">Args</span><span class="pun">...</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">F</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">invoke_result</span> <span class="pun">=</span> <span class="typ dec var fun">mpark::lib::invoke_result</span><span class="pun">&lt;</span>F, Args...<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">F</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">invoke_result_t</span> <span class="pun">=</span> <span class="typ dec var fun">mpark::lib::invoke_result_t</span><span class="pun">&lt;</span>F, Args...<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">E</span><span class="pun">&gt;</span>
+        <span class="kwd">constexpr</span> <span class="typ dec var fun">std::underlying_type_t</span><span class="pun">&lt;</span>E<span class="pun">&gt;</span> <a href="doc_type_traits.html#standardese-otto::util::underlying%3CE%3E(E)"><span class="typ dec var fun">underlying</span></a><span class="pun">(</span><span class="typ dec var fun">E</span> <span class="typ dec var fun">e</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::is_number&lt;T,Enable&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::is_number</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">is_number</span>
+<span class="pun">:</span> <span class="typ dec var fun">std::false_type</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::is_number&lt;T,Enable&gt;-brief" class="standardese-brief-section">Any arithmetic type except bool</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::overloaded&lt;Ls&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::overloaded</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Ls</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">overloaded</span>
+<span class="pun">:</span> <span class="typ dec var fun">Ls</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">overloaded</span><span class="pun">(</span>Ls... <span class="typ dec var fun">ls</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Ls::operator()</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::overloaded&lt;Ls&gt;-brief" class="standardese-brief-section">Overload lambdas</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::match&lt;Var,Lambdas&gt;(Var&amp;&amp;,Lambdas...)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::match</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Var</span><span class="pun">,</span> <span class="kwd">class</span> <span class="pun">...</span> <span class="typ dec var fun">Lambdas</span><span class="pun">&gt;</span>
+<span class="kwd">auto</span> <span class="typ dec var fun">match</span><span class="pun">(</span><span class="typ dec var fun">Var</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">v</span><span class="pun">,</span> Lambdas... <span class="typ dec var fun">ls</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::match&lt;Var,Lambdas&gt;(Var&amp;&amp;,Lambdas...)-brief" class="standardese-brief-section">Pattern matching for std::variant</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::select_type&lt;b,T1,T2&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::select_type</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">bool</span> <span class="typ dec var fun">b</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T1</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">T2</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">select_type</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::select_type&lt;b,T1,T2&gt;-brief" class="standardese-brief-section">has member type <code>type</code> which is <code>T1</code> if b is <code>true</code>,
+otherwise it is <code>T2</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::is_iterator&lt;iter,type,category,Enable&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::is_iterator</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">type</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">category</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Enable</span> <span class="pun">=</span> void<span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">is_iterator</span>
+<span class="pun">:</span> <span class="typ dec var fun">std::false_type</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::is_iterator&lt;iter,type,category,Enable&gt;-brief" class="standardese-brief-section">Extends <code>std::true_type</code> if <code>iter</code> is an iterator over <code>type</code>,
+with category of at least <code>category</code></p>
+<p>Checks <code>std::iterator_traits</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::is_iterator_v" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Unexposed entity <code>otto::util::is_iterator_v</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">iter</span><span class="pun">,</span> <span class="typ dec var fun">typename</span> <span class="kwd">type</span><span class="pun">,</span> <span class="typ dec var fun">typename</span> <span class="kwd">category</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="typ dec var fun">bool</span> <span class="kwd">is_iterator_v</span> <span class="pun">=</span> <span class="kwd">is_iterator</span><span class="pun">&lt;</span><span class="kwd">iter</span><span class="pun">,</span> <span class="kwd">type</span><span class="pun">,</span> <span class="kwd">category</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::is_iterator_v-brief" class="standardese-brief-section"><code>true</code> if <code>iter</code> is an iterator over <code>type</code>,
+with category of at least <code>category</code></p>
+<p>Checks <code>std::iterator_traits</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::int_n_bytes&lt;N&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::int_n_bytes</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">int_n_bytes</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::int_n_bytes&lt;N&gt;-brief" class="standardese-brief-section">Get an integer with <code>N</code> bytes</p>
+<p>If possible, has member types <code>type</code> and <code>utype</code>,
+Corresponding to the signed and unsigned ints of size <code>N</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::underlying&lt;E&gt;(E)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::underlying</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">E</span><span class="pun">&gt;</span>
+<span class="kwd">constexpr</span> <span class="typ dec var fun">std::underlying_type_t</span><span class="pun">&lt;</span>E<span class="pun">&gt;</span> <span class="typ dec var fun">underlying</span><span class="pun">(</span><span class="typ dec var fun">E</span> <span class="typ dec var fun">e</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::underlying&lt;E&gt;(E)-brief" class="standardese-brief-section">Cast scoped enums to their underlying numeric type</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

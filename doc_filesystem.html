@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>filesystem.hpp</title>
+</head>
+<body>
+<article id="standardese-filesystem.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>filesystem.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">chrono</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">memory</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string_view</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">system_error</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">filesystem</span>
+    <span class="pun">{</span>
+        <span class="kwd">class</span> <span class="typ dec var fun">path</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">swap</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">size_t</span> <span class="typ dec var fun">hash_value</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">operator&lt;</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">operator&lt;=</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">operator&gt;</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">operator&gt;=</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">operator==</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">operator!=</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">operator&#x2F;</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">charT</span><span class="pun">,</span> <span class="kwd">class</span> <span class="typ dec var fun">traits</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">std::basic_ostream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator&lt;&lt;</span><span class="pun">(</span><span class="typ dec var fun">std::basic_ostream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">os</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">charT</span><span class="pun">,</span> <span class="kwd">class</span> <span class="typ dec var fun">traits</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">std::basic_istream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator&gt;&gt;</span><span class="pun">(</span><span class="typ dec var fun">std::basic_istream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">is</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">u8path</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">source</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">InputIterator</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">u8path</span><span class="pun">(</span><span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">first</span><span class="pun">,</span> <span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">last</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">enum</span> <span class="kwd">class</span> <a href="doc_filesystem.html#standardese-otto::filesystem::file_type"><span class="typ dec var fun">file_type</span></a><span class="pun">;</span>
+
+        <span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">copy_options</span><span class="pun">;</span>
+
+        <span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">perms</span><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">file_time_type</span> <span class="pun">=</span> <span class="typ dec var fun">std::chrono::time_point</span><span class="pun">&lt;</span>std::chrono::system_clock<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">perm_options</span><span class="pun">;</span>
+
+        <span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">directory_options</span><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <span class="typ dec var fun">space_info</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">file_status</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">filesystem_error</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">directory_entry</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">directory_iterator</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::directory_iterator</span> <span class="typ dec var fun">begin</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::directory_iterator</span> <span class="typ dec var fun">iter</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::directory_iterator</span> <span class="typ dec var fun">end</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::directory_iterator</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">iter</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">recursive_directory_iterator</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::recursive_directory_iterator</span> <span class="typ dec var fun">begin</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::recursive_directory_iterator</span> <span class="typ dec var fun">iter</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::recursive_directory_iterator</span> <span class="typ dec var fun">end</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::recursive_directory_iterator</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">iter</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">absolute</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">absolute</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">canonical</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">canonical</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">copy</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">copy</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">copy</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::copy_options</span> <span class="typ dec var fun">options</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">copy</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::copy_options</span> <span class="typ dec var fun">options</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">copy_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">copy_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">copy_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::copy_options</span> <span class="typ dec var fun">option</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">copy_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::copy_options</span> <span class="typ dec var fun">option</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">copy_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">existing_symlink</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_symlink</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">copy_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">existing_symlink</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_symlink</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">create_directories</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">create_directories</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">create_directory</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">create_directory</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">create_directory</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">attributes</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">create_directory</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">attributes</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">create_directory_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_symlink</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">create_directory_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_symlink</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">create_hard_link</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_hard_link</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">create_hard_link</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_hard_link</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">create_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_symlink</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">create_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">new_symlink</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">current_path</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">current_path</span><span class="pun">(</span><span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">current_path</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">current_path</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">equivalent</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p1</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p2</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">equivalent</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p1</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p2</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">exists</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">exists</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">exists</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_block_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_block_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_block_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_character_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_character_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_character_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_directory</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_directory</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_directory</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_fifo</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_fifo</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_fifo</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_other</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_other</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_other</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_regular_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_regular_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_regular_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_socket</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_socket</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_socket</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">is_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">file_size</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">file_size</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">hard_link_count</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">hard_link_count</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">file_time_type</span> <span class="typ dec var fun">last_write_time</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">file_time_type</span> <span class="typ dec var fun">last_write_time</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">symlink_status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">symlink_status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">permissions</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::perms</span> <span class="typ dec var fun">prms</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::perm_options</span> <span class="typ dec var fun">opts</span> <span class="pun">=</span> <span class="kwd">perm_options</span><span class="pun">::</span><span class="kwd">replace</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">permissions</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::perms</span> <span class="typ dec var fun">prms</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">permissions</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::perms</span> <span class="typ dec var fun">prms</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::perm_options</span> <span class="typ dec var fun">opts</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">proximate</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">proximate</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">base</span> <span class="pun">=</span> <span class="kwd">current_path</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">proximate</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">base</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">read_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">read_symlink</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">relative</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">relative</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">base</span> <span class="pun">=</span> <span class="kwd">current_path</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">relative</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">base</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">remove</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">remove</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">remove_all</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">remove_all</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">rename</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">rename</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">from</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">to</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">resize_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">size</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">resize_file</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">uintmax_t</span> <span class="typ dec var fun">size</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::space_info</span> <span class="typ dec var fun">space</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::space_info</span> <span class="typ dec var fun">space</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">status_known</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">s</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">symlink_status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::file_status</span> <span class="typ dec var fun">symlink_status</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">temp_directory_path</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">temp_directory_path</span><span class="pun">(</span><span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">weakly_canonical</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::filesystem::path</span> <span class="typ dec var fun">weakly_canonical</span><span class="pun">(</span><span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::error_code</span><span class="pun">&amp;</span> <span class="typ dec var fun">ec</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">fs</span> <span class="pun">=</span> <span class="typ dec var fun">otto::filesystem</span><span class="pun">;</span>
+<span class="pun">}</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">filesystem</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if_t&lt;std::is_constructible_v&lt;path::string_type,Source&gt;<span class="pun">&gt;</span>
+        <span class="typ dec var fun">path::</span><span class="typ dec var fun">path</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">source</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path::format</span> <span class="typ dec var fun">fmt</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">InputIterator</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">path::</span><span class="typ dec var fun">path</span><span class="pun">(</span><span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">first</span><span class="pun">,</span> <span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">last</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path::format</span> <span class="typ dec var fun">fmt</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">operator=</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">source</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">assign</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">source</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">InputIterator</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">assign</span><span class="pun">(</span><span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">first</span><span class="pun">,</span> <span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">last</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">operator&#x2F;=</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">source</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">append</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">source</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">InputIterator</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">append</span><span class="pun">(</span><span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">first</span><span class="pun">,</span> <span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">last</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">operator+=</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">x</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">EcharT</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">operator+=</span><span class="pun">(</span><span class="typ dec var fun">EcharT</span> <span class="typ dec var fun">x</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">Source</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">concat</span><span class="pun">(</span><span class="typ dec var fun">Source</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">x</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">InputIterator</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">path::</span><span class="typ dec var fun">concat</span><span class="pun">(</span><span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">first</span><span class="pun">,</span> <span class="typ dec var fun">InputIterator</span> <span class="typ dec var fun">last</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">charT</span><span class="pun">,</span> <span class="kwd">class</span> <span class="typ dec var fun">traits</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">std::basic_ostream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator&lt;&lt;</span><span class="pun">(</span><span class="typ dec var fun">std::basic_ostream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">os</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">charT</span><span class="pun">,</span> <span class="kwd">class</span> <span class="typ dec var fun">traits</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">std::basic_istream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator&gt;&gt;</span><span class="pun">(</span><span class="typ dec var fun">std::basic_istream</span><span class="pun">&lt;</span>charT, traits<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">is</span><span class="pun">,</span> <span class="typ dec var fun">otto::filesystem::path</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::filesystem" class="standardese-entity-documentation">
+<section id="standardese-otto::filesystem::file_type" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Enumeration <code>otto::filesystem::file_type</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">file_type</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">none</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">,</span>
+    <span class="typ dec var fun">not_found</span><span class="pun">,</span>
+    <span class="typ dec var fun">regular</span><span class="pun">,</span>
+    <span class="typ dec var fun">directory</span><span class="pun">,</span>
+    <span class="typ dec var fun">symlink</span><span class="pun">,</span>
+    <span class="typ dec var fun">block</span><span class="pun">,</span>
+    <span class="typ dec var fun">character</span><span class="pun">,</span>
+    <span class="typ dec var fun">fifo</span><span class="pun">,</span>
+    <span class="typ dec var fun">socket</span><span class="pun">,</span>
+    <span class="typ dec var fun">unknown</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::filesystem::file_type-brief" class="standardese-brief-section">File type enum</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+<section id="standardese-otto" class="standardese-entity-documentation">
+</section>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::filesystem" class="standardese-entity-documentation">
+</section>
+</section>
+</article>
+</body>
+</html>

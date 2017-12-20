@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>screens.hpp</title>
+</head>
+<body>
+<article id="standardese-screens.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>screens.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">functional</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;ui&#x2F;widget.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;ui&#x2F;drawing.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">ui</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">ItemType</span><span class="pun">&gt;</span>
+        <span class="kwd">class</span> <span class="typ dec var fun">SelectorScreen</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">SelectorScreen&lt;ItemType&gt;::</span><span class="typ dec var fun">SelectorScreen</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::SelectorScreen::ItemMap</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">items</span><span class="pun">,</span> <span class="typ dec var fun">vg::Colour</span> <span class="typ dec var fun">c</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">SelectorScreen&lt;ItemType&gt;::</span><span class="typ dec var fun">draw</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">vg::Canvas</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">ctx</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">virtual</span> <span class="kwd">bool</span> <span class="typ dec var fun">SelectorScreen&lt;ItemType&gt;::</span><span class="typ dec var fun">keypress</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">ui::Key</span></a> <span class="typ dec var fun">key</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">SelectorScreen&lt;ItemType&gt;::</span><span class="typ dec var fun">rotary</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::RotaryEvent"><span class="typ dec var fun">ui::RotaryEvent</span></a> <span class="typ dec var fun">e</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">SelectorScreen&lt;ItemType&gt;::</span><span class="typ dec var fun">prev</span><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">SelectorScreen&lt;ItemType&gt;::</span><span class="typ dec var fun">next</span><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">SelectorScreen&lt;ItemType&gt;::</span><span class="typ dec var fun">select</span><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">i</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::ui" class="standardese-entity-documentation">
+</section>
+</section>
+</article>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>drawing.hpp</title>
+</head>
+<body>
+<article id="standardese-drawing.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>drawing.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">fmt&#x2F;format.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">plog&#x2F;Log.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">filesystem.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;ui&#x2F;canvas.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">ui</span>
+    <span class="pun">{</span>
+        <span class="kwd">namespace</span> <span class="typ dec var fun">vg</span>
+        <span class="pun">{</span>
+            <span class="kwd">int</span> <span class="kwd">const</span> <span class="typ dec var fun">WIDTH</span> <span class="pun">=</span> <span class="lit">320</span><span class="pun">;</span>
+
+            <span class="kwd">int</span> <span class="kwd">const</span> <span class="typ dec var fun">HEIGHT</span> <span class="pun">=</span> <span class="lit">240</span><span class="pun">;</span>
+
+            <span class="kwd">namespace</span> <span class="typ dec var fun">Colours</span>
+            <span class="pun">{</span>
+                <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span> <span class="typ dec var fun">Black</span> <span class="pun">=</span> <span class="kwd">Colour</span><span class="pun">(</span><span class="lit">0x000000</span><span class="pun">)</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">otto::ui::vg::MainColour</span> <span class="kwd">const</span> <span class="typ dec var fun">White</span> <span class="pun">=</span> <span class="pun">{</span><span class="lit">0xFFFFFF</span><span class="pun">,</span> <span class="lit">0x646464</span><span class="pun">}</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">otto::ui::vg::MainColour</span> <span class="kwd">const</span> <span class="typ dec var fun">Yellow</span> <span class="pun">=</span> <span class="pun">{</span><span class="lit">0xFAB700</span><span class="pun">,</span> <span class="lit">0x646464</span><span class="pun">}</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">otto::ui::vg::MainColour</span> <span class="kwd">const</span> <span class="typ dec var fun">Red</span> <span class="pun">=</span> <span class="pun">{</span><span class="lit">0xE6332A</span><span class="pun">,</span> <span class="lit">0x6E0C0C</span><span class="pun">}</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">otto::ui::vg::MainColour</span> <span class="kwd">const</span> <span class="typ dec var fun">Green</span> <span class="pun">=</span> <span class="pun">{</span><span class="lit">0x5ECF3E</span><span class="pun">,</span> <span class="lit">0x0C6E0C</span><span class="pun">}</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">otto::ui::vg::MainColour</span> <span class="kwd">const</span> <span class="typ dec var fun">Blue</span> <span class="pun">=</span> <span class="pun">{</span><span class="lit">0x009EE3</span><span class="pun">,</span> <span class="lit">0x0C0C6E</span><span class="pun">}</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span> <span class="typ dec var fun">Gray60</span> <span class="pun">=</span> <span class="lit">0x999999</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span> <span class="typ dec var fun">Gray70</span> <span class="pun">=</span> <span class="lit">0xB2B2B2</span><span class="pun">;</span>
+            <span class="pun">}</span>
+
+            <span class="kwd">namespace</span> <span class="typ dec var fun">Fonts</span>
+            <span class="pun">{</span>
+                <span class="typ dec var fun">NanoCanvas::Font</span> <span class="typ dec var fun">Light</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">NanoCanvas::Font</span> <span class="typ dec var fun">Norm</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">NanoCanvas::Font</span> <span class="typ dec var fun">Bold</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">NanoCanvas::Font</span> <span class="typ dec var fun">SemiBold</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">NanoCanvas::Font</span> <span class="typ dec var fun">Mono</span><span class="pun">;</span>
+
+                <span class="typ dec var fun">fs::path</span> <span class="kwd">const</span> <span class="typ dec var fun">font_dir</span><span class="pun">;</span>
+
+                <span class="kwd">void</span> <span class="typ dec var fun">loadFont</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">otto::ui::vg::Canvas</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">ctx</span><span class="pun">,</span> <span class="typ dec var fun">NanoCanvas::Font</span><span class="pun">&amp;</span> <span class="typ dec var fun">font</span><span class="pun">,</span> <span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">name</span><span class="pun">)</span><span class="pun">;</span>
+            <span class="pun">}</span>
+
+            <span class="kwd">void</span> <span class="typ dec var fun">initUtils</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">otto::ui::vg::Canvas</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">ctx</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="pun">}</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::ui" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::vg" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::vg::Colours" class="standardese-entity-documentation">
+</section>
+<section id="standardese-otto::ui::vg::Fonts" class="standardese-entity-documentation">
+</section>
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

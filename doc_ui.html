@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ui.hpp</title>
+</head>
+<body>
+<article id="standardese-ui.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>ui.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">functional</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">imgui.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;ringbuffer.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;algorithm.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;locked.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#define</span> <span class="typ dec var fun">IF_DEBUG</span><span class="pre">(</span><span class="pre">...</span><span class="pre">)</span>
+
+<span class="pre">#define</span> <span class="typ dec var fun">CALL_IF_DEBUG</span><span class="pre">(</span><span class="pre">lambda</span><span class="pre">)</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">debug</span>
+    <span class="pun">{</span>
+        <span class="kwd">class</span> <span class="typ dec var fun">Info</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">class</span> <span class="typ dec var fun">graph</span><span class="pun">;</span>
+
+        <span class="kwd">namespace</span> <span class="typ dec var fun">ui</span>
+        <span class="pun">{</span>
+            <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>Info *<span class="pun">&gt;</span> <span class="typ dec var fun">info_ptrs</span><span class="pun">;</span>
+        <span class="pun">}</span>
+
+        <span class="typ dec var fun">Info::</span><span class="typ dec var fun">Info</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">virtual</span> <span class="typ dec var fun">Info::</span><span class="typ dec var fun">~Info</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::debug" class="standardese-entity-documentation">
+<section id="standardese-otto::debug::ui" class="standardese-entity-documentation">
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

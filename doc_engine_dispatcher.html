@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>engine_dispatcher.hpp</title>
+</head>
+<body>
+<article id="standardese-engine_dispatcher.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>engine_dispatcher.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;engines&#x2F;engine.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">engines</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">EngineDispatcher</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">to_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <span class="typ dec var fun">otto::engines::EngineDispatcher</span><span class="pun">&lt;</span>ET<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">er</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">from_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <span class="typ dec var fun">otto::engines::EngineDispatcher</span><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">er</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::engines" class="standardese-entity-documentation">
+</section>
+</section>
+</article>
+</body>
+</html>

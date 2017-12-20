@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>locked.hpp</title>
+</head>
+<body>
+<article id="standardese-locked.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>locked.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">mutex</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">functional</span><span class="pre">&gt;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+        <span class="kwd">class</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E"><span class="typ dec var fun">locked</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::locked&lt;T&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::util::locked</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+<span class="kwd">class</span> <span class="typ dec var fun">locked</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">T</span> <span class="typ dec var fun">contents</span><span class="pun">;</span>
+
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">locked</span><span class="pun">(</span>Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::mutex</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::mutex"><span class="typ dec var fun">mutex</span></a><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Func</span><span class="pun">&gt;</span>
+    <span class="kwd">auto</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::apply%3CFunc%3E(Func&amp;&amp;)"><span class="typ dec var fun">apply</span></a><span class="pun">(</span><span class="typ dec var fun">Func</span><span class="pun">&amp;&amp;</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::apply%3CFunc%3E(Func&amp;&amp;).f"><span class="typ dec var fun">f</span></a><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Func</span><span class="pun">&gt;</span>
+    <span class="kwd">auto</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::apply%3CFunc%3E(Func&amp;&amp;)const"><span class="typ dec var fun">apply</span></a><span class="pun">(</span><span class="typ dec var fun">Func</span><span class="pun">&amp;&amp;</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::apply%3CFunc%3E(Func&amp;&amp;)const.f"><span class="typ dec var fun">f</span></a><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span><span class="pun">&amp;</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::unsafe_access()"><span class="typ dec var fun">unsafe_access</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="kwd">const</span><span class="pun">&amp;</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::unsafe_access()const"><span class="typ dec var fun">unsafe_access</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::locked&lt;T&gt;-brief" class="standardese-brief-section">Wrap any type in a mutex, and guarantee that it is locked on every access.</p>
+<h4 class="standardese-list-section-heading">Member variables</h4>
+<ul id="standardese-otto::util::locked&lt;T&gt;-members" class="standardese-list-section">
+<li id="standardese-otto::util::locked&lt;T&gt;::mutex">
+<dl id="standardese-otto::util::locked&lt;T&gt;::mutex" class="standardese-term-description-item">
+<dt><code>mutex</code></dt>
+<dd>&mdash; Direct access to the mutex to do manual locking</dd>
+</dl>
+</li>
+</ul>
+<section id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>apply</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Func</span><span class="pun">&gt;</span>
+<span class="kwd">auto</span> <span class="typ dec var fun">apply</span><span class="pun">(</span><span class="typ dec var fun">Func</span><span class="pun">&amp;&amp;</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::apply%3CFunc%3E(Func&amp;&amp;).f"><span class="typ dec var fun">f</span></a><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;)-brief" class="standardese-brief-section">Use the wrapped value while locked
+Invoke <code>f</code> with the wrapped value as the only parameter</p>
+<section id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;).f" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Parameter <code>f</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">Func</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">f</span></code></pre>
+<p id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;).f-brief" class="standardese-brief-section">Invocable as <code>f(T)</code></p>
+<dl id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;).f-inline-sections" class="standardese-inline-sections">
+<dt>Returns:</dt>
+<dd>The result of calling <code>f(t)</code></dd>
+<dt>Requires:</dt>
+<dd><code>Func</code> is invocable as <code>Func(T&amp;)</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;)const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>apply</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Func</span><span class="pun">&gt;</span>
+<span class="kwd">auto</span> <span class="typ dec var fun">apply</span><span class="pun">(</span><span class="typ dec var fun">Func</span><span class="pun">&amp;&amp;</span> <a href="doc_locked.html#standardese-otto::util::locked%3CT%3E::apply%3CFunc%3E(Func&amp;&amp;)const.f"><span class="typ dec var fun">f</span></a><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;)const-brief" class="standardese-brief-section">Use the wrapped value while locked
+Invoke <code>f</code> with the wrapped value as the only parameter</p>
+<section id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;)const.f" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Parameter <code>f</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">Func</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">f</span></code></pre>
+<p id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;)const.f-brief" class="standardese-brief-section">Invocable as <code>f(T)</code></p>
+<dl id="standardese-otto::util::locked&lt;T&gt;::apply&lt;Func&gt;(Func&amp;&amp;)const.f-inline-sections" class="standardese-inline-sections">
+<dt>Returns:</dt>
+<dd>The result of calling <code>f(t)</code></dd>
+<dt>Requires:</dt>
+<dd><code>Func</code> is invocable as <code>Func(const T&amp;)</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::locked&lt;T&gt;::unsafe_access()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>unsafe_access</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">T</span><span class="pun">&amp;</span> <span class="typ dec var fun">unsafe_access</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::locked&lt;T&gt;::unsafe_access()-brief" class="standardese-brief-section">Get a non-locked reference to the value.</p>
+<p>This is of course highly unsafe, and defeats the purpose of the wrapper</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::locked&lt;T&gt;::unsafe_access()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>unsafe_access</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">T</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">unsafe_access</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::locked&lt;T&gt;::unsafe_access()const-brief" class="standardese-brief-section">Get a non-locked reference to the value.</p>
+<p>This is of course highly unsafe, and defeats the purpose of the wrapper</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>midi.hpp</title>
+</head>
+<body>
+<article id="standardese-midi.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>midi.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">cmath</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">variant.hpp</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;poly-ptr.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">midi</span>
+    <span class="pun">{</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">MidiEvent</span><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <span class="typ dec var fun">NoteEvent</span><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <span class="typ dec var fun">NoteOnEvent</span><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <span class="typ dec var fun">NoteOffEvent</span><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <span class="typ dec var fun">ControlChangeEvent</span><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">AnyMidiEvent</span> <span class="pun">=</span> <span class="typ dec var fun">mpark::variant</span><span class="pun">&lt;</span>NoteOnEvent, NoteOffEvent, ControlChangeEvent<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">generateFreqTable</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">tuning</span> <span class="pun">=</span> <span class="lit">440</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">constexpr</span> <span class="kwd">char</span> <span class="kwd">const</span><span class="pun">*</span> <span class="typ dec var fun">note_name</span><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">key</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::midi" class="standardese-entity-documentation">
+</section>
+</section>
+</article>
+</body>
+</html>

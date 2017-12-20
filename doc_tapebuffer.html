@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>tapebuffer.hpp</title>
+</head>
+<body>
+<article id="standardese-tapebuffer.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>tapebuffer.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">array</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">cmath</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">atomic</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">memory</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">set</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;iterator.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;algorithm.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;math.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;audio.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;ringbuffer.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">debug&#x2F;ui.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">class</span> <a href="doc_tapebuffer.html#standardese-otto::tape_buffer"><span class="typ dec var fun">tape_buffer</span></a><span class="pun">;</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::tape_buffer" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::tape_buffer</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">class</span> <span class="typ dec var fun">tape_buffer</span>
+<span class="pun">{</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">Value</span> <span class="pun">=</span> <span class="typ dec var fun">std::array</span><span class="pun">&lt;</span>float, 4<span class="pun">&gt;</span><span class="pun">;</span>
+
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">TapeSlice</span> <span class="pun">=</span> <span class="typ dec var fun">util::audio::Section</span><span class="pun">&lt;</span>int<span class="pun">&gt;</span><span class="pun">;</span>
+
+    <span class="kwd">struct</span> <span class="typ dec var fun">TapeSliceSet</span><span class="pun">;</span>
+
+    <span class="kwd">static</span> <span class="kwd">constexpr</span> <span class="typ dec var fun">std::size_t</span> <span class="kwd">const</span> <span class="typ dec var fun">buffer_size</span> <span class="pun">=</span> <span class="lit">1</span><span class="pun">&lt;&lt;</span><span class="lit">18</span><span class="pun">;</span>
+
+    <span class="kwd">static</span> <span class="kwd">constexpr</span> <span class="typ dec var fun">std::size_t</span> <span class="kwd">const</span> <span class="typ dec var fun">max_length</span> <span class="pun">=</span> <span class="lit">8</span><span class="pun">*</span><span class="lit">60</span><span class="pun">*</span><span class="lit">44100</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">value_type</span> <span class="pun">=</span> <span class="typ dec var fun">Value</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::array</span><span class="pun">&lt;</span>TapeSliceSet, 4<span class="pun">&gt;</span> <a href="doc_tapebuffer.html#standardese-otto::tape_buffer::slices"><span class="typ dec var fun">slices</span></a><span class="pun">;</span>
+
+    <span class="typ dec var fun">tape_buffer</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">~tape_buffer</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">tape_buffer</span><span class="pun">(</span><span class="typ dec var fun">otto::tape_buffer</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">tape_buffer</span><span class="pun">(</span><span class="typ dec var fun">otto::tape_buffer</span><span class="pun">&amp;&amp;</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">position</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <a href="doc_tapebuffer.html#standardese-otto::tape_buffer::advance(int)"><span class="typ dec var fun">advance</span></a><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">n</span> <span class="pun">=</span> <span class="lit">1</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">notify_update</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">invalidate</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">value_type</span><span class="pun">&amp;</span> <a href="doc_tapebuffer.html#standardese-otto::tape_buffer::cur_value()"><span class="typ dec var fun">cur_value</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">BinaryFunc</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">util::audio::Section</span><span class="pun">&lt;</span>int<span class="pun">&gt;</span> <a href="doc_tapebuffer.html#standardese-otto::tape_buffer::write_n%3CIter,BinaryFunc%3E(Iter,int,float,BinaryFunc&amp;&amp;)"><span class="typ dec var fun">write_n</span></a><span class="pun">(</span><span class="typ dec var fun">Iter</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">speed</span><span class="pun">,</span> <span class="typ dec var fun">BinaryFunc</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">func</span> <span class="pun">=</span> <span class="pun">[</span><span class="pun">]</span><span class="pun">(</span><span class="typ dec var fun">auto</span> <span class="pun">&amp;&amp;</span> <span class="kwd">in</span><span class="pun">,</span> <span class="typ dec var fun">auto</span><span class="pun">&amp;</span><span class="kwd">tape</span><span class="pun">)</span><span class="pun">{</span><span class="kwd">tape</span> <span class="pun">=</span> <span class="kwd">in</span><span class="pun">;</span><span class="pun">}</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">read_n</span><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">speed</span><span class="pun">,</span> <span class="typ dec var fun">Iter</span> <span class="typ dec var fun">dst</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">read_until</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">pos</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">speed</span><span class="pun">,</span> <span class="typ dec var fun">Iter</span> <span class="typ dec var fun">dst</span><span class="pun">,</span> <span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">max_n</span> <span class="pun">=</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">numeric_limits</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">size_t</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">max</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <a href="doc_tapebuffer.html#standardese-otto::tape_buffer::jump_to(std::size_t)"><span class="typ dec var fun">jump_to</span></a><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">buffer_type</span> <span class="pun">=</span> <span class="typ dec var fun">util::wrapping_array</span><span class="pun">&lt;</span>value_type, buffer_size<span class="pun">&gt;</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::atomic_int</span> <a href="doc_tapebuffer.html#standardese-otto::tape_buffer::current_position"><span class="typ dec var fun">current_position</span></a><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::atomic_int</span> <span class="typ dec var fun">head</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::atomic_int</span> <span class="typ dec var fun">tail</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::atomic</span><span class="pun">&lt;</span>util::audio::Section&lt;int&gt;<span class="pun">&gt;</span> <span class="typ dec var fun">write_sect</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">buffer_type</span> <span class="typ dec var fun">buffer</span><span class="pun">;</span>
+
+    <span class="kwd">friend</span> <span class="kwd">struct</span> <span class="typ dec var fun">Producer</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>Producer<span class="pun">&gt;</span> <span class="typ dec var fun">producer</span><span class="pun">;</span>
+
+    <span class="kwd">struct</span> <span class="typ dec var fun">DbgInfo</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::tape_buffer-brief" class="standardese-brief-section">The buffer used for the tapedeck</p>
+<p>Provides reading from file, variable speed reading&#x2F;writing in both
+directions and access to tape metadata, such as slices.</p>
+<h4 class="standardese-list-section-heading">Member variables</h4>
+<ul id="standardese-otto::tape_buffer-members" class="standardese-list-section">
+<li id="standardese-otto::tape_buffer::slices">
+<dl id="standardese-otto::tape_buffer::slices" class="standardese-term-description-item">
+<dt><code>slices</code></dt>
+<dd>&mdash; Tape slices for each of the 4 tracks</dd>
+</dl>
+</li>
+<li id="standardese-otto::tape_buffer::current_position">
+<dl id="standardese-otto::tape_buffer::current_position" class="standardese-term-description-item">
+<dt><code>current_position</code></dt>
+<dd>&mdash; The current file position
+This variable should only be modified by the consumer - to everyone else
+it is read only!</dd>
+</dl>
+</li>
+</ul>
+<section id="standardese-otto::tape_buffer::advance(int)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>advance</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">advance</span><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">n</span> <span class="pun">=</span> <span class="lit">1</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::tape_buffer::advance(int)-brief" class="standardese-brief-section">Move the point <code>n</code> forward. <code>n</code> can be negative</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::tape_buffer::cur_value()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>cur_value</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">value_type</span><span class="pun">&amp;</span> <span class="typ dec var fun">cur_value</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::tape_buffer::cur_value()-brief" class="standardese-brief-section">Get a refference to the value at point</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::tape_buffer::write_n&lt;Iter,BinaryFunc&gt;(Iter,int,float,BinaryFunc&amp;&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>write_n</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">BinaryFunc</span><span class="pun">&gt;</span>
+<span class="typ dec var fun">util::audio::Section</span><span class="pun">&lt;</span>int<span class="pun">&gt;</span> <span class="typ dec var fun">write_n</span><span class="pun">(</span><span class="typ dec var fun">Iter</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">speed</span><span class="pun">,</span> <span class="typ dec var fun">BinaryFunc</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">func</span> <span class="pun">=</span> <span class="pun">[</span><span class="pun">]</span><span class="pun">(</span><span class="typ dec var fun">auto</span> <span class="pun">&amp;&amp;</span> <span class="kwd">in</span><span class="pun">,</span> <span class="typ dec var fun">auto</span><span class="pun">&amp;</span><span class="kwd">tape</span><span class="pun">)</span><span class="pun">{</span><span class="kwd">tape</span> <span class="pun">=</span> <span class="kwd">in</span><span class="pun">;</span><span class="pun">}</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::tape_buffer::write_n&lt;Iter,BinaryFunc&gt;(Iter,int,float,BinaryFunc&amp;&amp;)-brief" class="standardese-brief-section">Write <code>n</code> frames from <code>iter</code> at speed <code>speed</code>, throug <code>func</code></p>
+<dl id="standardese-otto::tape_buffer::write_n&lt;Iter,BinaryFunc&gt;(Iter,int,float,BinaryFunc&amp;&amp;)-inline-sections" class="standardese-inline-sections">
+<dt>Returns:</dt>
+<dd>the section of tape that was just written</dd>
+</dl>
+<p>for each frame in the tape, <code>func</code> will be called with arguments
+<code>*iter, *tape</code>. It is expected that <code>func</code> modifies the <code>tape</code> argument.</p>
+<p><code>iter</code> will be slowed down&#x2F;sped up according to <code>speed</code>. If <code>speed</code> is
+positive, the frames will be written “behind” the cursor, as in, the
+last frame will be positioned at <code>cursor - 1</code>. If <code>speed</code> is negative,
+the first frame in the range will be positioned at <code>cursor + 1</code>.
+If <code>speed</code> is <code>0</code>, nothing will be written</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::tape_buffer::jump_to(std::size_t)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>jump_to</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">jump_to</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::tape_buffer::jump_to(std::size_t)-brief" class="standardese-brief-section">Jumps the tape to absolute position <code>p</code></p>
+<p>Use sparingly - a jump clears the entire buffer</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</article>
+</body>
+</html>

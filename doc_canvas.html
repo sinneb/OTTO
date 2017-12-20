@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>canvas.hpp</title>
+</head>
+<body>
+<article id="standardese-canvas.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>canvas.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">functional</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">type_traits</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">nanovg.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">NanoCanvas.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;math.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">ui</span>
+    <span class="pun">{</span>
+        <span class="kwd">namespace</span> <span class="typ dec var fun">vg</span>
+        <span class="pun">{</span>
+            <span class="kwd">using</span> <span class="typ dec var fun">NanoCanvas::HorizontalAlign</span><span class="pun">;</span>
+
+            <span class="kwd">using</span> <span class="typ dec var fun">NanoCanvas::VerticalAlign</span><span class="pun">;</span>
+
+            <span class="kwd">namespace</span> <span class="typ dec var fun">TextAlign</span> <span class="pun">=</span> <span class="typ dec var fun">NanoCanvas::TextAlign</span><span class="pun">;</span>
+
+            <span class="kwd">using</span> <span class="typ dec var fun">NanoCanvas::TextStyle</span><span class="pun">;</span>
+
+            <span class="kwd">using</span> <span class="typ dec var fun">NanoCanvas::Font</span><span class="pun">;</span>
+
+            <span class="kwd">using</span> <span class="typ dec var fun">Winding</span> <span class="pun">=</span> <span class="typ dec var fun">NanoCanvas::Canvas::Winding</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <span class="typ dec var fun">Point</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <span class="typ dec var fun">Size</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Box"><span class="typ dec var fun">Box</span></a><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <span class="typ dec var fun">Colour</span><span class="pun">;</span>
+
+            <span class="kwd">static</span> <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">Colour::</span><span class="typ dec var fun">floats</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">r</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">g</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">b</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">a</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">static</span> <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">Colour::</span><span class="typ dec var fun">bytes</span><span class="pun">(</span><span class="typ dec var fun">uint8_t</span> <span class="typ dec var fun">r</span><span class="pun">,</span> <span class="typ dec var fun">uint8_t</span> <span class="typ dec var fun">g</span><span class="pun">,</span> <span class="typ dec var fun">uint8_t</span> <span class="typ dec var fun">b</span><span class="pun">,</span> <span class="typ dec var fun">uint8_t</span> <span class="typ dec var fun">a</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">Colour::</span><span class="typ dec var fun">Colour</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">r</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">g</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">b</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">a</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">Colour::</span><span class="typ dec var fun">Colour</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">Colour::</span><span class="typ dec var fun">mix</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">c</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">ratio</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">Colour::</span><span class="typ dec var fun">dim</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">amount</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">Colour::</span><span class="typ dec var fun">brighten</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">amount</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <span class="typ dec var fun">MainColour</span><span class="pun">;</span>
+
+            <span class="kwd">class</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Drawable"><span class="typ dec var fun">Drawable</span></a><span class="pun">;</span>
+
+            <span class="kwd">class</span> <span class="typ dec var fun">SizedDrawable</span><span class="pun">;</span>
+
+            <span class="kwd">class</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">Canvas</span></a><span class="pun">;</span>
+        <span class="pun">}</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::ui" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::vg" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::vg::Box" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::ui::vg::Box</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">Box</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p1</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p2</span><span class="pun">;</span>
+
+    <span class="kwd">constexpr</span> <span class="typ dec var fun">otto::ui::vg::Size</span> <span class="typ dec var fun">size</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::Box-brief" class="standardese-brief-section">A positioned box</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::vg::Drawable" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::ui::vg::Drawable</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">class</span> <span class="typ dec var fun">Drawable</span>
+<span class="pun">{</span>
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="typ dec var fun">Drawable</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;)"><span class="typ dec var fun">draw</span></a><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">otto::ui::vg::Canvas</span></a><span class="pun">&amp;</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;).ctx"><span class="typ dec var fun">ctx</span></a><span class="pun">)</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::Drawable-brief" class="standardese-brief-section">Anything that can be drawn on screen.</p>
+<p>Holds a pointer to its parent</p>
+<section id="standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>draw</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">draw</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">otto::ui::vg::Canvas</span></a><span class="pun">&amp;</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;).ctx"><span class="typ dec var fun">ctx</span></a><span class="pun">)</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;)-brief" class="standardese-brief-section">Draw this widget to the context.</p>
+<p>Called from the parent’s draw method.</p>
+<h4 class="standardese-list-section-heading">Parameters</h4>
+<ul id="standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;)-params" class="standardese-list-section">
+<li id="standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;).ctx">
+<dl id="standardese-otto::ui::vg::Drawable::draw(otto::ui::vg::Canvas&amp;).ctx" class="standardese-term-description-item">
+<dt><code>ctx</code></dt>
+<dd>&mdash; the canvas to draw on.</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::vg::Canvas" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::ui::vg::Canvas</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">class</span> <span class="typ dec var fun">Canvas</span>
+<span class="pun">:</span> <span class="kwd">public</span> <span class="typ dec var fun">NanoCanvas::Canvas</span>
+<span class="pun">{</span>
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">Super</span> <span class="pun">=</span> <span class="typ dec var fun">NanoCanvas::Canvas</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::Winding</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::LineCap</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::LineJoin</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Canvas</span><span class="pun">(</span><span class="typ dec var fun">NVGcontext</span><span class="pun">*</span> <span class="typ dec var fun">ctx</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Size</span> <span class="typ dec var fun">size</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">scaleRatio</span> <span class="pun">=</span> <span class="lit">1.0f</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Canvas</span><span class="pun">(</span><span class="typ dec var fun">NVGcontext</span><span class="pun">*</span> <span class="typ dec var fun">ctx</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">width</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">height</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">scaleRatio</span> <span class="pun">=</span> <span class="lit">1.0f</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::moveTo</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">moveTo</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::lineTo</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">lineTo</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::arcTo</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">arcTo</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p1</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p2</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">r</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::quadraticCurveTo</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">quadraticCurveTo</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">control</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">end</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::bezierCurveTo</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">bezierCurveTo</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">cp1</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">cp2</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">end</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::arc</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">arc</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">cp</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">r</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">sAngle</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">eAngle</span><span class="pun">,</span> <span class="kwd">bool</span> <span class="typ dec var fun">counterclockwise</span> <span class="pun">=</span> <span class="typ dec var fun">false</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::rect</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">rect</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Size</span> <span class="typ dec var fun">s</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::roundedRect</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">roundedRect</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Size</span> <span class="typ dec var fun">s</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">r</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::circle</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">circle</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">r</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::ellipse</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">ellipse</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">rx</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">ry</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::clearColor</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">clearColor</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">color</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::fillText</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">fillText</span><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">text</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">rowWidth</span> <span class="pun">=</span> <span class="pun">(</span><span class="kwd">__builtin_nanf</span><span class="pun">(</span><span class="str">&quot;&quot;</span><span class="pun">)</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::textAlign</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::fillStyle</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">fillStyle</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">color</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::strokeStyle</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">strokeStyle</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">color</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::fill</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">fill</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">color</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::stroke</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">stroke</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">color</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Super::translate</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">translate</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">rotateAround</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">r</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">draw</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Drawable"><span class="typ dec var fun">otto::ui::vg::Drawable</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">d</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">draw</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Drawable"><span class="typ dec var fun">otto::ui::vg::Drawable</span></a><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">d</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">drawAt</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Drawable"><span class="typ dec var fun">otto::ui::vg::Drawable</span></a><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">d</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">drawAt</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Drawable"><span class="typ dec var fun">otto::ui::vg::Drawable</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">d</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">callAt</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">std::function</span><span class="pun">&lt;</span>void ()<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">f</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">It</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">plotBezier</span><span class="pun">(</span><span class="typ dec var fun">It</span> <span class="typ dec var fun">pointB</span><span class="pun">,</span> <span class="typ dec var fun">It</span> <span class="typ dec var fun">pointE</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">f</span> <span class="pun">=</span> <span class="lit">0.5</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">t</span> <span class="pun">=</span> <span class="lit">1</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">&gt;</span>
+    <span class="kwd">void</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotRounded%3CIter%3E(Iter,Iter,float)"><span class="typ dec var fun">plotRounded</span></a><span class="pun">(</span><span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotRounded%3CIter%3E(Iter,Iter,float).first"><span class="typ dec var fun">first</span></a><span class="pun">,</span> <span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotRounded%3CIter%3E(Iter,Iter,float).last"><span class="typ dec var fun">last</span></a><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">max_radius</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">&gt;</span>
+    <span class="kwd">void</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotLines%3CIter%3E(Iter,Iter)"><span class="typ dec var fun">plotLines</span></a><span class="pun">(</span><span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotLines%3CIter%3E(Iter,Iter).first"><span class="typ dec var fun">first</span></a><span class="pun">,</span> <span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotLines%3CIter%3E(Iter,Iter).last"><span class="typ dec var fun">last</span></a><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">It</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour)"><span class="typ dec var fun">plotPoints</span></a><span class="pun">(</span><span class="typ dec var fun">It</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).first"><span class="typ dec var fun">first</span></a><span class="pun">,</span> <span class="typ dec var fun">It</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).last"><span class="typ dec var fun">last</span></a><span class="pun">,</span> <span class="kwd">float</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).r"><span class="typ dec var fun">r</span></a><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Colour</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).c"><span class="typ dec var fun">c</span></a><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::Canvas</span><span class="pun">&amp;</span> <span class="typ dec var fun">debugDot</span><span class="pun">(</span><span class="typ dec var fun">otto::ui::vg::Point</span> <span class="typ dec var fun">p</span><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">c</span> <span class="pun">=</span> <span class="lit">0xFFFF00</span><span class="pun">)</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::Canvas-brief" class="standardese-brief-section">A modified NanoCanvas interface.</p>
+<p>Allows for usage of <a href="doc_canvas.html#standardese-otto::ui::vg"><code>Point</code></a> and <a href="doc_canvas.html#standardese-otto::ui::vg"><code>Size</code></a> classes</p>
+<section id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>plotRounded</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">&gt;</span>
+<span class="kwd">void</span> <span class="typ dec var fun">plotRounded</span><span class="pun">(</span><span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotRounded%3CIter%3E(Iter,Iter,float).first"><span class="typ dec var fun">first</span></a><span class="pun">,</span> <span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotRounded%3CIter%3E(Iter,Iter,float).last"><span class="typ dec var fun">last</span></a><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">max_radius</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float)-brief" class="standardese-brief-section">Draw a curve between points using only horizontal and vertical lines and
+rounded corners</p>
+<dl id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float)-inline-sections" class="standardese-inline-sections">
+<dt>Requires:</dt>
+<dd><code>It</code> shall be an <code>InputIterator&lt;Point&gt;</code></dd>
+</dl>
+<p>This is the algorithm used by the samplers, and in general to display waveforms</p>
+<h4 class="standardese-list-section-heading">Parameters</h4>
+<ul id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float)-params" class="standardese-list-section">
+<li id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float).first">
+<dl id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float).first" class="standardese-term-description-item">
+<dt><code>first</code></dt>
+<dd>&mdash; An iterator to the first point</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float).last">
+<dl id="standardese-otto::ui::vg::Canvas::plotRounded&lt;Iter&gt;(Iter,Iter,float).last" class="standardese-term-description-item">
+<dt><code>last</code></dt>
+<dd>&mdash; An iterator one past the last point</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>plotLines</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Iter</span><span class="pun">&gt;</span>
+<span class="kwd">void</span> <span class="typ dec var fun">plotLines</span><span class="pun">(</span><span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotLines%3CIter%3E(Iter,Iter).first"><span class="typ dec var fun">first</span></a><span class="pun">,</span> <span class="typ dec var fun">Iter</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotLines%3CIter%3E(Iter,Iter).last"><span class="typ dec var fun">last</span></a><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter)-brief" class="standardese-brief-section">Plot a curve between points using straight lines</p>
+<h4 class="standardese-list-section-heading">Parameters</h4>
+<ul id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter)-params" class="standardese-list-section">
+<li id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter).first">
+<dl id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter).first" class="standardese-term-description-item">
+<dt><code>first</code></dt>
+<dd>&mdash; An iterator to the first point</dd>
+</dl>
+</li>
+</ul>
+<section id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter).last" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Parameter <code>last</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">Iter</span> <span class="typ dec var fun">last</span></code></pre>
+<p id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter).last-brief" class="standardese-brief-section">An iterator one past the last point</p>
+<dl id="standardese-otto::ui::vg::Canvas::plotLines&lt;Iter&gt;(Iter,Iter).last-inline-sections" class="standardese-inline-sections">
+<dt>Requires:</dt>
+<dd><code>It</code> shall be an <code>InputIterator&lt;Point&gt;</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>plotPoints</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">It</span><span class="pun">&gt;</span>
+<a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">otto::ui::vg::Canvas</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">plotPoints</span><span class="pun">(</span><span class="typ dec var fun">It</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).first"><span class="typ dec var fun">first</span></a><span class="pun">,</span> <span class="typ dec var fun">It</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).last"><span class="typ dec var fun">last</span></a><span class="pun">,</span> <span class="kwd">float</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).r"><span class="typ dec var fun">r</span></a><span class="pun">,</span> <span class="typ dec var fun">otto::ui::vg::Colour</span> <a href="doc_canvas.html#standardese-otto::ui::vg::Canvas::plotPoints%3CIt%3E(It,It,float,otto::ui::vg::Colour).c"><span class="typ dec var fun">c</span></a><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour)-brief" class="standardese-brief-section">A scatterplot of points</p>
+<h4 class="standardese-list-section-heading">Parameters</h4>
+<ul id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour)-params" class="standardese-list-section">
+<li id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).first">
+<dl id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).first" class="standardese-term-description-item">
+<dt><code>first</code></dt>
+<dd>&mdash; An iterator to the first point</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).last">
+<dl id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).last" class="standardese-term-description-item">
+<dt><code>last</code></dt>
+<dd>&mdash; An iterator one past the last point</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).r">
+<dl id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).r" class="standardese-term-description-item">
+<dt><code>r</code></dt>
+<dd>&mdash; The radius of the points</dd>
+</dl>
+</li>
+</ul>
+<section id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).c" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Parameter <code>c</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">otto::ui::vg::Colour</span> <span class="typ dec var fun">c</span></code></pre>
+<p id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).c-brief" class="standardese-brief-section">The colour of the points</p>
+<dl id="standardese-otto::ui::vg::Canvas::plotPoints&lt;It&gt;(It,It,float,otto::ui::vg::Colour).c-inline-sections" class="standardese-inline-sections">
+<dt>Requires:</dt>
+<dd><code>It</code> shall be an <code>InputIterator&lt;Point&gt;</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>icons.hpp</title>
+</head>
+<body>
+<article id="standardese-icons.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>icons.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;ui&#x2F;drawing.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">ui</span>
+    <span class="pun">{</span>
+        <span class="kwd">namespace</span> <span class="typ dec var fun">vg</span>
+        <span class="pun">{</span>
+            <span class="kwd">namespace</span> <span class="typ dec var fun">icons</span>
+            <span class="pun">{</span>
+                <span class="kwd">struct</span> <span class="typ dec var fun">Icon</span><span class="pun">;</span>
+
+                <span class="kwd">struct</span> <a href="doc_icons.html#standardese-otto::ui::vg::icons::Arrow"><span class="typ dec var fun">Arrow</span></a><span class="pun">;</span>
+
+                <span class="kwd">struct</span> <a href="doc_icons.html#standardese-otto::ui::vg::icons::Note"><span class="typ dec var fun">Note</span></a><span class="pun">;</span>
+            <span class="pun">}</span>
+        <span class="pun">}</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::ui" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::vg" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::vg::icons" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::vg::icons::Arrow" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::ui::vg::icons::Arrow</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">Arrow</span>
+<span class="pun">:</span> <span class="typ dec var fun">Icon</span>
+<span class="pun">{</span>
+    <span class="kwd">enum</span> <span class="typ dec var fun">Direction</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::icons::Arrow::Direction</span> <span class="typ dec var fun">dir</span> <span class="pun">=</span> <span class="kwd">Right</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <a href="doc_icons.html#standardese-otto::ui::vg::icons::Arrow::stopped"><span class="typ dec var fun">stopped</span></a> <span class="pun">=</span> <span class="typ dec var fun">false</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <a href="doc_icons.html#standardese-otto::ui::vg::icons::Arrow::looping"><span class="typ dec var fun">looping</span></a> <span class="pun">=</span> <span class="typ dec var fun">false</span><span class="pun">;</span>
+
+    <span class="kwd">float</span> <a href="doc_icons.html#standardese-otto::ui::vg::icons::Arrow::headRatio"><span class="typ dec var fun">headRatio</span></a> <span class="pun">=</span> <span class="lit">0.25</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">draw</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">otto::ui::vg::Canvas</span></a><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">override</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::icons::Arrow-brief" class="standardese-brief-section">A simple arrow</p>
+<h4 class="standardese-list-section-heading">Member variables</h4>
+<ul id="standardese-otto::ui::vg::icons::Arrow-members" class="standardese-list-section">
+<li id="standardese-otto::ui::vg::icons::Arrow::stopped">
+<dl id="standardese-otto::ui::vg::icons::Arrow::stopped" class="standardese-term-description-item">
+<dt><code>stopped</code></dt>
+<dd>&mdash; Add stop line -&gt;|</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::icons::Arrow::looping">
+<dl id="standardese-otto::ui::vg::icons::Arrow::looping" class="standardese-term-description-item">
+<dt><code>looping</code></dt>
+<dd>&mdash; Loop arrow - CW for Up&#x2F;Right, CCW for Down&#x2F;Left</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::icons::Arrow::headRatio">
+<dl id="standardese-otto::ui::vg::icons::Arrow::headRatio" class="standardese-term-description-item">
+<dt><code>headRatio</code></dt>
+<dd>&mdash; headLength&#x2F;arrowLength</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::vg::icons::Note" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::ui::vg::icons::Note</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">Note</span>
+<span class="pun">:</span> <span class="typ dec var fun">Icon</span>
+<span class="pun">{</span>
+    <span class="kwd">enum</span> <span class="typ dec var fun">Direction</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::ui::vg::icons::Note::Direction</span> <span class="typ dec var fun">dir</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <a href="doc_icons.html#standardese-otto::ui::vg::icons::Note::filled"><span class="typ dec var fun">filled</span></a> <span class="pun">=</span> <span class="typ dec var fun">true</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">draw</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">otto::ui::vg::Canvas</span></a><span class="pun">&amp;</span><span class="pun">)</span> <span class="kwd">override</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::vg::icons::Note-brief" class="standardese-brief-section">A musical note</p>
+<h4 class="standardese-list-section-heading">Member variables</h4>
+<ul id="standardese-otto::ui::vg::icons::Note-members" class="standardese-list-section">
+<li id="standardese-otto::ui::vg::icons::Note::filled">
+<dl id="standardese-otto::ui::vg::icons::Note::filled" class="standardese-term-description-item">
+<dt><code>filled</code></dt>
+<dd>&mdash; Whether the head of the note is filled;</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

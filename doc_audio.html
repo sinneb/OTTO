@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>audio.hpp</title>
+</head>
+<body>
+<article id="standardese-audio.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>audio.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">type_traits</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">cmath</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">gsl&#x2F;span</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;dyn-array.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;iterator.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">namespace</span> <span class="typ dec var fun">audio</span>
+        <span class="pun">{</span>
+            <span class="kwd">float</span> <span class="typ dec var fun">mix</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">A</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">B</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">ratio</span> <span class="pun">=</span> <span class="lit">0.5</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">nChannels</span> <span class="pun">=</span> <span class="lit">4</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">SampleType</span> <span class="pun">=</span> float<span class="pun">&gt;</span>
+            <span class="kwd">using</span> <span class="typ dec var fun">AudioFrame</span> <span class="pun">=</span> <span class="typ dec var fun">std::array</span><span class="pun">&lt;</span>SampleType, nChannels<span class="pun">&gt;</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Rng1</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="typ dec var fun">Rng2</span><span class="pun">&gt;</span>
+            <span class="kwd">void</span> <span class="typ dec var fun">add_all</span><span class="pun">(</span><span class="typ dec var fun">Rng1</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">r1</span><span class="pun">,</span> <span class="typ dec var fun">Rng2</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">r2</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <span class="typ dec var fun">Graph</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">T</span> <span class="pun">=</span> int<span class="pun">&gt;</span>
+            <span class="kwd">struct</span> <a href="doc_audio.html#standardese-otto::util::audio::Section%3CT%3E"><span class="typ dec var fun">Section</span></a><span class="pun">;</span>
+        <span class="pun">}</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::audio" class="standardese-entity-documentation">
+<section id="standardese-otto::util::audio::Section&lt;T&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::audio::Section</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">class</span> <span class="typ dec var fun">T</span> <span class="pun">=</span> int<span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">Section</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">T</span> <span class="typ dec var fun">in</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="typ dec var fun">out</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+
+    <span class="kwd">operator</span> <span class="kwd">bool</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="typ dec var fun">size</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="typ dec var fun">middle</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="typ dec var fun">clamp</span><span class="pun">(</span><span class="typ dec var fun">T</span> <span class="typ dec var fun">val</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <span class="typ dec var fun">contains</span><span class="pun">(</span><span class="typ dec var fun">T</span> <span class="kwd">const</span> <span class="typ dec var fun">element</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <span class="typ dec var fun">contains</span><span class="pun">(</span><span class="typ dec var fun">Section</span><span class="pun">&lt;</span>T<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">other</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <span class="typ dec var fun">operator==</span><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <span class="typ dec var fun">operator!=</span><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">enum</span> <span class="typ dec var fun">Overlap</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::util::audio::Section::Overlap</span> <span class="typ dec var fun">overlaps</span><span class="pun">(</span><span class="typ dec var fun">Section</span><span class="pun">&lt;</span>T<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">other</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    Section&lt;T&gt;<span class="pun">&amp;</span> <a href="doc_audio.html#standardese-otto::util::audio::Section%3CT%3E::operator+=(Section%3CT%3E)"><span class="typ dec var fun">operator+=</span></a><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span><span class="pun">;</span>
+
+    Section&lt;T&gt; <a href="doc_audio.html#standardese-otto::util::audio::Section%3CT%3E::operator+(Section%3CT%3E)const"><span class="typ dec var fun">operator+</span></a><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    Section&lt;T&gt;<span class="pun">&amp;</span> <a href="doc_audio.html#standardese-otto::util::audio::Section%3CT%3E::operator-=(Section%3CT%3E)"><span class="typ dec var fun">operator-=</span></a><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span><span class="pun">;</span>
+
+    Section&lt;T&gt; <a href="doc_audio.html#standardese-otto::util::audio::Section%3CT%3E::operator-(Section%3CT%3E)const"><span class="typ dec var fun">operator-</span></a><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::audio::Section&lt;T&gt;-brief" class="standardese-brief-section">Agregate of an in and an out point, providing operations to compare and
+mutate one dimensional sections.</p>
+<p>Useful especially for marking sections on the tape</p>
+<section id="standardese-otto::util::audio::Section&lt;T&gt;::operator+=(Section&lt;T&gt;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator+=</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis">Section&lt;T&gt;<span class="pun">&amp;</span> <span class="typ dec var fun">operator+=</span><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::audio::Section&lt;T&gt;::operator+=(Section&lt;T&gt;)-brief" class="standardese-brief-section">Add <code>o</code> to this section</p>
+<p>Will, if needed, extend this section to span over both this and <code>o</code></p>
+<p>If <code>o</code> has <code>size &lt; 0</code>, no modifications are made</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::audio::Section&lt;T&gt;::operator+(Section&lt;T&gt;)const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator+</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis">Section&lt;T&gt; <span class="typ dec var fun">operator+</span><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::audio::Section&lt;T&gt;::operator+(Section&lt;T&gt;)const-brief" class="standardese-brief-section">Add <code>o</code> to a copy of this section</p>
+<p>see &lt;operator+=&gt; for details</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::audio::Section&lt;T&gt;::operator-=(Section&lt;T&gt;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator-=</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis">Section&lt;T&gt;<span class="pun">&amp;</span> <span class="typ dec var fun">operator-=</span><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::audio::Section&lt;T&gt;::operator-=(Section&lt;T&gt;)-brief" class="standardese-brief-section">Subtract <code>o</code> from this section.</p>
+<p>If the result cannot be expressed as a single section, no modifications
+are made.</p>
+<ul>
+<li>
+<p>If this contains <code>o</code>, no modifications are made.</p>
+</li>
+<li>
+<p>If this is contained by or equal to <code>o</code>, it will be turned into a
+unspecified, zero-size section.</p>
+</li>
+<li>
+<p>If the two sections partially overlap, the overlapping part will be
+removed.</p>
+</li>
+</ul>
+<p>As such, it is guarantied that every part in this, but not in <code>o</code> will
+be preserved. It is however not guarrantied that all of <code>o</code> will be
+removed.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::audio::Section&lt;T&gt;::operator-(Section&lt;T&gt;)const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator-</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis">Section&lt;T&gt; <span class="typ dec var fun">operator-</span><span class="pun">(</span>Section&lt;T&gt; <span class="typ dec var fun">o</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::audio::Section&lt;T&gt;::operator-(Section&lt;T&gt;)const-brief" class="standardese-brief-section">Subtract <code>o</code> from a copy of this.</p>
+<p>See &lt;operator-=&gt; for details</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

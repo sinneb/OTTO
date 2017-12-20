@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>processor.hpp</title>
+</head>
+<body>
+<article id="standardese-processor.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>processor.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">functional</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">gsl&#x2F;span</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">exception</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;audio&#x2F;midi.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <a href="standardese_entities.html#standardese-otto::audio"><span class="typ dec var fun">audio</span></a>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="pun">...</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_processor.html#standardese-otto::audio::is_audio_processor%3C%3E"><span class="typ dec var fun">is_audio_processor</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">&#x27;hidden&#x27;</span><span class="pun">&lt;</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">array</span><span class="pun">&lt;</span><span class="typ dec var fun">float</span><span class="pun">,</span> <span class="kwd">N</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">factor</span> <span class="pun">=</span> <span class="lit">1</span><span class="pun">&gt;</span>
+        <span class="kwd">class</span> <a href="doc_processor.html#standardese-otto::audio::RTBuffer%3CT,factor%3E"><span class="typ dec var fun">RTBuffer</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">ProcessBuffer</span> <span class="pun">=</span> <a href="doc_processor.html#standardese-otto::audio::RTBuffer%3CT,factor%3E"><span class="typ dec var fun">RTBuffer</span></a><span class="pun">&lt;</span>std::array&lt;float, N&gt;, 1<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_processor.html#standardese-otto::audio::ProcessData%3CN%3E"><span class="typ dec var fun">ProcessData</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::audio" class="standardese-entity-documentation">
+<section id="standardese-otto::audio::is_audio_processor&lt;&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::audio::is_audio_processor</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="pun">...</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">is_audio_processor</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::audio::is_audio_processor&lt;&gt;-brief" class="standardese-brief-section">Checks if a type qualifies as an &lt;AudioProcessor&gt;</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::audio::RTBuffer&lt;T,factor&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::audio::RTBuffer</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">,</span> <span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">factor</span> <span class="pun">=</span> <span class="lit">1</span><span class="pun">&gt;</span>
+<span class="kwd">class</span> <span class="typ dec var fun">RTBuffer</span>
+<span class="pun">:</span> <span class="kwd">public</span> <span class="typ dec var fun">util::dyn_array&lt;T&gt;</span>
+<span class="pun">{</span>
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="typ dec var fun">RTBuffer</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">initial_size</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">resize</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">new_size</span><span class="pun">)</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::audio::RTBuffer&lt;T,factor&gt;-brief" class="standardese-brief-section">A DynArray that resizes to fit the RealTime bufferSize.</p>
+<p>This is the container used in AudioProcessors, and it should be used
+in any place where the realtime data is copied out. It is resized on
+the bufferSizeChanged event</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::audio::ProcessData&lt;N&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::audio::ProcessData</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">ProcessData</span>
+<span class="pun">{</span>
+    <span class="kwd">static</span> <span class="kwd">constexpr</span> <span class="kwd">int</span> <span class="kwd">const</span> <span class="typ dec var fun">channels</span> <span class="pun">=</span> <span class="kwd">N</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">gsl::span</span><span class="pun">&lt;</span>std::array&lt;float, channels&gt;<span class="pun">&gt;</span> <span class="typ dec var fun">audio</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">gsl::span</span><span class="pun">&lt;</span>midi::AnyMidiEvent<span class="pun">&gt;</span> <span class="typ dec var fun">midi</span><span class="pun">;</span>
+
+    <span class="kwd">long</span> <span class="typ dec var fun">nframes</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">outN</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">ProcessData</span><span class="pun">&lt;</span>outN<span class="pun">&gt;</span> <span class="typ dec var fun">midi_only</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    ProcessData&lt;N&gt; <span class="typ dec var fun">audio_only</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+    <span class="kwd">auto</span> <span class="typ dec var fun">redirect</span><span class="pun">(</span><span class="typ dec var fun">T</span><span class="pun">&amp;</span> <span class="typ dec var fun">buf</span><span class="pun">)</span><span class="pun">;</span>
+
+    ProcessData&lt;N&gt; <a href="doc_processor.html#standardese-otto::audio::ProcessData%3CN%3E::slice(int,int)"><span class="typ dec var fun">slice</span></a><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">idx</span><span class="pun">,</span> <span class="kwd">int</span> <a href="doc_processor.html#standardese-otto::audio::ProcessData%3CN%3E::slice(int,int).length"><span class="typ dec var fun">length</span></a> <span class="pun">=</span> <span class="pun">-</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">auto</span> <span class="typ dec var fun">begin</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">auto</span> <span class="typ dec var fun">end</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">auto</span> <span class="typ dec var fun">begin</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">auto</span> <span class="typ dec var fun">end</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::audio::ProcessData&lt;N&gt;-brief" class="standardese-brief-section">Non-owning package of data passed to audio processors</p>
+<section id="standardese-otto::audio::ProcessData&lt;N&gt;::slice(int,int)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>slice</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis">ProcessData&lt;N&gt; <span class="typ dec var fun">slice</span><span class="pun">(</span><span class="kwd">int</span> <span class="typ dec var fun">idx</span><span class="pun">,</span> <span class="kwd">int</span> <a href="doc_processor.html#standardese-otto::audio::ProcessData%3CN%3E::slice(int,int).length"><span class="typ dec var fun">length</span></a> <span class="pun">=</span> <span class="pun">-</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::audio::ProcessData&lt;N&gt;::slice(int,int)-brief" class="standardese-brief-section">Get only a slice of the audio.</p>
+<dl id="standardese-otto::audio::ProcessData&lt;N&gt;::slice(int,int)-inline-sections" class="standardese-inline-sections">
+<dt>Requires:</dt>
+<dd>parameter <code>idx</code> shall be in the range <code>[0, nframes)</code>, and
+<code>length</code> shall be in range <code>[0, nframes - idx]</code></dd>
+</dl>
+<h4 class="standardese-list-section-heading">Parameters</h4>
+<ul id="standardese-otto::audio::ProcessData&lt;N&gt;::slice(int,int)-params" class="standardese-list-section">
+<li id="standardese-otto::audio::ProcessData&lt;N&gt;::slice(int,int).length">
+<dl id="standardese-otto::audio::ProcessData&lt;N&gt;::slice(int,int).length" class="standardese-term-description-item">
+<dt><code>length</code></dt>
+<dd>&mdash; The number of frames to keep in the slice
+If <code>length</code> is negative, <code>nframes - idx</code> will be used</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

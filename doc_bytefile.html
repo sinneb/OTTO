@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>bytefile.hpp</title>
+</head>
+<body>
+<article id="standardese-bytefile.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>bytefile.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">iterator</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">utility</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">fstream</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">filesystem.hpp</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;result.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">len</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">bytes</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <a href="doc_bytefile.html#standardese-otto::util::ByteFile"><span class="typ dec var fun">ByteFile</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <a href="doc_result.html#standardese-otto::util::result%3Cok_t,err_t%3E"><span class="typ dec var fun">result</span></a><span class="pun">&lt;</span>void, OutIter<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">l</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">bs</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">InIter</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="typ dec var fun">InIter</span> <span class="typ dec var fun">l</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">InIter</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">bs</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">F</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">std::enable_if_t</span><span class="pun">&lt;</span>util::is_invocable_v&lt;F, Chunk &amp;&gt;, void<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">for_chunks_in_range</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile::Position</span> <span class="typ dec var fun">i</span><span class="pun">,</span> <span class="typ dec var fun">otto::util::ByteFile::Position</span> <span class="typ dec var fun">o</span><span class="pun">,</span> <span class="typ dec var fun">F</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">f</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::ByteFile" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::util::ByteFile</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">class</span> <span class="typ dec var fun">ByteFile</span>
+<span class="pun">{</span>
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="kwd">struct</span> <span class="typ dec var fun">Error</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Position</span> <span class="pun">=</span> <span class="kwd">int</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Path</span> <span class="pun">=</span> <span class="typ dec var fun">filesystem::path</span><span class="pun">;</span>
+
+    <span class="kwd">struct</span> <span class="typ dec var fun">Chunk</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Path</span> <span class="typ dec var fun">path</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">ByteFile</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">ByteFile</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile::Path</span> <span class="kwd">const</span><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">ByteFile</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile</span><span class="pun">&amp;</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">ByteFile</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile</span><span class="pun">&amp;&amp;</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">~ByteFile</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::util::ByteFile</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator=</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">friend</span> <span class="kwd">void</span> <span class="typ dec var fun">swap</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile</span><span class="pun">&amp;</span><span class="pun">,</span> <span class="typ dec var fun">otto::util::ByteFile</span><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">open</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile::Path</span> <span class="kwd">const</span><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">close</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">flush</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">bool</span> <span class="typ dec var fun">is_open</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">create_file</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">read_file</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">write_file</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Position</span> <span class="typ dec var fun">seek</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile::Position</span><span class="pun">,</span> <span class="typ dec var fun">std::ios::seekdir</span> <span class="pun">=</span> <span class="kwd">std</span><span class="pun">::</span><span class="kwd">ios</span><span class="pun">::</span><span class="kwd">beg</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Position</span> <span class="typ dec var fun">position</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Position</span> <span class="typ dec var fun">size</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;OutIter,std::byte,std::output_iterator_tag&gt;<span class="pun">&gt;</span>
+    <a href="doc_result.html#standardese-otto::util::result%3Cok_t,err_t%3E"><span class="typ dec var fun">result</span></a><span class="pun">&lt;</span>void, OutIter<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="typ dec var fun">OutIter</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;OutIter,std::byte,std::output_iterator_tag&gt;<span class="pun">&gt;</span>
+    <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">int</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;InIter,std::byte,std::input_iterator_tag&gt;<span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="typ dec var fun">InIter</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;InIter,std::byte,std::input_iterator_tag&gt;<span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">int</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">F</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">std::enable_if_t</span><span class="pun">&lt;</span>util::is_invocable_v&lt;F, Chunk &amp;&gt;, void<span class="pun">&gt;</span> <span class="typ dec var fun">for_chunks_in_range</span><span class="pun">(</span><span class="typ dec var fun">otto::util::ByteFile::Position</span><span class="pun">,</span> <span class="typ dec var fun">otto::util::ByteFile::Position</span><span class="pun">,</span> <span class="typ dec var fun">F</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">f</span><span class="pun">)</span><span class="pun">;</span>
+
+<span class="kwd">protected</span><span class="pun">:</span>
+    <span class="typ dec var fun">std::fstream</span> <span class="typ dec var fun">fstream</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::ByteFile-brief" class="standardese-brief-section">TODO: Documentation</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

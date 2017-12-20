@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jsonfile.hpp</title>
+</head>
+<body>
+<article id="standardese-jsonfile.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>jsonfile.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">json.hpp</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">filesystem.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;exception.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;macros.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">JsonFile</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">std::string</span> <a href="doc_jsonfile.html#standardese-otto::util::to_string(JsonFile::ErrorCode)"><span class="typ dec var fun">to_string</span></a><span class="pun">(</span><span class="typ dec var fun">JsonFile::ErrorCode</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">constexpr</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">operator&amp;</span><span class="pun">(</span><span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">constexpr</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">operator|</span><span class="pun">(</span><span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">constexpr</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">operator&amp;=</span><span class="pun">(</span><span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">constexpr</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">operator|=</span><span class="pun">(</span><span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">lhs</span><span class="pun">,</span> <span class="typ dec var fun">JsonFile::OpenOptions</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::to_string(JsonFile::ErrorCode)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::to_string</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">std::string</span> <span class="typ dec var fun">to_string</span><span class="pun">(</span><span class="typ dec var fun">JsonFile::ErrorCode</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::to_string(JsonFile::ErrorCode)-brief" class="standardese-brief-section">String representation of <code>JsonFile::ErrorCode</code>.</p>
+<p>This is used by <code>util::as_exception</code> to print the error message.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

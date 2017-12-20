@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>widget.hpp</title>
+</head>
+<body>
+<article id="standardese-widget.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>widget.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;ui&#x2F;canvas.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">ui</span>
+    <span class="pun">{</span>
+        <span class="kwd">enum</span> <span class="kwd">class</span> <a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">Key</span></a><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">PressedKeys</span> <span class="pun">=</span> <span class="kwd">bool</span><span class="pun">[</span><span class="lit">36</span><span class="pun">]</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">Widget</span><span class="pun">;</span>
+
+        <span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">Rotary</span><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <a href="doc_widget.html#standardese-otto::ui::RotaryEvent"><span class="typ dec var fun">RotaryEvent</span></a><span class="pun">;</span>
+
+        <span class="kwd">class</span> <a href="doc_widget.html#standardese-otto::ui::Screen"><span class="typ dec var fun">Screen</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::ui" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::Key" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Enumeration <code>otto::ui::Key</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">Key</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">none</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">,</span>
+    <span class="typ dec var fun">red_up</span><span class="pun">,</span>
+    <span class="typ dec var fun">red_down</span><span class="pun">,</span>
+    <span class="typ dec var fun">red_click</span><span class="pun">,</span>
+    <span class="typ dec var fun">blue_up</span><span class="pun">,</span>
+    <span class="typ dec var fun">blue_down</span><span class="pun">,</span>
+    <span class="typ dec var fun">blue_click</span><span class="pun">,</span>
+    <span class="typ dec var fun">white_up</span><span class="pun">,</span>
+    <span class="typ dec var fun">white_down</span><span class="pun">,</span>
+    <span class="typ dec var fun">white_click</span><span class="pun">,</span>
+    <span class="typ dec var fun">green_up</span><span class="pun">,</span>
+    <span class="typ dec var fun">green_down</span><span class="pun">,</span>
+    <span class="typ dec var fun">green_click</span><span class="pun">,</span>
+    <span class="typ dec var fun">left</span><span class="pun">,</span>
+    <span class="typ dec var fun">right</span><span class="pun">,</span>
+    <span class="typ dec var fun">shift</span><span class="pun">,</span>
+    <span class="typ dec var fun">play</span><span class="pun">,</span>
+    <span class="typ dec var fun">rec</span><span class="pun">,</span>
+    <span class="typ dec var fun">track_1</span><span class="pun">,</span>
+    <span class="typ dec var fun">track_2</span><span class="pun">,</span>
+    <span class="typ dec var fun">track_3</span><span class="pun">,</span>
+    <span class="typ dec var fun">track_4</span><span class="pun">,</span>
+    <span class="typ dec var fun">quit</span><span class="pun">,</span>
+    <span class="typ dec var fun">tape</span><span class="pun">,</span>
+    <span class="typ dec var fun">mixer</span><span class="pun">,</span>
+    <span class="typ dec var fun">metronome</span><span class="pun">,</span>
+    <span class="typ dec var fun">synth</span><span class="pun">,</span>
+    <span class="typ dec var fun">drums</span><span class="pun">,</span>
+    <span class="typ dec var fun">sampler</span><span class="pun">,</span>
+    <span class="typ dec var fun">looper</span><span class="pun">,</span>
+    <span class="typ dec var fun">loop</span><span class="pun">,</span>
+    <span class="typ dec var fun">loop_in</span><span class="pun">,</span>
+    <span class="typ dec var fun">loop_out</span><span class="pun">,</span>
+    <span class="typ dec var fun">lift</span><span class="pun">,</span>
+    <span class="typ dec var fun">drop</span><span class="pun">,</span>
+    <span class="typ dec var fun">cut</span><span class="pun">,</span>
+    <a href="doc_widget.html#standardese-otto::ui::Key::n_keys"><span class="typ dec var fun">n_keys</span></a>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::Key-brief" class="standardese-brief-section">Represents a physical key</p>
+<h4 class="standardese-list-section-heading">Enumerators</h4>
+<ul id="standardese-otto::ui::Key-enumerators" class="standardese-list-section">
+<li id="standardese-otto::ui::Key::n_keys">
+<dl id="standardese-otto::ui::Key::n_keys" class="standardese-term-description-item">
+<dt><code>n_keys</code></dt>
+<dd>&mdash; Number of keys</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::RotaryEvent" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::ui::RotaryEvent</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">RotaryEvent</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">otto::ui::Rotary</span> <a href="doc_widget.html#standardese-otto::ui::RotaryEvent::rotary"><span class="typ dec var fun">rotary</span></a><span class="pun">;</span>
+
+    <span class="kwd">int</span> <a href="doc_widget.html#standardese-otto::ui::RotaryEvent::clicks"><span class="typ dec var fun">clicks</span></a><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::RotaryEvent-brief" class="standardese-brief-section">Passed to <code>Screen::rotary</code></p>
+<h4 class="standardese-list-section-heading">Member variables</h4>
+<ul id="standardese-otto::ui::RotaryEvent-members" class="standardese-list-section">
+<li id="standardese-otto::ui::RotaryEvent::rotary">
+<dl id="standardese-otto::ui::RotaryEvent::rotary" class="standardese-term-description-item">
+<dt><code>rotary</code></dt>
+<dd>&mdash; The rotary at which the event occured</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::RotaryEvent::clicks">
+<dl id="standardese-otto::ui::RotaryEvent::clicks" class="standardese-term-description-item">
+<dt><code>clicks</code></dt>
+<dd>&mdash; The amount of steps the rotary was turned. Negative means CCW</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::Screen" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::ui::Screen</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">class</span> <span class="typ dec var fun">Screen</span>
+<span class="pun">:</span> <span class="kwd">public</span> <span class="typ dec var fun">vg::Drawable</span>
+<span class="pun">{</span>
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">ptr</span> <span class="pun">=</span> <span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>Screen<span class="pun">&gt;</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Screen</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">~Screen</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">bool</span> <a href="doc_widget.html#standardese-otto::ui::Screen::keypress(otto::ui::Key)"><span class="typ dec var fun">keypress</span></a><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">bool</span> <a href="doc_widget.html#standardese-otto::ui::Screen::keyrelease(otto::ui::Key)"><span class="typ dec var fun">keyrelease</span></a><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_widget.html#standardese-otto::ui::Screen::rotary(otto::ui::RotaryEvent)"><span class="typ dec var fun">rotary</span></a><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::RotaryEvent"><span class="typ dec var fun">otto::ui::RotaryEvent</span></a><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_widget.html#standardese-otto::ui::Screen::on_show()"><span class="typ dec var fun">on_show</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_widget.html#standardese-otto::ui::Screen::on_hide()"><span class="typ dec var fun">on_hide</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::ui::Screen-brief" class="standardese-brief-section">Represents a view that covers the entire screen</p>
+<p>If it belongs to a engine, use <a href="ui::EngineScreen">ui::EngineScreen</a>.</p>
+<section id="standardese-otto::ui::Screen::keypress(otto::ui::Key)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>keypress</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">bool</span> <span class="typ dec var fun">keypress</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::Screen::keypress(otto::ui::Key)-brief" class="standardese-brief-section">Run by MainUI when a key is pressed</p>
+<p>@key the pressed key
+@return true if the key was used.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::Screen::keyrelease(otto::ui::Key)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>keyrelease</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">bool</span> <span class="typ dec var fun">keyrelease</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::Screen::keyrelease(otto::ui::Key)-brief" class="standardese-brief-section">Run by MainUI when a key is released</p>
+<p>@key the released key
+@return true if the key was used.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::Screen::rotary(otto::ui::RotaryEvent)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>rotary</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">rotary</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::RotaryEvent"><span class="typ dec var fun">otto::ui::RotaryEvent</span></a><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::Screen::rotary(otto::ui::RotaryEvent)-brief" class="standardese-brief-section">This should be used for handling rotary events</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::Screen::on_show()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>on_show</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">on_show</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::Screen::on_show()-brief" class="standardese-brief-section">Run by MainUI when switching to this screen</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::Screen::on_hide()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>on_hide</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">on_hide</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::Screen::on_hide()-brief" class="standardese-brief-section">Run by MainUI when switching to another screen</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

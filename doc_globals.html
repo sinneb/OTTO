@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>globals.hpp</title>
+</head>
+<body>
+<article id="standardese-globals.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>globals.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">filesystem.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;event.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;audio&#x2F;main_audio.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;engines&#x2F;engine.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;engines&#x2F;engine_dispatcher.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">engines&#x2F;studio&#x2F;input_selector&#x2F;input_selector.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">engines&#x2F;studio&#x2F;metronome&#x2F;metronome.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">engines&#x2F;studio&#x2F;mixer&#x2F;mixer.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">engines&#x2F;studio&#x2F;tapedeck&#x2F;tapedeck.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">global</span>
+    <span class="pun">{</span>
+        <span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">ErrorCode</span><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">exception</span> <span class="pun">=</span> <span class="typ dec var fun">util::as_exception</span><span class="pun">&lt;</span>ErrorCode<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">filesystem::path</span> <span class="kwd">const</span> <span class="typ dec var fun">data_dir</span><span class="pun">;</span>
+
+        <span class="kwd">namespace</span> <span class="typ dec var fun">event</span>
+        <span class="pun">{</span>
+            <span class="typ dec var fun">util::EventDispatcher&lt;&gt;</span> <span class="typ dec var fun">pre_init</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">util::EventDispatcher&lt;&gt;</span> <span class="typ dec var fun">post_init</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">util::EventDispatcher&lt;&gt;</span> <span class="typ dec var fun">pre_exit</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">util::EventDispatcher&lt;&gt;</span> <span class="typ dec var fun">post_exit</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">util::EventDispatcher</span><span class="pun">&lt;</span>unsigned int<span class="pun">&gt;</span> <span class="typ dec var fun">buffersize_change</span><span class="pun">;</span>
+
+            <span class="typ dec var fun">util::EventDispatcher</span><span class="pun">&lt;</span>unsigned int<span class="pun">&gt;</span> <span class="typ dec var fun">samplerate_change</span><span class="pun">;</span>
+        <span class="pun">}</span>
+
+        <a href="doc_main_audio.html#standardese-otto::audio::MainAudio"><span class="typ dec var fun">audio::MainAudio</span></a> <span class="typ dec var fun">audio</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">engines::EngineDispatcher</span><span class="pun">&lt;</span>engines::EngineType::synth<span class="pun">&gt;</span> <span class="typ dec var fun">synth</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">engines::EngineDispatcher</span><span class="pun">&lt;</span>engines::EngineType::drums<span class="pun">&gt;</span> <span class="typ dec var fun">drums</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">engines::EngineDispatcher</span><span class="pun">&lt;</span>engines::EngineType::effect<span class="pun">&gt;</span> <span class="typ dec var fun">effect</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">engines::Tapedeck</span> <span class="typ dec var fun">tapedeck</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">engines::Mixer</span> <span class="typ dec var fun">mixer</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">engines::Metronome</span> <span class="typ dec var fun">metronome</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">engines::InputSelector</span> <span class="typ dec var fun">selector</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">init</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">exit</span><span class="pun">(</span><span class="typ dec var fun">otto::global::ErrorCode</span> <span class="typ dec var fun">ec</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <span class="typ dec var fun">running</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">otto::global::ErrorCode</span> <span class="typ dec var fun">error</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">read_data</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">save_data</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::global" class="standardese-entity-documentation">
+<section id="standardese-otto::global::event" class="standardese-entity-documentation">
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

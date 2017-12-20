@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>engine.hpp</title>
+</head>
+<body>
+<article id="standardese-engine.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>engine.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">memory</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">functional</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">plog&#x2F;Log.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;exception.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;algorithm.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;jsonfile.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;ui&#x2F;widget.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;audio&#x2F;processor.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">engines</span>
+    <span class="pun">{</span>
+        <span class="kwd">enum</span> <span class="kwd">class</span> <a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">EngineType</span></a><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">EnginePatch</span></a><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine"><span class="typ dec var fun">AnyEngine</span></a><span class="pun">;</span>
+
+        <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::to_json(nlohmann::json&amp;,otto::engines::AnyEngineconst&amp;)"><span class="typ dec var fun">to_json</span></a><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine"><span class="typ dec var fun">otto::engines::AnyEngine</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">e</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::from_json(nlohmann::jsonconst&amp;,otto::engines::AnyEngine&amp;)"><span class="typ dec var fun">from_json</span></a><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine"><span class="typ dec var fun">otto::engines::AnyEngine</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">e</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span><span class="kwd">EngineType</span><span class="pun">::</span><span class="kwd">drums</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">DrumsEngine</span> <span class="pun">=</span> <span class="typ dec var fun">Engine</span><span class="pun">&lt;</span>EngineType::drums<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span><span class="kwd">EngineType</span><span class="pun">::</span><span class="kwd">synth</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">SynthEngine</span> <span class="pun">=</span> <span class="typ dec var fun">Engine</span><span class="pun">&lt;</span>EngineType::synth<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span><span class="kwd">EngineType</span><span class="pun">::</span><span class="kwd">effect</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">EffectEngine</span> <span class="pun">=</span> <span class="typ dec var fun">Engine</span><span class="pun">&lt;</span>EngineType::effect<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span><span class="kwd">EngineType</span><span class="pun">::</span><span class="kwd">sequencer</span><span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">using</span> <span class="typ dec var fun">SequencerEngine</span> <span class="pun">=</span> <span class="typ dec var fun">Engine</span><span class="pun">&lt;</span>EngineType::sequencer<span class="pun">&gt;</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">E</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::engine_type%3CE%3E"><span class="typ dec var fun">engine_type</span></a><span class="pun">;</span>
+
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">E</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="kwd">EngineType</span> <span class="kwd">engine_type_v</span> <span class="pun">=</span> <span class="kwd">engine_type</span><span class="pun">&lt;</span><span class="kwd">E</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">REngine</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::register_engine%3CREngine,Args%3E(Args&amp;&amp;...)"><span class="typ dec var fun">register_engine</span></a><span class="pun">(</span>Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Engine&lt;ET&gt; &gt;<span class="pun">&gt;</span> <a href="doc_engine.html#standardese-otto::engines"><span class="typ dec var fun">create_engines</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile"><span class="typ dec var fun">PresetFile</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Engine</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::EngineScreen%3CEngine%3E"><span class="typ dec var fun">EngineScreen</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">engines</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Eg</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">register_engine</span><span class="pun">(</span>Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+        <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Engine&lt;ET&gt; &gt;<span class="pun">&gt;</span> <span class="typ dec var fun">create_engines</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::engines" class="standardese-entity-documentation">
+<section id="standardese-otto::engines::EngineType" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Enumeration <code>otto::engines::EngineType</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">EngineType</span>
+<span class="pun">{</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::drums"><span class="typ dec var fun">drums</span></a><span class="pun">,</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::synth"><span class="typ dec var fun">synth</span></a><span class="pun">,</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::effect"><span class="typ dec var fun">effect</span></a><span class="pun">,</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::sequencer"><span class="typ dec var fun">sequencer</span></a><span class="pun">,</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::modulation"><span class="typ dec var fun">modulation</span></a><span class="pun">,</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::studio"><span class="typ dec var fun">studio</span></a><span class="pun">,</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::system"><span class="typ dec var fun">system</span></a><span class="pun">,</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType::other"><span class="typ dec var fun">other</span></a>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineType-brief" class="standardese-brief-section">Engine type</p>
+<p>Each engine has a type, which signifies the group it belongs to.</p>
+<h4 class="standardese-list-section-heading">Enumerators</h4>
+<ul id="standardese-otto::engines::EngineType-enumerators" class="standardese-list-section">
+<li id="standardese-otto::engines::EngineType::drums">
+<dl id="standardese-otto::engines::EngineType::drums" class="standardese-term-description-item">
+<dt><code>drums</code></dt>
+<dd>&mdash; Drum engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType::synth">
+<dl id="standardese-otto::engines::EngineType::synth" class="standardese-term-description-item">
+<dt><code>synth</code></dt>
+<dd>&mdash; Synth engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType::effect">
+<dl id="standardese-otto::engines::EngineType::effect" class="standardese-term-description-item">
+<dt><code>effect</code></dt>
+<dd>&mdash; FX engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType::sequencer">
+<dl id="standardese-otto::engines::EngineType::sequencer" class="standardese-term-description-item">
+<dt><code>sequencer</code></dt>
+<dd>&mdash; Sequencer engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType::modulation">
+<dl id="standardese-otto::engines::EngineType::modulation" class="standardese-term-description-item">
+<dt><code>modulation</code></dt>
+<dd>&mdash; Modulation engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType::studio">
+<dl id="standardese-otto::engines::EngineType::studio" class="standardese-term-description-item">
+<dt><code>studio</code></dt>
+<dd>&mdash; Studio engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType::system">
+<dl id="standardese-otto::engines::EngineType::system" class="standardese-term-description-item">
+<dt><code>system</code></dt>
+<dd>&mdash; System engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType::other">
+<dl id="standardese-otto::engines::EngineType::other" class="standardese-term-description-item">
+<dt><code>other</code></dt>
+<dd>&mdash; Uncategorized</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EnginePatch" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::EnginePatch</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">EnginePatch</span>
+<span class="pun">{</span>
+    <a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">type</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::string</span> <span class="typ dec var fun">name</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">nlohmann::json</span> <span class="typ dec var fun">data</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::EnginePatch-brief" class="standardese-brief-section">An engine type and name, along with its json-serialized data.</p>
+<p>For applying patches, take a look at <code>otto::engines::EngineRegistry</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::AnyEngine</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">AnyEngine</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">AnyEngine</span><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="typ dec var fun">name</span><span class="pun">,</span> <span class="typ dec var fun">otto::engines::Properties</span><span class="pun">&amp;</span> <span class="typ dec var fun">props</span><span class="pun">,</span> <span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>ui::Screen<span class="pun">&gt;</span> <span class="typ dec var fun">screen</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">AnyEngine</span><span class="pun">(</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">~AnyEngine</span><span class="pun">(</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">default</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine::on_enable()"><span class="typ dec var fun">on_enable</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine::on_disable()"><span class="typ dec var fun">on_disable</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine::name()const"><span class="typ dec var fun">name</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::engines::Properties</span><span class="pun">&amp;</span> <span class="typ dec var fun">props</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::engines::Properties</span> <span class="kwd">const</span><span class="pun">&amp;</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine::props()const"><span class="typ dec var fun">props</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_widget.html#standardese-otto::ui::Screen"><span class="typ dec var fun">ui::Screen</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">screen</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_widget.html#standardese-otto::ui::Screen"><span class="typ dec var fun">ui::Screen</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">screen</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">nlohmann::json</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine::to_json()const"><span class="typ dec var fun">to_json</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine::from_json(nlohmann::jsonconst&amp;)"><span class="typ dec var fun">from_json</span></a><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">otto::engines::EnginePatch</span></a> <a href="doc_engine.html#standardese-otto::engines::AnyEngine::make_patch()const"><span class="typ dec var fun">make_patch</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+
+<span class="kwd">private</span><span class="pun">:</span>
+    <span class="typ dec var fun">std::string</span> <span class="kwd">const</span> <span class="typ dec var fun">_name</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::engines::Properties</span><span class="pun">&amp;</span> <span class="typ dec var fun">_props</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>ui::Screen<span class="pun">&gt;</span> <span class="typ dec var fun">_screen</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine-brief" class="standardese-brief-section">Abstract base class for Engines</p>
+<p>Use this when refering to a generic engine</p>
+<section id="standardese-otto::engines::AnyEngine::on_enable()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>on_enable</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">on_enable</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::on_enable()-brief" class="standardese-brief-section">Called when this module is enabled</p>
+<dl id="standardese-otto::engines::AnyEngine::on_enable()-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>None</dd>
+</dl>
+<p>The samplers use this to load the sample file.</p>
+<p>TODO: Define “enabled”</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine::on_disable()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>on_disable</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">on_disable</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::on_disable()-brief" class="standardese-brief-section">Called when this module is disabled</p>
+<dl id="standardese-otto::engines::AnyEngine::on_disable()-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>None</dd>
+</dl>
+<p>The samplers use this to load the sample file.</p>
+<p>TODO: Define “disabled”</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine::name()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>name</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">name</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::name()const-brief" class="standardese-brief-section">The name of this module.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine::props()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>props</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">otto::engines::Properties</span><span class="pun">&amp;</span> <span class="typ dec var fun">props</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::props()-brief" class="standardese-brief-section">The module properties.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine::props()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>props</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">otto::engines::Properties</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">props</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::props()const-brief" class="standardese-brief-section">The module properties.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine::to_json()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>to_json</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="typ dec var fun">nlohmann::json</span> <span class="typ dec var fun">to_json</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::to_json()const-brief" class="standardese-brief-section">Serialize the properties</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine::from_json(nlohmann::jsonconst&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>from_json</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">from_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::from_json(nlohmann::jsonconst&amp;)-brief" class="standardese-brief-section">Deserialize the properties</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::AnyEngine::make_patch()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>make_patch</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">otto::engines::EnginePatch</span></a> <span class="typ dec var fun">make_patch</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::AnyEngine::make_patch()const-brief" class="standardese-brief-section">Construct an <code>EnginePatch</code> with the serialized data.</p>
+<p>This is implemented in the <code>Engine</code> specializations, so you don’t have
+to worry about it when writing your own engine.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::to_json(nlohmann::json&amp;,otto::engines::AnyEngineconst&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::engines::to_json</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">to_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine"><span class="typ dec var fun">otto::engines::AnyEngine</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">e</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::to_json(nlohmann::json&amp;,otto::engines::AnyEngineconst&amp;)-brief" class="standardese-brief-section">Serialization</p>
+<dl id="standardese-otto::engines::to_json(nlohmann::json&amp;,otto::engines::AnyEngineconst&amp;)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd><code>j = e.to_json()</code></dd>
+</dl>
+<p>This function is detected by nlohmann::json using adl</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::from_json(nlohmann::jsonconst&amp;,otto::engines::AnyEngine&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::engines::from_json</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">from_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine"><span class="typ dec var fun">otto::engines::AnyEngine</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">e</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::from_json(nlohmann::jsonconst&amp;,otto::engines::AnyEngine&amp;)-brief" class="standardese-brief-section">Deserialization</p>
+<dl id="standardese-otto::engines::from_json(nlohmann::jsonconst&amp;,otto::engines::AnyEngine&amp;)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd><code>e.from_json(j)</code></dd>
+</dl>
+<p>This function is detected by nlohmann::json using adl</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::Engine&lt;ET&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::Engine</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">Engine</span>
+<span class="pun">:</span> <span class="typ dec var fun">AnyEngine</span>
+<span class="pun">{</span>
+<span class="kwd">protected</span><span class="pun">:</span>
+    <span class="kwd">using</span> <a href="doc_engine.html#standardese-otto::engines::AnyEngine"><span class="typ dec var fun">AnyEngine::AnyEngine</span></a><span class="pun">;</span>
+
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="kwd">virtual</span> <a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">otto::engines::EnginePatch</span></a> <span class="typ dec var fun">make_patch</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::Engine&lt;ET&gt;-brief" class="standardese-brief-section">Engine base class</p>
+<p>When creating a new engine, extend this class, instantiated with the
+appropriate <code>EngineType</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::engine_type&lt;E&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::engine_type</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">E</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">engine_type</span>
+<span class="pun">{</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::engine_type&lt;E&gt;-brief" class="standardese-brief-section">Type trait to get engine type.</p>
+<p>If <code>E</code> is an <code>Engine</code>, this struct has a member <code>value</code> which is the
+type of that engine.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::engine_type_v" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Unexposed entity <code>otto::engines::engine_type_v</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">E</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="kwd">EngineType</span> <span class="kwd">engine_type_v</span> <span class="pun">=</span> <span class="kwd">engine_type</span><span class="pun">&lt;</span><span class="kwd">E</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::engine_type_v-brief" class="standardese-brief-section">Shorthand for <code>engine_type&lt;E&gt;::value</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::register_engine&lt;REngine,Args&gt;(Args&amp;&amp;...)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::engines::register_engine</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">REngine</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+<span class="kwd">void</span> <span class="typ dec var fun">register_engine</span><span class="pun">(</span>Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::register_engine&lt;REngine,Args&gt;(Args&amp;&amp;...)-brief" class="standardese-brief-section">Register an engine.</p>
+<dl id="standardese-otto::engines::register_engine&lt;REngine,Args&gt;(Args&amp;&amp;...)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>Store a function which constructs an <code>REngine</code> in a
+<a href="http://en.cppreference.com/mwiki/index.php?title=Special%3ASearch&amp;search=std::unique_ptr"><code>std::unique_ptr</code></a> with <code>args</code> forwarded.</dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::create_engines&lt;ET&gt;()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::engines::create_engines</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+<span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Engine&lt;ET&gt; &gt;<span class="pun">&gt;</span> <span class="typ dec var fun">create_engines</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::create_engines&lt;ET&gt;()-brief" class="standardese-brief-section">Construct all registered engines of type <code>ET</code></p>
+<dl id="standardese-otto::engines::create_engines&lt;ET&gt;()-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>Call all the stored constructors for type <code>ET</code>, and move the
+resulting <code>unique_ptr</code>s into a vector, which is returned.</dd>
+</dl>
+<p>This is mostly useful for <code>EngineDispatcher</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::PresetFile</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">PresetFile</span>
+<span class="pun">:</span> <span class="typ dec var fun">util::JsonFile</span>
+<span class="pun">{</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">util::JsonFile::ErrorCode</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">util::JsonFile::OpenOptions</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">util::JsonFile::exception</span><span class="pun">;</span>
+
+    <span class="kwd">explicit</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::PresetFile(fs::pathconst&amp;)"><span class="typ dec var fun">PresetFile</span></a><span class="pun">(</span><span class="typ dec var fun">fs::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">otto::util::JsonFile::ErrorCode</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::validate()const"><span class="typ dec var fun">validate</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span> <span class="kwd">override</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::string</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::name()const"><span class="typ dec var fun">name</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::json_engines()"><span class="typ dec var fun">json_engines</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>EnginePatch<span class="pun">&gt;</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::engines()const"><span class="typ dec var fun">engines</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">otto::engines::EnginePatch</span></a> <a href="doc_engine.html#standardese-otto::engines::PresetFile::engine(otto::engines::EngineType)"><span class="typ dec var fun">engine</span></a><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">group</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::engine(std::stringconst&amp;)const"><span class="typ dec var fun">engine</span></a><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">group</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::operator%5B%5D(std::stringconst&amp;)"><span class="typ dec var fun">operator[]</span></a><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">group</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile::operator%5B%5D(std::stringconst&amp;)const"><span class="typ dec var fun">operator[]</span></a><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">group</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<h4>OTTO Preset format</h4>
+<p>OTTO Presets are defined in a json file with the following layout:</p>
+<pre><code class="standardese-language-json">{
+  &quot;OTTO Preset&quot;: {
+    &quot;Version&quot;: 0,
+    &quot;Name&quot;: &quot;&#x2F;* Name *&#x2F;&quot;
+  },
+  &quot;Engines&quot;: {
+    &quot;&#x2F;* Type *&#x2F;&quot;: {
+      &quot;Engine&quot;: &quot;&#x2F;* Engine *&#x2F;&quot;,
+      &quot;Data&quot;: &quot;&#x2F;* Engine specific data *&#x2F;&quot;
+    },
+    &quot;&#x2F;* Type *&#x2F;&quot;: {
+      &quot;Engine&quot;: &quot;&#x2F;* Engine *&#x2F;&quot;,
+      &quot;Data&quot;: &quot;&#x2F;* Engine specific data *&#x2F;&quot;
+    },
+  }
+}
+</code></pre>
+<ul>
+<li>
+<p><code>Version</code> is a file format version number, currently at <code>0</code></p>
+</li>
+<li>
+<p><code>Type</code> is one of the types <code>&quot;Drums&quot;</code>, <code>&quot;Synth&quot;</code> or <code>&quot;Effect&quot;</code>. Each</p>
+</li>
+<li>
+<p>preset can define one engine in each group</p>
+</li>
+<li>
+<p><code>Engine</code> is an engine id string, as if by <code>AnyEngine::name()</code></p>
+</li>
+<li>
+<p><code>Data</code> is the serialized data for the engine, as if by
+<code>AnyEngine::to_json()</code></p>
+</li>
+</ul>
+<p>At some point it will be possible to embed similar data in a sample file,
+but currently you need to supply both a sample file and a preset file</p>
+<section id="standardese-otto::engines::PresetFile::PresetFile(fs::pathconst&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Constructor <code>PresetFile</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">explicit</span> <span class="typ dec var fun">PresetFile</span><span class="pun">(</span><span class="typ dec var fun">fs::path</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">p</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::PresetFile(fs::pathconst&amp;)-brief" class="standardese-brief-section">Constructor</p>
+<dl id="standardese-otto::engines::PresetFile::PresetFile(fs::pathconst&amp;)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>delegate to <code>util::JsonFile(p)</code></dd>
+<dt>Postconditions:</dt>
+<dd>as <code>util::JsonFile(p)</code>, and <code>validate() == ErrorCode::none</code> \remarks remember to <code>read()</code> after construction</dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::validate()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>validate</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="typ dec var fun">otto::util::JsonFile::ErrorCode</span> <span class="typ dec var fun">validate</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span> <span class="kwd">override</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::validate()const-brief" class="standardese-brief-section">Confirm the presence of the header and <code>Engines</code> section, as well as the
+version number.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::name()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>name</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">std::string</span> <span class="typ dec var fun">name</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::name()const-brief" class="standardese-brief-section">Get the name of this preset</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::json_engines()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>json_engines</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">json_engines</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::json_engines()-brief" class="standardese-brief-section">Get a json object refering to the <code>Engines</code> section.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::engines()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>engines</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>EnginePatch<span class="pun">&gt;</span> <span class="typ dec var fun">engines</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::engines()const-brief" class="standardese-brief-section">Get a json object refering to the <code>Engines</code> section.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::engine(otto::engines::EngineType)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>engine</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">otto::engines::EnginePatch</span></a> <span class="typ dec var fun">engine</span><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">group</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::engine(otto::engines::EngineType)-brief" class="standardese-brief-section">Get a json object with an engine, defined by its group</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::engine(std::stringconst&amp;)const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>engine</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">engine</span><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">group</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::engine(std::stringconst&amp;)const-brief" class="standardese-brief-section">Get a json object with an engine, defined by its group</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::operator[](std::stringconst&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator[]</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator[]</span><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">group</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::operator[](std::stringconst&amp;)-brief" class="standardese-brief-section">Get a json object with an engine, defined by its group</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::PresetFile::operator[](std::stringconst&amp;)const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator[]</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator[]</span><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">group</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::PresetFile::operator[](std::stringconst&amp;)const-brief" class="standardese-brief-section">Get a json object with an engine, defined by its group</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineScreen&lt;Engine&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::EngineScreen</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Engine</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">EngineScreen</span>
+<span class="pun">:</span> <span class="typ dec var fun">ui::Screen</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">EngineScreen</span><span class="pun">(</span><span class="typ dec var fun">Engine</span><span class="pun">*</span> <span class="typ dec var fun">engine</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">~EngineScreen</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+<span class="kwd">protected</span><span class="pun">:</span>
+    <span class="typ dec var fun">Engine</span><span class="pun">&amp;</span> <span class="typ dec var fun">engine</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineScreen&lt;Engine&gt;-brief" class="standardese-brief-section">A <code>ui::Screen</code> with a reference to the engine it belongs to.</p>
+<p>Screens for engines should inherit from this. They can then access the
+engine from the <code>engine</code> reference.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::engines" class="standardese-entity-documentation">
+</section>
+</section>
+</article>
+</body>
+</html>

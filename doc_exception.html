@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>exception.hpp</title>
+</head>
+<body>
+<article id="standardese-exception.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>exception.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">exception</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string_view</span><span class="pre">&gt;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">struct</span> <span class="typ dec var fun">exception</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Data</span><span class="pun">&gt;</span>
+        <span class="kwd">struct</span> <a href="doc_exception.html#standardese-otto::util::as_exception%3CData%3E"><span class="typ dec var fun">as_exception</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::as_exception&lt;Data&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::as_exception</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Data</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">as_exception</span>
+<span class="pun">:</span> <span class="typ dec var fun">exception</span>
+<span class="pun">{</span>
+    <span class="kwd">using</span> <span class="typ dec var fun">data_type</span> <span class="pun">=</span> <span class="typ dec var fun">Data</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">DataRef</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">as_exception</span><span class="pun">(</span><span class="typ dec var fun">DataRef</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">dr</span><span class="pun">,</span> <span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">m</span><span class="pun">,</span> Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">DataRef</span><span class="pun">&gt;</span>
+    <span class="typ dec var fun">as_exception</span><span class="pun">(</span><span class="typ dec var fun">DataRef</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">dr</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">data_type</span><span class="pun">&amp;</span> <span class="typ dec var fun">data</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">data_type</span><span class="pun">&amp;</span> <span class="typ dec var fun">data</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+<span class="kwd">private</span><span class="pun">:</span>
+    <span class="typ dec var fun">data_type</span> <span class="typ dec var fun">_data</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::as_exception&lt;Data&gt;-brief" class="standardese-brief-section">A wrapper for throwing arbitrary data</p>
+<p>Always use this instead of throwing an error code.</p>
+<h5>Prefered usage (error codes):</h5>
+<p>Define an <code>ErrorCode</code> enum, and a type alias to <code>as_exception&lt;ErrorCode&gt;</code>
+as member types in your class. You may also want to write a
+<code>to_string(ErrorCode)</code> function, which will be appended to the exception
+message.</p>
+<pre><code class="standardese-language-cpp">enum struct ErrorCode {
+  none = 0,
+  not_found,
+  invalid
+}
+using exception = util::as_exception&lt;ErrorCode&gt;;
+</code></pre>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

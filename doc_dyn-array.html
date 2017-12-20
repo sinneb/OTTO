@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>dyn-array.hpp</title>
+</head>
+<body>
+<article id="standardese-dyn-array.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>dyn-array.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">memory</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">iterator</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">algorithm</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">cstring</span><span class="pre">&gt;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+        <span class="kwd">class</span> <a href="doc_dyn-array.html#standardese-otto::util::dyn_array%3CT%3E"><span class="typ dec var fun">dyn_array</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::dyn_array&lt;T&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::util::dyn_array</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+<span class="kwd">class</span> <span class="typ dec var fun">dyn_array</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">cur_size</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>T []<span class="pun">&gt;</span> <span class="typ dec var fun">_data</span><span class="pun">;</span>
+
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="typ dec var fun">dyn_array</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">size</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">auto</span> <span class="typ dec var fun">operator[]</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">i</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">auto</span> <span class="typ dec var fun">operator[]</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">i</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span><span class="pun">*</span> <span class="typ dec var fun">begin</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span><span class="pun">*</span> <span class="typ dec var fun">end</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="kwd">const</span><span class="pun">*</span> <span class="typ dec var fun">begin</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="kwd">const</span><span class="pun">*</span> <span class="typ dec var fun">end</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span><span class="pun">*</span> <span class="typ dec var fun">data</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">T</span> <span class="kwd">const</span><span class="pun">*</span> <span class="typ dec var fun">data</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">size</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <a href="doc_dyn-array.html#standardese-otto::util::dyn_array%3CT%3E::resize(std::size_t)"><span class="typ dec var fun">resize</span></a><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">new_size</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <a href="doc_dyn-array.html#standardese-otto::util::dyn_array%3CT%3E::clear()"><span class="typ dec var fun">clear</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::dyn_array&lt;T&gt;-brief" class="standardese-brief-section">Dynamic array</p>
+<p>Default initialized. Cleared on resize.</p>
+<section id="standardese-otto::util::dyn_array&lt;T&gt;::resize(std::size_t)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>resize</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">resize</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">new_size</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::dyn_array&lt;T&gt;::resize(std::size_t)-brief" class="standardese-brief-section">Replace the array with a new one of size <code>new_size</code></p>
+<p>Also default initializes the data</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::dyn_array&lt;T&gt;::clear()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>clear</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">clear</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::dyn_array&lt;T&gt;::clear()-brief" class="standardese-brief-section">Fill the array with default initialized values</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

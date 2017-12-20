@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>mainui.hpp</title>
+</head>
+<body>
+<article id="standardese-mainui.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>mainui.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;ui&#x2F;widget.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">json.hpp</span><span class="pre">&gt;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">ui</span>
+    <span class="pun">{</span>
+        <span class="kwd">void</span> <a href="doc_mainui.html#standardese-otto::ui::main_ui_loop()"><span class="typ dec var fun">main_ui_loop</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">bool</span> <a href="doc_mainui.html#standardese-otto::ui::is_pressed(otto::ui::Key)"><span class="typ dec var fun">is_pressed</span></a><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a> <span class="typ dec var fun">k</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <a href="doc_mainui.html#standardese-otto::ui::display(otto::ui::Screen&amp;)"><span class="typ dec var fun">display</span></a><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Screen"><span class="typ dec var fun">otto::ui::Screen</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">screen</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">init</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="typ dec var fun">nlohmann::json</span> <span class="typ dec var fun">to_json</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">void</span> <span class="typ dec var fun">from_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">namespace</span> <a href="standardese_entities.html#standardese-otto::ui::impl"><span class="typ dec var fun">impl</span></a>
+        <span class="pun">{</span>
+            <span class="kwd">void</span> <a href="doc_mainui.html#standardese-otto::ui::impl::draw_frame(vg::Canvas&amp;)"><span class="typ dec var fun">draw_frame</span></a><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">vg::Canvas</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">ctx</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">bool</span> <a href="doc_mainui.html#standardese-otto::ui::impl::keypress(otto::ui::Key)"><span class="typ dec var fun">keypress</span></a><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a> <span class="typ dec var fun">key</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">bool</span> <a href="doc_mainui.html#standardese-otto::ui::impl::keyrelease(otto::ui::Key)"><span class="typ dec var fun">keyrelease</span></a><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a> <span class="typ dec var fun">key</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="pun">}</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<p id="standardese-mainui.hpp-brief" class="standardese-brief-section">This file contains the UI state. If you do not need access to this, but just
+the library, look at <code>core&#x2F;ui&#x2F;widgets.hpp</code> and <code>core&#x2F;ui&#x2F;canvas.hpp</code> instead.</p>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::ui" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::main_ui_loop()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::ui::main_ui_loop</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">main_ui_loop</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::main_ui_loop()-brief" class="standardese-brief-section">The main ui loop</p>
+<p>This sets up all the device specific graphics, and calls
+<code>internal::draw_frame</code> 60 times pr second, until [global::running] is
+false, or the graphics are exitted by the user. It is also responsible for
+listening to keyevents, and calling <code>internal::keypress</code> and
+<code>internal::keyrelease</code> as apropriate.</p>
+<p>On some platforms (OSX), all OpenGL calls must be made from the main
+thread, therefore this function is called from <code>main()</code>.</p>
+<p>One important note, is that this function is implemented in the graphics
+drivers, and not the expected implementation file. Currently the only
+graphics driver avaliable is <code>src&#x2F;core&#x2F;ui&#x2F;glfw_impl.cpp</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::is_pressed(otto::ui::Key)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::ui::is_pressed</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">bool</span> <span class="typ dec var fun">is_pressed</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a> <span class="typ dec var fun">k</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::is_pressed(otto::ui::Key)-brief" class="standardese-brief-section">Check if a key is currently pressed.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::display(otto::ui::Screen&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::ui::display</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">display</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Screen"><span class="typ dec var fun">otto::ui::Screen</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">screen</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::display(otto::ui::Screen&amp;)-brief" class="standardese-brief-section">Display a screen.</p>
+<p>Calls <code>Screen::on_hide</code> for the old screen, and then <code>Screen::on_show</code>
+for the new screen</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::impl" class="standardese-entity-documentation">
+<section id="standardese-otto::ui::impl::draw_frame(vg::Canvas&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::ui::impl::draw_frame</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">draw_frame</span><span class="pun">(</span><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><span class="typ dec var fun">vg::Canvas</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">ctx</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::impl::draw_frame(vg::Canvas&amp;)-brief" class="standardese-brief-section">Draws the current screen and overlays.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::impl::keypress(otto::ui::Key)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::ui::impl::keypress</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">bool</span> <span class="typ dec var fun">keypress</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a> <span class="typ dec var fun">key</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::impl::keypress(otto::ui::Key)-brief" class="standardese-brief-section">Dispatches to the event handler for the current screen, and handles
+global keys.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::ui::impl::keyrelease(otto::ui::Key)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::ui::impl::keyrelease</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">bool</span> <span class="typ dec var fun">keyrelease</span><span class="pun">(</span><a href="doc_widget.html#standardese-otto::ui::Key"><span class="typ dec var fun">otto::ui::Key</span></a> <span class="typ dec var fun">key</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::ui::impl::keyrelease(otto::ui::Key)-brief" class="standardese-brief-section">Dispatches to the event handler for the current screen, and handles
+global keys.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

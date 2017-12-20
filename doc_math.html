@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>math.hpp</title>
+</head>
+<body>
+<article id="standardese-math.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>math.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">cmath</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">array</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">algorithm</span><span class="pre">&gt;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">namespace</span> <span class="typ dec var fun">math</span>
+        <span class="pun">{</span>
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">constexpr</span> <span class="kwd">bool</span> <span class="typ dec var fun">between</span><span class="pun">(</span><span class="typ dec var fun">T</span> <span class="typ dec var fun">min</span><span class="pun">,</span> <span class="typ dec var fun">T</span> <span class="typ dec var fun">max</span><span class="pun">,</span> <span class="typ dec var fun">T</span> <span class="typ dec var fun">el</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">float</span> <span class="typ dec var fun">round</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">places</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+            <span class="kwd">constexpr</span> <span class="typ dec var fun">T</span> <a href="doc_math.html#standardese-otto::util::math::modulo%3CT%3E(T,T)"><span class="typ dec var fun">modulo</span></a><span class="pun">(</span><span class="typ dec var fun">T</span> <span class="typ dec var fun">a</span><span class="pun">,</span> <span class="typ dec var fun">T</span> <span class="typ dec var fun">b</span><span class="pun">)</span><span class="pun">;</span>
+
+            <span class="kwd">struct</span> <span class="typ dec var fun">vec</span><span class="pun">;</span>
+
+            <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+            <span class="kwd">constexpr</span> <span class="typ dec var fun">std::array</span><span class="pun">&lt;</span>float, N<span class="pun">&gt;</span> <a href="doc_math.html#standardese-otto::util::math::split_values%3CN%3E(float,float,float)"><span class="typ dec var fun">split_values</span></a><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">min</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">max</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="pun">}</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::math" class="standardese-entity-documentation">
+<section id="standardese-otto::util::math::modulo&lt;T&gt;(T,T)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::math::modulo</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">T</span><span class="pun">&gt;</span>
+<span class="kwd">constexpr</span> <span class="typ dec var fun">T</span> <span class="typ dec var fun">modulo</span><span class="pun">(</span><span class="typ dec var fun">T</span> <span class="typ dec var fun">a</span><span class="pun">,</span> <span class="typ dec var fun">T</span> <span class="typ dec var fun">b</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::math::modulo&lt;T&gt;(T,T)-brief" class="standardese-brief-section">Real modulo for negative <code>a</code> too</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::math::split_values&lt;N&gt;(float,float,float)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::math::split_values</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
+<span class="kwd">constexpr</span> <span class="typ dec var fun">std::array</span><span class="pun">&lt;</span>float, N<span class="pun">&gt;</span> <span class="typ dec var fun">split_values</span><span class="pun">(</span><span class="kwd">float</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">min</span><span class="pun">,</span> <span class="kwd">float</span> <span class="typ dec var fun">max</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::math::split_values&lt;N&gt;(float,float,float)-brief" class="standardese-brief-section">Split a number into <code>N</code> values between 0 and 1, each representing a Nth
+part of the range <code>[min,max]</code></p>
+<p>This is useful for UI especially, when you want to display a range of
+values by fading colours between N fixed points. See <code>draw_pitch</code> in
+<code>drum_sampler.cpp</code> for an example</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</section>
+</article>
+</body>
+</html>

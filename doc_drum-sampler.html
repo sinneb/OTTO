@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>drum-sampler.hpp</title>
+</head>
+<body>
+<article id="standardese-drum-sampler.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>drum-sampler.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">fmt&#x2F;format.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">filesystem.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;audio&#x2F;processor.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;engines&#x2F;engine.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">engines</span>
+    <span class="pun">{</span>
+        <span class="kwd">struct</span> <a href="doc_drum-sampler.html#standardese-otto::engines::DrumSampler"><span class="typ dec var fun">DrumSampler</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::engines" class="standardese-entity-documentation">
+<section id="standardese-otto::engines::DrumSampler" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::DrumSampler</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">DrumSampler</span>
+<span class="pun">:</span> <span class="typ dec var fun">engines::DrumsEngine</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">DrumSampler</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">~DrumSampler</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">override</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">audio::ProcessData</span><span class="pun">&lt;</span>1<span class="pun">&gt;</span> <span class="typ dec var fun">process</span><span class="pun">(</span><span class="typ dec var fun">audio::ProcessData</span><span class="pun">&lt;</span>0<span class="pun">&gt;</span><span class="pun">)</span> <span class="kwd">override</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">load</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">on_enable</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">override</span><span class="pun">;</span>
+
+    <span class="kwd">static</span> <span class="typ dec var fun">fs::path</span> <span class="typ dec var fun">samplePath</span><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="typ dec var fun">name</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">size_t</span> <span class="typ dec var fun">maxSampleSize</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">util::dyn_array</span><span class="pun">&lt;</span>float<span class="pun">&gt;</span> <span class="typ dec var fun">sampleData</span><span class="pun">;</span>
+
+    <span class="kwd">int</span> <span class="typ dec var fun">sampleSampleRate</span> <span class="pun">=</span> <span class="lit">44100</span><span class="pun">;</span>
+
+    <span class="kwd">float</span> <span class="typ dec var fun">sampleSpeed</span> <span class="pun">=</span> <span class="lit">1</span><span class="pun">;</span>
+
+    <span class="kwd">static</span> <span class="kwd">constexpr</span> <span class="kwd">int</span> <span class="kwd">const</span> <span class="typ dec var fun">nVoices</span> <span class="pun">=</span> <span class="lit">24</span><span class="pun">;</span>
+
+    <span class="kwd">struct</span> <span class="typ dec var fun">Props</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Props</span> <span class="typ dec var fun">props</span><span class="pun">;</span>
+
+    <span class="kwd">int</span> <span class="typ dec var fun">currentVoiceIdx</span> <span class="pun">=</span> <span class="lit">0</span><span class="pun">;</span>
+
+<span class="kwd">private</span><span class="pun">:</span>
+    <span class="typ dec var fun">audio::ProcessBuffer</span><span class="pun">&lt;</span>1<span class="pun">&gt;</span> <span class="typ dec var fun">proc_buf</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::DrumSampler-brief" class="standardese-brief-section">A sampler with 24 individual voices, laid out over the keys.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

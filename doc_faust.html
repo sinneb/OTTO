@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>faust.hpp</title>
+</head>
+<body>
+<article id="standardese-faust.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>faust.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">map</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">memory</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">algorithm</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">gsl&#x2F;span</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">faust&#x2F;gui&#x2F;UI.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">faust&#x2F;gui&#x2F;meta.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">faust&#x2F;dsp&#x2F;dsp.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">plog&#x2F;Log.h</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;type_traits.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;algorithm.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">audio</span>
+    <span class="pun">{</span>
+        <span class="kwd">using</span> <span class="typ dec var fun">FaustDSP</span> <span class="pun">=</span> <span class="typ dec var fun">dsp</span><span class="pun">;</span>
+
+        <span class="kwd">class</span> <span class="typ dec var fun">FaustOptions</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <a href="doc_faust.html#standardese-otto::audio::FaustWrapper%3CCin,Cout%3E.Cin"><span class="typ dec var fun">Cin</span></a><span class="pun">,</span> <span class="kwd">int</span> <a href="doc_faust.html#standardese-otto::audio::FaustWrapper%3CCin,Cout%3E.Cout"><span class="typ dec var fun">Cout</span></a><span class="pun">&gt;</span>
+        <span class="kwd">class</span> <a href="doc_faust.html#standardese-otto::audio::FaustWrapper%3CCin,Cout%3E"><span class="typ dec var fun">FaustWrapper</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::audio" class="standardese-entity-documentation">
+<section id="standardese-otto::audio::FaustWrapper&lt;Cin,Cout&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::audio::FaustWrapper</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">int</span> <a href="doc_faust.html#standardese-otto::audio::FaustWrapper%3CCin,Cout%3E.Cin"><span class="typ dec var fun">Cin</span></a><span class="pun">,</span> <span class="kwd">int</span> <a href="doc_faust.html#standardese-otto::audio::FaustWrapper%3CCin,Cout%3E.Cout"><span class="typ dec var fun">Cout</span></a><span class="pun">&gt;</span>
+<span class="kwd">class</span> <span class="typ dec var fun">FaustWrapper</span>
+<span class="pun">{</span>
+    <a href="doc_processor.html#standardese-otto::audio::RTBuffer%3CT,factor%3E"><span class="typ dec var fun">audio::RTBuffer</span></a><span class="pun">&lt;</span>float, std::max(Cin, Cout)<span class="pun">&gt;</span> <span class="typ dec var fun">faustbuf</span><span class="pun">;</span>
+
+<span class="kwd">protected</span><span class="pun">:</span>
+    <span class="typ dec var fun">audio::ProcessBuffer</span><span class="pun">&lt;</span>Cout<span class="pun">&gt;</span> <span class="typ dec var fun">proc_buf</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">otto::audio::FaustOptions</span> <span class="typ dec var fun">opts</span><span class="pun">;</span>
+
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>dsp<span class="pun">&gt;</span> <span class="typ dec var fun">fDSP</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">FaustWrapper</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">FaustWrapper</span><span class="pun">(</span><span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>dsp<span class="pun">&gt;</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">d</span><span class="pun">,</span> <span class="typ dec var fun">engines::Properties</span><span class="pun">&amp;</span> <span class="typ dec var fun">props</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">~FaustWrapper</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <a href="doc_processor.html#standardese-otto::audio::ProcessData%3CN%3E"><span class="typ dec var fun">audio::ProcessData</span></a><span class="pun">&lt;</span>Cout<span class="pun">&gt;</span> <span class="typ dec var fun">process</span><span class="pun">(</span><a href="doc_processor.html#standardese-otto::audio::ProcessData%3CN%3E"><span class="typ dec var fun">audio::ProcessData</span></a><span class="pun">&lt;</span>Cin<span class="pun">&gt;</span> <span class="typ dec var fun">data</span><span class="pun">)</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::audio::FaustWrapper&lt;Cin,Cout&gt;-brief" class="standardese-brief-section">A Wrapper for faust scripts
+All interactions with faust should go through this wrapper</p>
+<h4 class="standardese-list-section-heading">Template parameters</h4>
+<ul id="standardese-otto::audio::FaustWrapper&lt;Cin,Cout&gt;-tparams" class="standardese-list-section">
+<li id="standardese-otto::audio::FaustWrapper&lt;Cin,Cout&gt;.Cout">
+<dl id="standardese-otto::audio::FaustWrapper&lt;Cin,Cout&gt;.Cout" class="standardese-term-description-item">
+<dt><code>Cout</code></dt>
+<dd>&mdash; The number of output audio channels
+Make sure this corresponds with the actually called faust script</dd>
+</dl>
+</li>
+</ul>
+<section id="standardese-otto::audio::FaustWrapper&lt;Cin,Cout&gt;.Cin" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Template parameter <code>Cin</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">int</span> <span class="typ dec var fun">Cin</span></code></pre>
+<p id="standardese-otto::audio::FaustWrapper&lt;Cin,Cout&gt;.Cin-brief" class="standardese-brief-section">The number of input audio channels.</p>
+<p>Make sure this corresponds with the actually called faust script</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

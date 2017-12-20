@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>soundfile.hpp</title>
+</head>
+<body>
+<article id="standardese-soundfile.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>soundfile.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">algorithm</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;bytefile.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;algorithm.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">util&#x2F;exception.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">util</span>
+    <span class="pun">{</span>
+        <span class="kwd">class</span> <a href="doc_soundfile.html#standardese-otto::util::SoundFile"><span class="typ dec var fun">SoundFile</span></a><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">SoundFile::</span><span class="typ dec var fun">read_samples</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">l</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">SoundFile::</span><span class="typ dec var fun">read_samples</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">SoundFile::</span><span class="typ dec var fun">write_samples</span><span class="pun">(</span><span class="typ dec var fun">InIter</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="typ dec var fun">InIter</span> <span class="typ dec var fun">l</span><span class="pun">)</span><span class="pun">;</span>
+
+        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">SoundFile::</span><span class="typ dec var fun">write_samples</span><span class="pun">(</span><span class="typ dec var fun">InIter</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">i</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::util" class="standardese-entity-documentation">
+<section id="standardese-otto::util::SoundFile" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::util::SoundFile</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">class</span> <span class="typ dec var fun">SoundFile</span>
+<span class="pun">:</span> <span class="kwd">public</span> <span class="typ dec var fun">ByteFile</span>
+<span class="pun">{</span>
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="kwd">using</span> <a href="doc_soundfile.html#standardese-otto::util::SoundFile::Position"><span class="typ dec var fun">Position</span></a> <span class="pun">=</span> <span class="kwd">int</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <a href="doc_soundfile.html#standardese-otto::util::SoundFile::Sample"><span class="typ dec var fun">Sample</span></a> <span class="pun">=</span> <span class="kwd">float</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">Chunk</span> <span class="pun">=</span> <span class="typ dec var fun">ByteFile::Chunk</span><span class="pun">;</span>
+
+    <span class="kwd">static</span> <span class="kwd">constexpr</span> <span class="typ dec var fun">std::size_t</span> <span class="kwd">const</span> <a href="doc_soundfile.html#standardese-otto::util::SoundFile::sample_size"><span class="typ dec var fun">sample_size</span></a> <span class="pun">=</span> <span class="typ dec var fun">sizeof</span><span class="pun">(</span><span class="kwd">Sample</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">struct</span> <span class="typ dec var fun">Error</span><span class="pun">;</span>
+
+    <span class="kwd">struct</span> <span class="typ dec var fun">Info</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">Info</span> <span class="typ dec var fun">info</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">SoundFile</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="typ dec var fun">~SoundFile</span><span class="pun">(</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">default</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <a href="doc_bytefile.html#standardese-otto::util::ByteFile"><span class="typ dec var fun">ByteFile::open</span></a><span class="pun">;</span>
+
+    <span class="kwd">using</span> <a href="doc_bytefile.html#standardese-otto::util::ByteFile"><span class="typ dec var fun">ByteFile::close</span></a><span class="pun">;</span>
+
+    <span class="kwd">using</span> <a href="doc_bytefile.html#standardese-otto::util::ByteFile"><span class="typ dec var fun">ByteFile::flush</span></a><span class="pun">;</span>
+
+    <span class="kwd">using</span> <a href="doc_bytefile.html#standardese-otto::util::ByteFile"><span class="typ dec var fun">ByteFile::is_open</span></a><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">write_file</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">override</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">read_file</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">override</span><span class="pun">;</span>
+
+    <a href="doc_soundfile.html#standardese-otto::util::SoundFile::Position"><span class="typ dec var fun">Position</span></a> <span class="typ dec var fun">seek</span><span class="pun">(</span><a href="doc_soundfile.html#standardese-otto::util::SoundFile::Position"><span class="typ dec var fun">otto::util::SoundFile::Position</span></a><span class="pun">)</span><span class="pun">;</span>
+
+    <a href="doc_soundfile.html#standardese-otto::util::SoundFile::Position"><span class="typ dec var fun">Position</span></a> <span class="typ dec var fun">position</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <a href="doc_soundfile.html#standardese-otto::util::SoundFile::Position"><span class="typ dec var fun">Position</span></a> <span class="typ dec var fun">length</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;OutIter,Sample,std::output_iterator_tag&gt;<span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">read_samples</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="typ dec var fun">OutIter</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;OutIter,Sample,std::output_iterator_tag&gt;<span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">read_samples</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">&amp;&amp;</span><span class="pun">,</span> <span class="kwd">int</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;InIter,Sample,std::input_iterator_tag&gt;<span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">write_samples</span><span class="pun">(</span><span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="typ dec var fun">InIter</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;InIter,Sample,std::input_iterator_tag&gt;<span class="pun">&gt;</span>
+    <span class="kwd">void</span> <span class="typ dec var fun">write_samples</span><span class="pun">(</span><span class="typ dec var fun">InIter</span><span class="pun">&amp;&amp;</span><span class="pun">,</span> <span class="kwd">int</span><span class="pun">)</span><span class="pun">;</span>
+
+<span class="kwd">protected</span><span class="pun">:</span>
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_soundfile.html#standardese-otto::util::SoundFile::add_custom_chunks(std::vector%3Cstd::unique_ptr%3CChunk%3E%3E&amp;)"><span class="typ dec var fun">add_custom_chunks</span></a><span class="pun">(</span><span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Chunk&gt;<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">v</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">virtual</span> <span class="kwd">void</span> <a href="doc_soundfile.html#standardese-otto::util::SoundFile::replace_custom_chunk(std::unique_ptr%3CChunk%3E&amp;)"><span class="typ dec var fun">replace_custom_chunk</span></a><span class="pun">(</span><span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>Chunk<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">ptr</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">friend</span> <span class="kwd">struct</span> <span class="typ dec var fun">Header</span><span class="pun">;</span>
+
+    <span class="kwd">friend</span> <span class="kwd">struct</span> <span class="typ dec var fun">WAVE_fmt</span><span class="pun">;</span>
+
+    <span class="kwd">friend</span> <span class="kwd">struct</span> <span class="typ dec var fun">WAVE_data</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">ByteFile::Position</span> <span class="typ dec var fun">audioOffset</span><span class="pun">;</span>
+
+    <a href="doc_soundfile.html#standardese-otto::util::SoundFile::Sample"><span class="typ dec var fun">Sample</span></a> <span class="typ dec var fun">bytes_to_sample</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>sample_size<span class="pun">&gt;</span> <span class="typ dec var fun">bytes</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>sample_size<span class="pun">&gt;</span> <span class="typ dec var fun">sample_to_bytes</span><span class="pun">(</span><a href="doc_soundfile.html#standardese-otto::util::SoundFile::Sample"><span class="typ dec var fun">otto::util::SoundFile::Sample</span></a> <span class="typ dec var fun">sample</span><span class="pun">)</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::util::SoundFile-brief" class="standardese-brief-section">A file handler for sound (wav, aiff) files</p>
+<section id="standardese-otto::util::SoundFile::Position" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Type alias <code>Position</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">using</span> <span class="typ dec var fun">Position</span> <span class="pun">=</span> <span class="kwd">int</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::SoundFile::Position-brief" class="standardese-brief-section">Used for indexing into the file</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::SoundFile::Sample" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Type alias <code>Sample</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">using</span> <span class="typ dec var fun">Sample</span> <span class="pun">=</span> <span class="kwd">float</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::SoundFile::Sample-brief" class="standardese-brief-section">The type of a sample</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::SoundFile::sample_size" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Variable <code>sample_size</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">static</span> <span class="kwd">constexpr</span> <span class="typ dec var fun">std::size_t</span> <span class="kwd">const</span> <span class="typ dec var fun">sample_size</span> <span class="pun">=</span> <span class="typ dec var fun">sizeof</span><span class="pun">(</span><span class="kwd">Sample</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::SoundFile::sample_size-brief" class="standardese-brief-section">Size in bytes of one sample</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::SoundFile::add_custom_chunks(std::vector&lt;std::unique_ptr&lt;Chunk&gt;&gt;&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>add_custom_chunks</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">add_custom_chunks</span><span class="pun">(</span><span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Chunk&gt;<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">v</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::SoundFile::add_custom_chunks(std::vector&lt;std::unique_ptr&lt;Chunk&gt;&gt;&amp;)-brief" class="standardese-brief-section">When extending &lt;SoundFile&gt;, override this function.</p>
+<p>It should push back any custom metadata chunks to <code>v</code></p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::util::SoundFile::replace_custom_chunk(std::unique_ptr&lt;Chunk&gt;&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>replace_custom_chunk</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">virtual</span> <span class="kwd">void</span> <span class="typ dec var fun">replace_custom_chunk</span><span class="pun">(</span><span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>Chunk<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">ptr</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::util::SoundFile::replace_custom_chunk(std::unique_ptr&lt;Chunk&gt;&amp;)-brief" class="standardese-brief-section">When extending &lt;SoundFile&gt;, override this function.</p>
+<p>It should check the id of <code>ptr</code>, and if it matches,
+swap it with an instance of the correct class.
+If the chunk is unknown, leave it alone. After this,
+<a href="Chunk::read">Chunk::read</a> will be invoked on <code>ptr</code>.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

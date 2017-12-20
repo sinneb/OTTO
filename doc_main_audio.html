@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>main_audio.hpp</title>
+</head>
+<body>
+<article id="standardese-main_audio.hpp" class="standardese-file-documentation">
+<h1 class="standardese-file-documentation-heading">Header file <code>main_audio.hpp</code></h1>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">memory</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">atomic</span><span class="pre">&gt;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">core&#x2F;audio&#x2F;processor.hpp</span><span class="pre">&quot;</span>
+
+<span class="pre">#include</span> <span class="pre">&quot;</span><span class="typ dec var fun">debug&#x2F;ui.hpp</span><span class="pre">&quot;</span>
+
+<span class="kwd">namespace</span> <span class="typ dec var fun">otto</span>
+<span class="pun">{</span>
+    <span class="kwd">namespace</span> <span class="typ dec var fun">audio</span>
+    <span class="pun">{</span>
+        <span class="kwd">class</span> <a href="doc_main_audio.html#standardese-otto::audio::MainAudio"><span class="typ dec var fun">MainAudio</span></a><span class="pun">;</span>
+    <span class="pun">}</span>
+<span class="pun">}</span>
+</code></pre>
+<section id="standardese-otto" class="standardese-entity-documentation">
+<section id="standardese-otto::audio" class="standardese-entity-documentation">
+<section id="standardese-otto::audio::MainAudio" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Class <code>otto::audio::MainAudio</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">class</span> <span class="typ dec var fun">MainAudio</span>
+<span class="pun">{</span>
+    <span class="typ dec var fun">std::unique_ptr</span><span class="pun">&lt;</span>Impl<span class="pun">&gt;</span> <span class="typ dec var fun">impl</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::atomic_bool</span> <span class="typ dec var fun">do_process</span><span class="pun">;</span>
+
+    <span class="kwd">struct</span> <span class="typ dec var fun">DbgInfo</span><span class="pun">;</span>
+
+<span class="kwd">public</span><span class="pun">:</span>
+    <span class="typ dec var fun">std::atomic_int</span> <span class="typ dec var fun">samplerate</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">MainAudio</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">~MainAudio</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">ProcessData</span><span class="pun">&lt;</span>2<span class="pun">&gt;</span> <span class="typ dec var fun">process</span><span class="pun">(</span><span class="typ dec var fun">ProcessData</span><span class="pun">&lt;</span>1<span class="pun">&gt;</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">init</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">exit</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <span class="typ dec var fun">start_processing</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+<span class="kwd">private</span><span class="pun">:</span>
+    <span class="typ dec var fun">ProcessBuffer</span><span class="pun">&lt;</span>1<span class="pun">&gt;</span> <span class="typ dec var fun">audiobuf1</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::audio::MainAudio-brief" class="standardese-brief-section">Class that interacts with OS audio&#x2F;midi framework, and delegates
+processing to the engines.</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+</section>
+</article>
+</body>
+</html>

@@ -2,10 +2,126 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Files</title>
+<title>Modules</title>
+<style type="text/css" media="screen">
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+
+@font-face {
+    font-family: TOP-1;
+    src:url(styles/OTTO-Light.ttf)
+    format("truetype")
+}
+
+code.standardese-language-cpp.standardese-entity-synopsis {
+    margin: 0px;
+    display: block;
+    background: #FAFAFA;
+    padding: 20px;
+    overflow: auto;
+    border: 1px solid #EEE;
+    border-left: 4px solid #e637009c;
+    border-radius: 0px;
+    box-shadow: 2px 3px 10px #DDD;
+}
+
+hr.standardese-entity-documentation-break {
+    //margin: 10px 0px 50px 0px;
+    border: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: TOP-1;
+    color: #e63700
+}
+
+* {
+    font-family: Roboto Regular
+}
+
+code * {
+    font-family: Inconsolata;
+}
+
+code {
+    font-family: Inconsolata;
+    background: #F5F5F5;
+    padding: 0.1em 0.4em;
+    border-radius: 0.2em
+}
+
+body {
+  min-height: 100vh;
+}
+
+body, .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.left {
+  /* put the nav on the left */
+  order: -1;
+}
+
+.page-contents {
+  overflow-x: auto;
+}
+
+.page-contents {
+    overflow-x: auto;
+    max-width: 900px;
+    padding: 0px 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    flex: 1;
+  }
+  .page-contents {
+    flex: 1;
+  }
+  .sidebar {
+    /* 12em is the width of the columns */
+    flex: 0 0 18em;
+  }
+}
+
+h3.standardese-entity-documentation-heading {
+    font-size: 21px;
+}
+
+dt {
+    font-family: TOP-1;
+    color: #e63700;
+}
+
+a {
+    color: #e63700;
+    text-decoration:  none;
+}
+
+ul {
+    list-style-type: circle;
+}
+
+li#standardese-Modules a {
+    color: black;
+}
+
+</style>
 </head>
 <body>
-<ul id="standardese-file-index" class="standardese-file-index">
+  <div class="container">
+    <div class="page-contents">
+      <ul id="standardese-module-index" class="standardese-module-index">
+<h1>Project modules</h1>
+</ul>
+    </div>
+    <div class="sidebar left">
+      <ul id="standardese-file-index" class="standardese-file-index">
 <h1>Project files</h1>
 <li id="standardese-algorithm.hpp" class="standardese-entity-index-item">
 <dl>
@@ -245,5 +361,8 @@ the library, look at <code>core&#x2F;ui&#x2F;widgets.hpp</code> and <code>core&#
 </dl>
 </li>
 </ul>
+    </div>
+  </div>
 </body>
 </html>
+

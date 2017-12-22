@@ -14,7 +14,7 @@
     format("truetype")
 }
 
-code.standardese-language-cpp {
+pre code {
     margin: 0px;
     display: block;
     background: #FAFAFA;
@@ -23,7 +23,7 @@ code.standardese-language-cpp {
     border: 1px solid #EEE;
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-entity-synopsis {
     border-left: 4px solid #e63700;
 }
 
@@ -386,7 +386,7 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 <li id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E"><code>EngineDispatcher</code></a></dt>
-<dd>&mdash; Owns engines of type <code>ET</code>, and dispatch to them</dd>
+<dd>&mdash; Owns engines of type <code>ET</code>, and dispatches to a selected one of them</dd>
 </dl>
 </li>
 <li id="standardese-otto::engines::EnginePatch" class="standardese-entity-index-item">
@@ -484,7 +484,7 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 </li>
 <li id="standardese-otto::engines::create_engines&lt;ET&gt;()" class="standardese-entity-index-item">
 <dl>
-<dt><a href="doc_engine.html#standardese-otto::engines"><code>create_engines</code></a></dt>
+<dt><a href="doc_engine.html#standardese-otto::engines::create_engines%3CET%3E()"><code>create_engines</code></a></dt>
 <dd>&mdash; Construct all registered engines of type <code>ET</code></dd>
 </dl>
 </li>
@@ -1828,10 +1828,9 @@ with category of at least <code>category</code></dd>
 <dd>&mdash; Wrap any type in a mutex, and guarantee that it is locked on every access.</dd>
 </dl>
 </li>
-<li id="standardese-otto::util::match&lt;Var,Lambdas&gt;(Var&amp;&amp;,Lambdas...)" class="standardese-entity-index-item">
+<li id="standardese-otto::util::match&lt;Funcs,S,B,Ts&gt;(Funcs&amp;&amp;...)" class="standardese-entity-index-item">
 <dl>
-<dt><a href="doc_type_traits.html#standardese-otto::util::match%3CVar,Lambdas%3E(Var&amp;&amp;,Lambdas...)"><code>match</code></a></dt>
-<dd>&mdash; Pattern matching for std::variant</dd>
+<dt><a href="doc_poly-ptr.html#standardese-otto::util"><code>match</code></a></dt>
 </dl>
 </li>
 <li id="standardese-otto::util::max_element&lt;Cont&gt;(Cont&amp;&amp;)" class="standardese-entity-index-item">

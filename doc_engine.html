@@ -14,7 +14,7 @@
     format("truetype")
 }
 
-code.standardese-language-cpp {
+pre code {
     margin: 0px;
     display: block;
     background: #FAFAFA;
@@ -23,7 +23,7 @@ code.standardese-language-cpp {
     border: 1px solid #EEE;
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-entity-synopsis {
     border-left: 4px solid #e63700;
 }
 
@@ -181,7 +181,7 @@ li#standardese-engine\.hpp a {
         <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::register_engine%3CREngine,Args%3E(Args&amp;&amp;...)"><span class="typ dec var fun">register_engine</span></a><span class="pun">(</span>Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
 
         <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
-        <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Engine&lt;ET&gt; &gt;<span class="pun">&gt;</span> <a href="doc_engine.html#standardese-otto::engines"><span class="typ dec var fun">create_engines</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Engine&lt;ET&gt; &gt;<span class="pun">&gt;</span> <a href="doc_engine.html#standardese-otto::engines::create_engines%3CET%3E()"><span class="typ dec var fun">create_engines</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
 
         <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::PresetFile"><span class="typ dec var fun">PresetFile</span></a><span class="pun">;</span>
 
@@ -194,11 +194,6 @@ li#standardese-engine\.hpp a {
 <span class="pun">{</span>
     <span class="kwd">namespace</span> <span class="typ dec var fun">engines</span>
     <span class="pun">{</span>
-        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">Eg</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
-        <span class="kwd">void</span> <span class="typ dec var fun">register_engine</span><span class="pun">(</span>Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
-
-        <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
-        <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Engine&lt;ET&gt; &gt;<span class="pun">&gt;</span> <span class="typ dec var fun">create_engines</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
     <span class="pun">}</span>
 <span class="pun">}</span>
 </code></pre>
@@ -285,7 +280,7 @@ li#standardese-engine\.hpp a {
 <span class="pun">};</span>
 </code></pre>
 <p id="standardese-otto::engines::EnginePatch-brief" class="standardese-brief-section">An engine type and name, along with its json-serialized data.</p>
-<p>For applying patches, take a look at <code>otto::engines::EngineRegistry</code></p>
+<p>For applying patches, take a look at <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E"><code>otto::engines::EngineDispatcher</code></a></p>
 </section>
 <hr class="standardese-entity-documentation-break" />
 <section id="standardese-otto::engines::AnyEngine" class="standardese-entity-documentation">
@@ -474,7 +469,7 @@ appropriate <code>EngineType</code></p>
 <dd>Call all the stored constructors for type <code>ET</code>, and move the
 resulting <code>unique_ptr</code>s into a vector, which is returned.</dd>
 </dl>
-<p>This is mostly useful for <code>EngineDispatcher</code></p>
+<p>This is mostly useful for <code>EngineDispatcher&lt;ET&gt;</code></p>
 </section>
 <hr class="standardese-entity-documentation-break" />
 <section id="standardese-otto::engines::PresetFile" class="standardese-entity-documentation">

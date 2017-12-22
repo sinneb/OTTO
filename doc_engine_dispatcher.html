@@ -14,7 +14,7 @@
     format("truetype")
 }
 
-code.standardese-language-cpp {
+pre code {
     margin: 0px;
     display: block;
     background: #FAFAFA;
@@ -23,7 +23,7 @@ code.standardese-language-cpp {
     border: 1px solid #EEE;
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-entity-synopsis {
     border-left: 4px solid #e63700;
 }
 
@@ -182,7 +182,7 @@ li#standardese-engine_dispatcher\.hpp a {
     <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">*</span> <span class="typ dec var fun">_current</span><span class="pun">;</span>
 <span class="pun">};</span>
 </code></pre>
-<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;-brief" class="standardese-brief-section">Owns engines of type <code>ET</code>, and dispatch to them</p>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;-brief" class="standardese-brief-section">Owns engines of type <code>ET</code>, and dispatches to a selected one of them</p>
 <section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::EngineDispatcher()" class="standardese-entity-documentation">
 <h3 class="standardese-entity-documentation-heading">Constructor <code>EngineDispatcher</code></h3>
 <pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">EngineDispatcher</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
@@ -198,10 +198,10 @@ li#standardese-engine_dispatcher\.hpp a {
 <h3 class="standardese-entity-documentation-heading">Function <code>init</code></h3>
 <pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">init</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
 </code></pre>
-<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::init()-brief" class="standardese-brief-section">Construct the engines</p>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::init()-brief" class="standardese-brief-section">Construct all registered engines</p>
 <dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::init()-inline-sections" class="standardese-inline-sections">
 <dt>Effects:</dt>
-<dd>construct <code>_engines</code> using <code>create_engines</code></dd>
+<dd>construct <code>_engines</code> using <a href="doc_engine.html#standardese-otto::engines::create_engines%3CET%3E()"><code>otto::engines::create_engines&lt;ET&gt;</code></a></dd>
 </dl>
 <p>Only call this after all engines are registered</p>
 </section>

@@ -24,7 +24,7 @@ cat <<EOF > $file
     format("truetype")
 }
 
-code.standardese-language-cpp {
+pre code {
     margin: 0px;
     display: block;
     background: #FAFAFA;
@@ -33,7 +33,7 @@ code.standardese-language-cpp {
     border: 1px solid #EEE;
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-entity-synopsis {
     border-left: 4px solid #e63700;
 }
 

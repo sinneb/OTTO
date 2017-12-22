@@ -14,20 +14,20 @@
     format("truetype")
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-language-cpp {
     margin: 0px;
     display: block;
     background: #FAFAFA;
     padding: 20px;
     overflow: auto;
     border: 1px solid #EEE;
-    border-left: 4px solid #e637009c;
-    border-radius: 0px;
-    box-shadow: 2px 3px 10px #DDD;
+}
+
+code.standardese-language-cpp.standardese-entity-synopsis {
+    border-left: 4px solid #e63700;
 }
 
 hr.standardese-entity-documentation-break {
-    //margin: 10px 0px 50px 0px;
     border: none;
 }
 
@@ -143,10 +143,10 @@ li#standardese-bytefile\.hpp a {
         <a href="doc_result.html#standardese-otto::util::result%3Cok_t,err_t%3E"><span class="typ dec var fun">result</span></a><span class="pun">&lt;</span>void, OutIter<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">l</span><span class="pun">)</span><span class="pun">;</span>
 
         <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
-        <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streampos<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span> <span class="typ dec var fun">iter</span><span class="pun">,</span> <span class="kwd">int</span> <span class="typ dec var fun">n</span><span class="pun">)</span><span class="pun">;</span>
 
         <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
-        <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">bs</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streampos<span class="pun">&gt;</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">bs</span><span class="pun">)</span><span class="pun">;</span>
 
         <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span><span class="pun">&gt;</span>
         <span class="kwd">void</span> <span class="typ dec var fun">ByteFile::</span><span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">InIter</span> <span class="typ dec var fun">f</span><span class="pun">,</span> <span class="typ dec var fun">InIter</span> <span class="typ dec var fun">l</span><span class="pun">)</span><span class="pun">;</span>
@@ -217,10 +217,10 @@ li#standardese-bytefile\.hpp a {
     <a href="doc_result.html#standardese-otto::util::result%3Cok_t,err_t%3E"><span class="typ dec var fun">result</span></a><span class="pun">&lt;</span>void, OutIter<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="typ dec var fun">OutIter</span><span class="pun">)</span><span class="pun">;</span>
 
     <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;OutIter,std::byte,std::output_iterator_tag&gt;<span class="pun">&gt;</span>
-    <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">int</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streampos<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">OutIter</span><span class="pun">,</span> <span class="kwd">int</span><span class="pun">)</span><span class="pun">;</span>
 
     <span class="kwd">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">N</span><span class="pun">&gt;</span>
-    <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streamsize<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
+    <span class="typ dec var fun">result</span><span class="pun">&lt;</span>void, std::streampos<span class="pun">&gt;</span> <span class="typ dec var fun">read_bytes</span><span class="pun">(</span><span class="typ dec var fun">bytes</span><span class="pun">&lt;</span>N<span class="pun">&gt;</span><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
 
     <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">=</span> std::enable_if&lt;is_iterator_v&lt;InIter,std::byte,std::input_iterator_tag&gt;<span class="pun">&gt;</span>
     <span class="kwd">void</span> <span class="typ dec var fun">write_bytes</span><span class="pun">(</span><span class="typ dec var fun">InIter</span><span class="pun">,</span> <span class="typ dec var fun">InIter</span><span class="pun">)</span><span class="pun">;</span>
@@ -403,11 +403,6 @@ the library, look at <code>core&#x2F;ui&#x2F;widgets.hpp</code> and <code>core&#
 <li id="standardese-poly-ptr.hpp" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_poly-ptr.html#standardese-poly-ptr.hpp"><code>poly-ptr.hpp</code></a></dt>
-</dl>
-</li>
-<li id="standardese-poly_variant.hpp" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_poly_variant.html#standardese-poly_variant.hpp"><code>poly_variant.hpp</code></a></dt>
 </dl>
 </li>
 <li id="standardese-processor.hpp" class="standardese-entity-index-item">

@@ -14,20 +14,20 @@
     format("truetype")
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-language-cpp {
     margin: 0px;
     display: block;
     background: #FAFAFA;
     padding: 20px;
     overflow: auto;
     border: 1px solid #EEE;
-    border-left: 4px solid #e637009c;
-    border-radius: 0px;
-    box-shadow: 2px 3px 10px #DDD;
+}
+
+code.standardese-language-cpp.standardese-entity-synopsis {
+    border-left: 4px solid #e63700;
 }
 
 hr.standardese-entity-documentation-break {
-    //margin: 10px 0px 50px 0px;
     border: none;
 }
 
@@ -125,18 +125,190 @@ li#standardese-engine_dispatcher\.hpp a {
     <span class="kwd">namespace</span> <span class="typ dec var fun">engines</span>
     <span class="pun">{</span>
         <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
-        <span class="kwd">struct</span> <span class="typ dec var fun">EngineDispatcher</span><span class="pun">;</span>
+        <span class="kwd">struct</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E"><span class="typ dec var fun">EngineDispatcher</span></a><span class="pun">;</span>
 
         <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
-        <span class="kwd">void</span> <span class="typ dec var fun">to_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <span class="typ dec var fun">otto::engines::EngineDispatcher</span><span class="pun">&lt;</span>ET<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">er</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">to_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E"><span class="typ dec var fun">otto::engines::EngineDispatcher</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">er</span><span class="pun">)</span><span class="pun">;</span>
 
         <span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
-        <span class="kwd">void</span> <span class="typ dec var fun">from_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <span class="typ dec var fun">otto::engines::EngineDispatcher</span><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">er</span><span class="pun">)</span><span class="pun">;</span>
+        <span class="kwd">void</span> <span class="typ dec var fun">from_json</span><span class="pun">(</span><span class="typ dec var fun">nlohmann::json</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">j</span><span class="pun">,</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E"><span class="typ dec var fun">otto::engines::EngineDispatcher</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">er</span><span class="pun">)</span><span class="pun">;</span>
     <span class="pun">}</span>
 <span class="pun">}</span>
 </code></pre>
 <section id="standardese-otto" class="standardese-entity-documentation">
 <section id="standardese-otto::engines" class="standardese-entity-documentation">
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::EngineDispatcher</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="typ dec var fun">ET</span><span class="pun">&gt;</span>
+<span class="kwd">struct</span> <span class="typ dec var fun">EngineDispatcher</span>
+<span class="pun">{</span>
+    <span class="kwd">enum</span> <span class="kwd">class</span> <span class="typ dec var fun">ErrorCode</span><span class="pun">;</span>
+
+    <span class="kwd">using</span> <span class="typ dec var fun">exception</span> <span class="pun">=</span> <a href="doc_exception.html#standardese-otto::util::as_exception%3CData%3E"><span class="typ dec var fun">util::as_exception</span></a><span class="pun">&lt;</span>ErrorCode<span class="pun">&gt;</span><span class="pun">;</span>
+
+    <span class="kwd">static</span> <span class="kwd">constexpr</span> <a href="doc_engine.html#standardese-otto::engines::EngineType"><span class="typ dec var fun">otto::engines::EngineType</span></a> <span class="kwd">const</span> <span class="typ dec var fun">type</span> <span class="pun">=</span> <span class="kwd">ET</span><span class="pun">;</span>
+
+    <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::EngineDispatcher()"><span class="typ dec var fun">EngineDispatcher</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="kwd">void</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::init()"><span class="typ dec var fun">init</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::current()"><span class="typ dec var fun">current</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">current</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::operator*()"><span class="typ dec var fun">operator*</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator*</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">*</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::operator-%3E()const"><span class="typ dec var fun">operator-&gt;</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">*</span> <span class="typ dec var fun">operator-&gt;</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::select(Engine%3CET%3E*)"><span class="typ dec var fun">select</span></a><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">*</span> <span class="typ dec var fun">ptr</span><span class="pun">)</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::select(Engine%3CET%3E&amp;)"><span class="typ dec var fun">select</span></a><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">ref</span><span class="pun">)</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::select(std::size_t)"><span class="typ dec var fun">select</span></a><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">idx</span><span class="pun">)</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::select(std::stringconst&amp;)"><span class="typ dec var fun">select</span></a><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">name</span><span class="pun">)</span><span class="pun">;</span>
+
+    <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>EnginePatch<span class="pun">&gt;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::make_patches()const"><span class="typ dec var fun">make_patches</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E::apply_patch(otto::engines::EnginePatchconst&amp;)"><span class="typ dec var fun">apply_patch</span></a><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">otto::engines::EnginePatch</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">seq</span><span class="pun">)</span><span class="pun">;</span>
+
+<span class="kwd">private</span><span class="pun">:</span>
+    <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>std::unique_ptr&lt;Engine&lt;ET&gt; &gt;<span class="pun">&gt;</span> <span class="typ dec var fun">_engines</span><span class="pun">;</span>
+
+    <a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">*</span> <span class="typ dec var fun">_current</span><span class="pun">;</span>
+<span class="pun">};</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;-brief" class="standardese-brief-section">Owns engines of type <code>ET</code>, and dispatch to them</p>
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::EngineDispatcher()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Constructor <code>EngineDispatcher</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">EngineDispatcher</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::EngineDispatcher()-brief" class="standardese-brief-section">Construct an EngineDispatcher</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::EngineDispatcher()-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>None</dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::init()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>init</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">init</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::init()-brief" class="standardese-brief-section">Construct the engines</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::init()-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>construct <code>_engines</code> using <code>create_engines</code></dd>
+</dl>
+<p>Only call this after all engines are registered</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::current()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>current</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">current</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::current()-brief" class="standardese-brief-section">Access the currently selected engine</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::operator*()" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator*</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">operator*</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::operator*()-brief" class="standardese-brief-section">Access the currently selected engine</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::operator-&gt;()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>operator-&gt;</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span> <span class="kwd">const</span><span class="pun">*</span> <span class="typ dec var fun">operator-&gt;</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span> <span class="kwd">noexcept</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::operator-&gt;()const-brief" class="standardese-brief-section">Access the currently selected engine</p>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(Engine&lt;ET&gt;*)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>select</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">select</span><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">*</span> <span class="typ dec var fun">ptr</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(Engine&lt;ET&gt;*)-brief" class="standardese-brief-section">Select engine</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(Engine&lt;ET&gt;*)-inline-sections" class="standardese-inline-sections">
+<dt>Requires:</dt>
+<dd><code>ptr &gt;= _engines.begin() &amp;&amp; ptr &lt; _engines.end()</code></dd>
+<dt>Effects:</dt>
+<dd>If <code>_current</code> is not null, <code>_current-&gt;on_disable()</code>. Then,
+assign <code>ptr</code> to <code>_current</code>, and invoke <code>ptr-&gt;on_enable()</code></dd>
+<dt>Postconditions:</dt>
+<dd><code>current() == *ptr</code></dd>
+<dt>Returns:</dt>
+<dd><code>current()</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(Engine&lt;ET&gt;&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>select</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">select</span><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">ref</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(Engine&lt;ET&gt;&amp;)-brief" class="standardese-brief-section">Select engine</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(Engine&lt;ET&gt;&amp;)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd><code>select(&amp;ref)</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(std::size_t)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>select</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">select</span><span class="pun">(</span><span class="typ dec var fun">std::size_t</span> <span class="typ dec var fun">idx</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(std::size_t)-brief" class="standardese-brief-section">Select engine by index</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(std::size_t)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd><code>select(_engines.begin() + idx)</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(std::stringconst&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>select</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">select</span><span class="pun">(</span><span class="typ dec var fun">std::string</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">name</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(std::stringconst&amp;)-brief" class="standardese-brief-section">Select engine by name</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::select(std::stringconst&amp;)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>Find engine with name <code>name</code>, and <code>select(engine)</code></dd>
+<dt>Throws:</dt>
+<dd><code>util::exception</code> when no matching engine was found</dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::make_patches()const" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>make_patches</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>EnginePatch<span class="pun">&gt;</span> <span class="typ dec var fun">make_patches</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::make_patches()const-brief" class="standardese-brief-section">Construct patches to get all the engines into the current state.</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::make_patches()const-inline-sections" class="standardese-inline-sections">
+<dt>Returns:</dt>
+<dd>A vector of the results of <code>e.make_patch()</code> for each engine <code>e</code></dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+<section id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::apply_patch(otto::engines::EnginePatchconst&amp;)" class="standardese-entity-documentation">
+<h3 class="standardese-entity-documentation-heading">Function <code>apply_patch</code></h3>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><span class="typ dec var fun">Engine</span></a><span class="pun">&lt;</span>ET<span class="pun">&gt;</span><span class="pun">&amp;</span> <span class="typ dec var fun">apply_patch</span><span class="pun">(</span><a href="doc_engine.html#standardese-otto::engines::EnginePatch"><span class="typ dec var fun">otto::engines::EnginePatch</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">seq</span><span class="pun">)</span><span class="pun">;</span>
+</code></pre>
+<p id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::apply_patch(otto::engines::EnginePatchconst&amp;)-brief" class="standardese-brief-section">Apply an <code>EnginePatch</code> to a matching engine.</p>
+<dl id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;::apply_patch(otto::engines::EnginePatchconst&amp;)-inline-sections" class="standardese-inline-sections">
+<dt>Effects:</dt>
+<dd>If <code>p.type == type</code>, find an engine ´e´ for which <code>e.name() == p.name</code>, and apply the patch (<code>e.from_json(p.data)</code>).</dd>
+<dt>Throws:</dt>
+<dd>If no matching engine was found, <code>exception</code> is thrown, with
+the appropriate error code.</dd>
+<dt>Returns:</dt>
+<dd>A reference to the engine that matched the patch</dd>
+</dl>
+</section>
+<hr class="standardese-entity-documentation-break" />
+</section>
+<hr class="standardese-entity-documentation-break" />
 </section>
 </section>
 </article>
@@ -299,11 +471,6 @@ the library, look at <code>core&#x2F;ui&#x2F;widgets.hpp</code> and <code>core&#
 <li id="standardese-poly-ptr.hpp" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_poly-ptr.html#standardese-poly-ptr.hpp"><code>poly-ptr.hpp</code></a></dt>
-</dl>
-</li>
-<li id="standardese-poly_variant.hpp" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_poly_variant.html#standardese-poly_variant.hpp"><code>poly_variant.hpp</code></a></dt>
 </dl>
 </li>
 <li id="standardese-processor.hpp" class="standardese-entity-index-item">

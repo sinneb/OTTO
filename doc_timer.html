@@ -14,20 +14,20 @@
     format("truetype")
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-language-cpp {
     margin: 0px;
     display: block;
     background: #FAFAFA;
     padding: 20px;
     overflow: auto;
     border: 1px solid #EEE;
-    border-left: 4px solid #e637009c;
-    border-radius: 0px;
-    box-shadow: 2px 3px 10px #DDD;
+}
+
+code.standardese-language-cpp.standardese-entity-synopsis {
+    border-left: 4px solid #e63700;
 }
 
 hr.standardese-entity-documentation-break {
-    //margin: 10px 0px 50px 0px;
     border: none;
 }
 
@@ -120,21 +120,7 @@ li#standardese-timer\.hpp a {
 <h1 class="standardese-file-documentation-heading">Header file <code>timer.hpp</code></h1>
 <pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">string</span><span class="pre">&gt;</span>
 
-<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">vector</span><span class="pre">&gt;</span>
-
-<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">utility</span><span class="pre">&gt;</span>
-
-<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">map</span><span class="pre">&gt;</span>
-
 <span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">chrono</span><span class="pre">&gt;</span>
-
-<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">numeric</span><span class="pre">&gt;</span>
-
-<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">algorithm</span><span class="pre">&gt;</span>
-
-<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">fstream</span><span class="pre">&gt;</span>
-
-<span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">functional</span><span class="pre">&gt;</span>
 
 <span class="pre">#include</span> <span class="pre">&lt;</span><span class="typ dec var fun">json.hpp</span><span class="pre">&gt;</span>
 
@@ -144,329 +130,24 @@ li#standardese-timer\.hpp a {
     <span class="pun">{</span>
         <span class="kwd">namespace</span> <span class="typ dec var fun">timer</span>
         <span class="pun">{</span>
-            <span class="kwd">using</span> <a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">timer_id</span></a> <span class="pun">=</span> <span class="typ dec var fun">std::string</span><span class="pun">;</span>
+            <span class="kwd">using</span> <span class="typ dec var fun">timer_id</span> <span class="pun">=</span> <span class="typ dec var fun">std::string</span><span class="pun">;</span>
 
-            <span class="kwd">struct</span> <a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">Timer</span></a><span class="pun">;</span>
+            <span class="kwd">using</span> <span class="typ dec var fun">time_point</span> <span class="pun">=</span> <span class="typ dec var fun">std::chrono::time_point</span><span class="pun">&lt;</span>std::chrono::steady_clock, std::chrono::nanoseconds<span class="pun">&gt;</span><span class="pun">;</span>
 
-            <span class="kwd">struct</span> <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><span class="typ dec var fun">ScopedTimer</span></a><span class="pun">;</span>
+            <span class="kwd">using</span> <span class="typ dec var fun">time_duration</span> <span class="pun">=</span> <span class="typ dec var fun">time_point::duration::rep</span><span class="pun">;</span>
 
-            <a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <a href="doc_timer.html#standardese-otto::util::timer::find_or_make(otto::util::timer::timer_id)"><span class="typ dec var fun">find_or_make</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
+            <span class="kwd">void</span> <span class="typ dec var fun">start</span><span class="pun">(</span><span class="typ dec var fun">otto::util::timer::timer_id</span> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
 
-            <a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <a href="doc_timer.html#standardese-otto::util::timer::start(otto::util::timer::timer_id)"><span class="typ dec var fun">start</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-
-            <a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <a href="doc_timer.html#standardese-otto::util::timer::start(otto::util::timer::Timer&amp;)"><span class="typ dec var fun">start</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span><span class="pun">;</span>
-
-            <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><span class="typ dec var fun">otto::util::timer::ScopedTimer</span></a> <a href="doc_timer.html#standardese-otto::util::timer::start_scoped(otto::util::timer::timer_id)"><span class="typ dec var fun">start_scoped</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-
-            <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><span class="typ dec var fun">otto::util::timer::ScopedTimer</span></a> <a href="doc_timer.html#standardese-otto::util::timer::start_scoped(otto::util::timer::Timer&amp;)"><span class="typ dec var fun">start_scoped</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
-
-            <span class="kwd">void</span> <a href="doc_timer.html#standardese-otto::util::timer::stop(otto::util::timer::Timer&amp;)"><span class="typ dec var fun">stop</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-
-            <span class="kwd">void</span> <a href="doc_timer.html#standardese-otto::util::timer::stop(otto::util::timer::Timer&amp;)"><span class="typ dec var fun">stop</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
-
-            <a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <a href="doc_timer.html#standardese-otto::util::timer::tick(otto::util::timer::timer_id)"><span class="typ dec var fun">tick</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-
-            <a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <a href="doc_timer.html#standardese-otto::util::timer::tick(otto::util::timer::Timer&amp;)"><span class="typ dec var fun">tick</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span><span class="pun">;</span>
-
-            <span class="typ dec var fun">nlohmann::json</span> <span class="typ dec var fun">serialize</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+            <span class="kwd">void</span> <span class="typ dec var fun">save_data</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
         <span class="pun">}</span>
     <span class="pun">}</span>
 <span class="pun">}</span>
 
-<span class="pre">#define</span> <span class="typ dec var fun">TIME_SCOPE</span><span class="pre">(</span><span class="pre">name</span><span class="pre">)</span>
+<span class="pre">#define</span> <span class="typ dec var fun">TIME_SCOPE</span><span class="pre">(</span><span class="pre">id</span><span class="pre">)</span>
 </code></pre>
 <section id="standardese-otto" class="standardese-entity-documentation">
 <section id="standardese-otto::util" class="standardese-entity-documentation">
 <section id="standardese-otto::util::timer" class="standardese-entity-documentation">
-<section id="standardese-otto::util::timer::timer_id" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Type alias <code>otto::util::timer::timer_id</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">using</span> <span class="typ dec var fun">timer_id</span> <span class="pun">=</span> <span class="typ dec var fun">std::string</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::timer_id-brief" class="standardese-brief-section">The type used to identify timers</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::Timer" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::timer::Timer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">Timer</span>
-<span class="pun">{</span>
-    <span class="kwd">using</span> <a href="doc_timer.html#standardese-otto::util::timer::Timer::time_point"><span class="typ dec var fun">time_point</span></a> <span class="pun">=</span> <span class="typ dec var fun">std::chrono::time_point</span><span class="pun">&lt;</span>std::chrono::steady_clock, std::chrono::nanoseconds<span class="pun">&gt;</span><span class="pun">;</span>
-
-    <a href="doc_timer.html#standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_idconst&amp;)"><span class="typ dec var fun">Timer</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-
-    <a href="doc_timer.html#standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_id&amp;&amp;)"><span class="typ dec var fun">Timer</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-
-    <span class="kwd">void</span> <a href="doc_timer.html#standardese-otto::util::timer::Timer::start()"><span class="typ dec var fun">start</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-
-    <span class="kwd">void</span> <a href="doc_timer.html#standardese-otto::util::timer::Timer::stop()"><span class="typ dec var fun">stop</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-
-    <span class="kwd">void</span> <a href="doc_timer.html#standardese-otto::util::timer::Timer::tick()"><span class="typ dec var fun">tick</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-
-    <span class="typ dec var fun">nlohmann::json</span> <a href="doc_timer.html#standardese-otto::util::timer::Timer::serialize()const"><span class="typ dec var fun">serialize</span></a><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
-
-    <a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">;</span>
-
-    <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>Timer<span class="pun">&gt;</span> <span class="typ dec var fun">children</span><span class="pun">;</span>
-
-    <span class="typ dec var fun">std::vector</span><span class="pun">&lt;</span>time_point::duration<span class="pun">&gt;</span> <span class="typ dec var fun">data</span><span class="pun">;</span>
-
-    <a href="doc_timer.html#standardese-otto::util::timer::Timer::time_point"><span class="typ dec var fun">time_point</span></a> <span class="typ dec var fun">start_time</span><span class="pun">;</span>
-
-    <span class="kwd">bool</span> <span class="typ dec var fun">running</span><span class="pun">;</span>
-<span class="pun">};</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer-brief" class="standardese-brief-section">Contains the actual timing data.</p>
-<p>Should only very rarely be interacted with directly by the user.</p>
-<section id="standardese-otto::util::timer::Timer::time_point" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Type alias <code>time_point</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">using</span> <span class="typ dec var fun">time_point</span> <span class="pun">=</span> <span class="typ dec var fun">std::chrono::time_point</span><span class="pun">&lt;</span>std::chrono::steady_clock, std::chrono::nanoseconds<span class="pun">&gt;</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer::time_point-brief" class="standardese-brief-section">A <code>std::chrono::time_point</code> used to measure timings.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_idconst&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Constructor <code>Timer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">Timer</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_idconst&amp;)-brief" class="standardese-brief-section">Construct a new timer with id <code>id</code></p>
-<dl id="standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_idconst&amp;)-inline-sections" class="standardese-inline-sections">
-<dt>Effects:</dt>
-<dd>set member variable <code>id</code> to <code>id</code></dd>
-<dt>Remarks:</dt>
-<dd>at this point, <code>start_time</code> is undefined.</dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_id&amp;&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Constructor <code>Timer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">Timer</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_id&amp;&amp;)-brief" class="standardese-brief-section">Construct a new timer with id <code>id</code></p>
-<dl id="standardese-otto::util::timer::Timer::Timer(otto::util::timer::timer_id&amp;&amp;)-inline-sections" class="standardese-inline-sections">
-<dt>Effects:</dt>
-<dd>set member variable <code>id</code> to <code>id</code></dd>
-<dt>Remarks:</dt>
-<dd>at this point, <code>start_time</code> is undefined.</dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::Timer::start()" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>start</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">start</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer::start()-brief" class="standardese-brief-section">Start the timer</p>
-<dl id="standardese-otto::util::timer::Timer::start()-inline-sections" class="standardese-inline-sections">
-<dt>Effects:</dt>
-<dd>sets <code>start_time</code> to <code>time_point::clock::now()</code></dd>
-<dt>Postconditions:</dt>
-<dd><code>running == true</code></dd>
-<dt>Remarks:</dt>
-<dd>Do <em>not</em> use this function. In most cases you want the free
-function which also pushes and pops from&#x2F;to the stack</dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::Timer::stop()" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>stop</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">stop</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer::stop()-brief" class="standardese-brief-section">Stop the timer</p>
-<dl id="standardese-otto::util::timer::Timer::stop()-inline-sections" class="standardese-inline-sections">
-<dt>Requires:</dt>
-<dd><code>running == true</code></dd>
-<dt>Effects:</dt>
-<dd>pushes <code>time_point::clock::now() - start_time</code> to the back of <code>data</code>.</dd>
-<dt>Postconditions:</dt>
-<dd><code>running == false</code></dd>
-<dt>Remarks:</dt>
-<dd>Do <em>not</em> use this function. In most cases you want the free
-function which also pushes and pops from&#x2F;to the stack</dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::Timer::tick()" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>tick</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">tick</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer::tick()-brief" class="standardese-brief-section">Tick the timer</p>
-<dl id="standardese-otto::util::timer::Timer::tick()-inline-sections" class="standardese-inline-sections">
-<dt>Effects:</dt>
-<dd>if <code>running == false</code>, same as <code>start()</code>. Otherwise, push
-<code>time_point::clock::now() - start_time</code> to the back of <code>data</code>, and
-assign <code>time_point::clock::now()</code> to <code>start_time</code></dd>
-<dt>Postconditions:</dt>
-<dd><code>running == true</code></dd>
-<dt>Complexity:</dt>
-<dd><code>time_point::clock::now()</code> is only called once.</dd>
-<dt>Remarks:</dt>
-<dd>Do <em>not</em> use this function. In most cases you want the free
-function which also pushes and pops from&#x2F;to the stack</dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::Timer::serialize()const" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>serialize</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">nlohmann::json</span> <span class="typ dec var fun">serialize</span><span class="pun">(</span><span class="pun">)</span> <span class="kwd">const</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::Timer::serialize()const-brief" class="standardese-brief-section">Simple serialization of the Timer data, with all the children nested.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::ScopedTimer" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Struct <code>otto::util::timer::ScopedTimer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">struct</span> <span class="typ dec var fun">ScopedTimer</span>
-<span class="pun">{</span>
-    <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::ScopedTimerconst&amp;)"><span class="typ dec var fun">ScopedTimer</span></a><span class="pun">(</span><span class="typ dec var fun">otto::util::timer::ScopedTimer</span> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
-
-    <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::ScopedTimer&amp;&amp;)"><span class="typ dec var fun">ScopedTimer</span></a><span class="pun">(</span><span class="typ dec var fun">otto::util::timer::ScopedTimer</span><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
-
-    <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer::%7EScopedTimer()"><span class="typ dec var fun">~ScopedTimer</span></a><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-
-<span class="kwd">private</span><span class="pun">:</span>
-    <span class="kwd">explicit</span> <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::Timer&amp;)"><span class="typ dec var fun">ScopedTimer</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
-
-    <span class="kwd">explicit</span> <a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::Timer*)"><span class="typ dec var fun">ScopedTimer</span></a><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">*</span> <span class="typ dec var fun">timer</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
-
-    <a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">*</span> <span class="typ dec var fun">timer</span><span class="pun">;</span>
-
-    <span class="kwd">friend</span> <span class="typ dec var fun">otto::util::timer::ScopedTimer</span> <span class="typ dec var fun">start_scoped</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a><span class="pun">)</span><span class="pun">;</span>
-
-    <span class="kwd">friend</span> <span class="typ dec var fun">otto::util::timer::ScopedTimer</span> <span class="typ dec var fun">start_scoped</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
-<span class="pun">};</span>
-</code></pre>
-<p id="standardese-otto::util::timer::ScopedTimer-brief" class="standardese-brief-section">A pointer to a timer, which stops and pops the timer upon destruction.</p>
-<p>This is useful for scope timers, and must always be moved from</p>
-<section id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::ScopedTimerconst&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Constructor <code>ScopedTimer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">ScopedTimer</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><span class="typ dec var fun">otto::util::timer::ScopedTimer</span></a> <span class="kwd">const</span><span class="pun">&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::ScopedTimerconst&amp;)-brief" class="standardese-brief-section">Move only</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::ScopedTimer&amp;&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Constructor <code>ScopedTimer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">ScopedTimer</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><span class="typ dec var fun">otto::util::timer::ScopedTimer</span></a><span class="pun">&amp;&amp;</span> <span class="typ dec var fun">rhs</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::ScopedTimer&amp;&amp;)-brief" class="standardese-brief-section">Move construct this handler</p>
-<dl id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::ScopedTimer&amp;&amp;)-inline-sections" class="standardese-inline-sections">
-<dt>Postconditions:</dt>
-<dd>\ <code>this-\&gt;timer == rhs.timer</code> and also, <code>rhs.timer == nullptr</code></dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::ScopedTimer::~ScopedTimer()" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Destructor <code>~ScopedTimer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">~ScopedTimer</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::ScopedTimer::~ScopedTimer()-brief" class="standardese-brief-section">Destruct the handler and stop the timer.</p>
-<dl id="standardese-otto::util::timer::ScopedTimer::~ScopedTimer()-inline-sections" class="standardese-inline-sections">
-<dt>Effects:</dt>
-<dd>if <code>timer != nullptr</code>, call <code>stop(*this)</code>.
-Otherwise, do nothing</dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::Timer&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Constructor <code>ScopedTimer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">explicit</span> <span class="typ dec var fun">ScopedTimer</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::Timer&amp;)-brief" class="standardese-brief-section">Construct a handle to the provided timer</p>
-<h4 class="standardese-list-section-heading">Postconditions</h4>
-<ul class="standardese-list-section">
-<li>
-<dl class="standardese-term-description-item">
-<dt>`this</dt>
-<dd>&mdash; &gt;timer == &amp;timer`</dd>
-</dl>
-</li>
-</ul>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::Timer*)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Constructor <code>ScopedTimer</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">explicit</span> <span class="typ dec var fun">ScopedTimer</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">*</span> <span class="typ dec var fun">timer</span><span class="pun">)</span> <span class="kwd">noexcept</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::ScopedTimer::ScopedTimer(otto::util::timer::Timer*)-brief" class="standardese-brief-section">(error while parsing comment text: unkown command \note)</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::find_or_make(otto::util::timer::timer_id)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::find_or_make</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">find_or_make</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::find_or_make(otto::util::timer::timer_id)-brief" class="standardese-brief-section">Find or create a child of the current top of the stack, which matches id
-<code>id</code>.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::start(otto::util::timer::timer_id)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::start</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">start</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::start(otto::util::timer::timer_id)-brief" class="standardese-brief-section">Start a timer with id <code>id</code>, and push it to the stack.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::start(otto::util::timer::Timer&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::start</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">start</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::start(otto::util::timer::Timer&amp;)-brief" class="standardese-brief-section">Start <code>timer</code> and push it onto the stack.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::start_scoped(otto::util::timer::timer_id)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::start_scoped</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><span class="typ dec var fun">otto::util::timer::ScopedTimer</span></a> <span class="typ dec var fun">start_scoped</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::start_scoped(otto::util::timer::timer_id)-brief" class="standardese-brief-section">Start a timer with id <code>id</code>, and push it to the stack.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::start_scoped(otto::util::timer::Timer&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::start_scoped</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><span class="typ dec var fun">otto::util::timer::ScopedTimer</span></a> <span class="typ dec var fun">start_scoped</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::start_scoped(otto::util::timer::Timer&amp;)-brief" class="standardese-brief-section">Start the timer pointed to by <code>TimerHandle</code></p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::stop()" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::stop</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">stop</span><span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::stop()-brief" class="standardese-brief-section">Stop the current timer, and pop it off the stack</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::stop(otto::util::timer::Timer&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::stop</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">void</span> <span class="typ dec var fun">stop</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span> <span class="pun">=</span> <span class="kwd">delete</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::stop(otto::util::timer::Timer&amp;)-brief" class="standardese-brief-section">Stop the timer, and pop it off the stack if it is there.</p>
-<dl id="standardese-otto::util::timer::stop(otto::util::timer::Timer&amp;)-inline-sections" class="standardese-inline-sections">
-<dt>Effects:</dt>
-<dd><code>timer.stop()</code> and, if <code>&amp;timer</code> is in <code>timer_stack</code>, stop and pop
-it and everything after it.</dd>
-</dl>
-<p>Currently unimplemented</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::tick(otto::util::timer::timer_id)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::tick</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">tick</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><span class="typ dec var fun">otto::util::timer::timer_id</span></a> <span class="typ dec var fun">id</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::tick(otto::util::timer::timer_id)-brief" class="standardese-brief-section">Tick a timer with id <code>id</code>, and push it to the back of the stack if it is
-not there already.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::util::timer::tick(otto::util::timer::Timer&amp;)" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Function <code>otto::util::timer::tick</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">tick</span><span class="pun">(</span><a href="doc_timer.html#standardese-otto::util::timer::Timer"><span class="typ dec var fun">otto::util::timer::Timer</span></a><span class="pun">&amp;</span> <span class="typ dec var fun">timer</span><span class="pun">)</span><span class="pun">;</span>
-</code></pre>
-<p id="standardese-otto::util::timer::tick(otto::util::timer::Timer&amp;)-brief" class="standardese-brief-section">Tick <code>timer</code></p>
-<dl id="standardese-otto::util::timer::tick(otto::util::timer::Timer&amp;)-inline-sections" class="standardese-inline-sections">
-<dt>Effects:</dt>
-<dd><code>timer.tick()</code> and, if <code>timer_stack.back() != &amp;timer</code>, push it to
-the stack.</dd>
-</dl>
-</section>
-<hr class="standardese-entity-documentation-break" />
 </section>
 </section>
 </section>
@@ -630,11 +311,6 @@ the library, look at <code>core&#x2F;ui&#x2F;widgets.hpp</code> and <code>core&#
 <li id="standardese-poly-ptr.hpp" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_poly-ptr.html#standardese-poly-ptr.hpp"><code>poly-ptr.hpp</code></a></dt>
-</dl>
-</li>
-<li id="standardese-poly_variant.hpp" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_poly_variant.html#standardese-poly_variant.hpp"><code>poly_variant.hpp</code></a></dt>
 </dl>
 </li>
 <li id="standardese-processor.hpp" class="standardese-entity-index-item">

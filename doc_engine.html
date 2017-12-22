@@ -14,20 +14,20 @@
     format("truetype")
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-language-cpp {
     margin: 0px;
     display: block;
     background: #FAFAFA;
     padding: 20px;
     overflow: auto;
     border: 1px solid #EEE;
-    border-left: 4px solid #e637009c;
-    border-radius: 0px;
-    box-shadow: 2px 3px 10px #DDD;
+}
+
+code.standardese-language-cpp.standardese-entity-synopsis {
+    border-left: 4px solid #e63700;
 }
 
 hr.standardese-entity-documentation-break {
-    //margin: 10px 0px 50px 0px;
     border: none;
 }
 
@@ -175,10 +175,7 @@ li#standardese-engine\.hpp a {
 
         <span class="kwd">using</span> <span class="typ dec var fun">SequencerEngine</span> <span class="pun">=</span> <span class="typ dec var fun">Engine</span><span class="pun">&lt;</span>EngineType::sequencer<span class="pun">&gt;</span><span class="pun">;</span>
 
-        <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">E</span><span class="pun">&gt;</span>
-        <span class="kwd">struct</span> <a href="doc_engine.html#standardese-otto::engines::engine_type%3CE%3E"><span class="typ dec var fun">engine_type</span></a><span class="pun">;</span>
-
-        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">E</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="kwd">EngineType</span> <span class="kwd">engine_type_v</span> <span class="pun">=</span> <span class="kwd">engine_type</span><span class="pun">&lt;</span><span class="kwd">E</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+        <span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">E</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="kwd">EngineType</span> <span class="kwd">engine_type_v</span> <span class="pun">=</span> <span class="typ dec var fun">decltype</span><span class="pun">(</span><span class="kwd">internal</span><span class="pun">::</span><span class="kwd">engine_type_impl_func</span><span class="pun">(</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">declval</span><span class="pun">&lt;</span><span class="kwd">E</span><span class="pun">&gt;</span><span class="pun">(</span><span class="pun">)</span><span class="pun">)</span><span class="pun">)</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
 
         <span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">REngine</span><span class="pun">,</span> <span class="kwd">typename</span> <span class="pun">...</span> <span class="typ dec var fun">Args</span><span class="pun">&gt;</span>
         <span class="kwd">void</span> <a href="doc_engine.html#standardese-otto::engines::register_engine%3CREngine,Args%3E(Args&amp;&amp;...)"><span class="typ dec var fun">register_engine</span></a><span class="pun">(</span>Args &amp;&amp;... <span class="typ dec var fun">args</span><span class="pun">)</span><span class="pun">;</span>
@@ -445,23 +442,12 @@ to worry about it when writing your own engine.</p>
 appropriate <code>EngineType</code></p>
 </section>
 <hr class="standardese-entity-documentation-break" />
-<section id="standardese-otto::engines::engine_type&lt;E&gt;" class="standardese-entity-documentation">
-<h3 class="standardese-entity-documentation-heading">Struct <code>otto::engines::engine_type</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="kwd">template</span> <span class="pun">&lt;</span><span class="kwd">typename</span> <span class="typ dec var fun">E</span><span class="pun">&gt;</span>
-<span class="kwd">struct</span> <span class="typ dec var fun">engine_type</span>
-<span class="pun">{</span>
-<span class="pun">};</span>
-</code></pre>
-<p id="standardese-otto::engines::engine_type&lt;E&gt;-brief" class="standardese-brief-section">Type trait to get engine type.</p>
-<p>If <code>E</code> is an <code>Engine</code>, this struct has a member <code>value</code> which is the
-type of that engine.</p>
-</section>
-<hr class="standardese-entity-documentation-break" />
 <section id="standardese-otto::engines::engine_type_v" class="standardese-entity-documentation">
 <h3 class="standardese-entity-documentation-heading">Unexposed entity <code>otto::engines::engine_type_v</code></h3>
-<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">E</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="kwd">EngineType</span> <span class="kwd">engine_type_v</span> <span class="pun">=</span> <span class="kwd">engine_type</span><span class="pun">&lt;</span><span class="kwd">E</span><span class="pun">&gt;</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
+<pre><code class="standardese-language-cpp standardese-entity-synopsis"><span class="typ dec var fun">template</span> <span class="pun">&lt;</span><span class="typ dec var fun">typename</span> <span class="kwd">E</span><span class="pun">&gt;</span><span class="typ dec var fun">constexpr</span> <span class="kwd">EngineType</span> <span class="kwd">engine_type_v</span> <span class="pun">=</span> <span class="typ dec var fun">decltype</span><span class="pun">(</span><span class="kwd">internal</span><span class="pun">::</span><span class="kwd">engine_type_impl_func</span><span class="pun">(</span><span class="kwd">std</span><span class="pun">::</span><span class="kwd">declval</span><span class="pun">&lt;</span><span class="kwd">E</span><span class="pun">&gt;</span><span class="pun">(</span><span class="pun">)</span><span class="pun">)</span><span class="pun">)</span><span class="pun">::</span><span class="kwd">value</span><span class="pun">;</span>
 </code></pre>
-<p id="standardese-otto::engines::engine_type_v-brief" class="standardese-brief-section">Shorthand for <code>engine_type&lt;E&gt;::value</code></p>
+<p id="standardese-otto::engines::engine_type_v-brief" class="standardese-brief-section">Type trait to get engine type.</p>
+<p>SFINAE friendly, and will match any type that inherits from <code>Engine</code></p>
 </section>
 <hr class="standardese-entity-documentation-break" />
 <section id="standardese-otto::engines::register_engine&lt;REngine,Args&gt;(Args&amp;&amp;...)" class="standardese-entity-documentation">
@@ -817,11 +803,6 @@ the library, look at <code>core&#x2F;ui&#x2F;widgets.hpp</code> and <code>core&#
 <li id="standardese-poly-ptr.hpp" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_poly-ptr.html#standardese-poly-ptr.hpp"><code>poly-ptr.hpp</code></a></dt>
-</dl>
-</li>
-<li id="standardese-poly_variant.hpp" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_poly_variant.html#standardese-poly_variant.hpp"><code>poly_variant.hpp</code></a></dt>
 </dl>
 </li>
 <li id="standardese-processor.hpp" class="standardese-entity-index-item">

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-otto_dir=$HOME/Documents/Programming/OTTO
+otto_dir=$1
 
 standardese --config $otto_dir/.standardese $(find $otto_dir/src -name "*.hpp" | sed "s/\n/ /")
 
-find . -name "doc_*.html" -exec ./format.sh $1 {} \;
+find . -name "doc_*.html" -exec ./format.sh {} \;
 
 ./format.sh standardese_entities.html
 ./format.sh standardese_modules.html

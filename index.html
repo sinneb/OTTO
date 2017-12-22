@@ -14,20 +14,20 @@
     format("truetype")
 }
 
-code.standardese-language-cpp.standardese-entity-synopsis {
+code.standardese-language-cpp {
     margin: 0px;
     display: block;
     background: #FAFAFA;
     padding: 20px;
     overflow: auto;
     border: 1px solid #EEE;
-    border-left: 4px solid #e637009c;
-    border-radius: 0px;
-    box-shadow: 2px 3px 10px #DDD;
+}
+
+code.standardese-language-cpp.standardese-entity-synopsis {
+    border-left: 4px solid #e63700;
 }
 
 hr.standardese-entity-documentation-break {
-    //margin: 10px 0px 50px 0px;
     border: none;
 }
 
@@ -139,13 +139,8 @@ li#standardese-Entities a {
 <dt><a href="doc_timer.html#standardese-timer.hpp"><code>TIME_SCOPE</code></a></dt>
 </dl>
 </li>
-<li id="standardese-otto" class="standardese-namespace-documentation">
-<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto</code></h2>
-<p class="standardese-brief-section">A simple stack-based library used to time nested parts of a program.</p>
-<p>if !OTTO_ENABLE_TIMERS, all implementations are empty</p>
-<ul class="standardese-namespace-members">
 <li id="standardese-otto::audio" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::audio</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::audio</code></h2>
 <p class="standardese-brief-section">Audio Processors are anything that can process audio&#x2F;midi.</p>
 <p>They run on the audio thread, and are called by the audio system (Jack).
 Formally, an audio processor is defined as having a method matching
@@ -212,8 +207,18 @@ processing to the engines.</dd>
 </li>
 </ul>
 </li>
+<li id="standardese-otto::debug::ui" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::debug::ui</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::debug::ui::info_ptrs" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_ui.html#standardese-otto::debug::ui"><code>info_ptrs</code></a></dt>
+</dl>
+</li>
+</ul>
+</li>
 <li id="standardese-otto::debug" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::debug</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::debug</code></h2>
 <ul class="standardese-namespace-members">
 <li id="standardese-otto::debug::Info" class="standardese-entity-index-item">
 <dl>
@@ -225,16 +230,6 @@ processing to the engines.</dd>
 <dt><a href="doc_ui.html#standardese-otto::debug"><code>graph</code></a></dt>
 </dl>
 </li>
-<li id="standardese-otto::debug::ui" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::debug::ui</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::debug::ui::info_ptrs" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_ui.html#standardese-otto::debug::ui"><code>info_ptrs</code></a></dt>
-</dl>
-</li>
-</ul>
-</li>
 <li id="standardese-otto::debug::~Info()" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_ui.html#standardese-otto::debug"><code>~Info</code></a></dt>
@@ -242,165 +237,8 @@ processing to the engines.</dd>
 </li>
 </ul>
 </li>
-<li id="standardese-otto::engines" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::engines</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::engines::AnyEngine" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::AnyEngine"><code>AnyEngine</code></a></dt>
-<dd>&mdash; Abstract base class for Engines</dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::BeatPos" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_metronome.html#standardese-otto::engines"><code>BeatPos</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::DrumSampler" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_drum-sampler.html#standardese-otto::engines::DrumSampler"><code>DrumSampler</code></a></dt>
-<dd>&mdash; A sampler with 24 individual voices, laid out over the keys.</dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::DrumsEngine" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines"><code>DrumsEngine</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::EffectEngine" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines"><code>EffectEngine</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::Engine&lt;ET&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><code>Engine</code></a></dt>
-<dd>&mdash; Engine base class</dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine_dispatcher.html#standardese-otto::engines"><code>EngineDispatcher</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::EnginePatch" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::EnginePatch"><code>EnginePatch</code></a></dt>
-<dd>&mdash; An engine type and name, along with its json-serialized data.</dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::EngineScreen&lt;Engine&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::EngineScreen%3CEngine%3E"><code>EngineScreen</code></a></dt>
-<dd>&mdash; A <code>ui::Screen</code> with a reference to the engine it belongs to.</dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::EngineType" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::EngineType"><code>EngineType</code></a></dt>
-<dd>&mdash; Engine type</dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::FaustSynthEngine" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_faust-engine.html#standardese-otto::engines"><code>FaustSynthEngine</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::InputSelector" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_input_selector.html#standardese-otto::engines"><code>InputSelector</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::Metronome" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_metronome.html#standardese-otto::engines"><code>Metronome</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::Mixer" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_mixer.html#standardese-otto::engines"><code>Mixer</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::NukeSynth" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_nuke.html#standardese-otto::engines"><code>NukeSynth</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::PresetFile" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::PresetFile"><code>PresetFile</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::Properties" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine-props.html#standardese-otto::engines"><code>Properties</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::Property&lt;T,mode_tag,_store,mode_type&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine-props.html#standardese-otto::engines"><code>Property</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::PropertyBase" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine-props.html#standardese-otto::engines"><code>PropertyBase</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::SequencerEngine" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines"><code>SequencerEngine</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::SimpleDrumVoice" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_simple-drums.html#standardese-otto::engines"><code>SimpleDrumVoice</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::SimpleDrumsEngine" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_simple-drums.html#standardese-otto::engines"><code>SimpleDrumsEngine</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::SynthEngine" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines"><code>SynthEngine</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::TapeScreen" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_tapescreen.html#standardese-otto::engines"><code>TapeScreen</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::Tapedeck" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_tapedeck.html#standardese-otto::engines"><code>Tapedeck</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::engines::create_engines&lt;ET&gt;()" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines"><code>create_engines</code></a></dt>
-<dd>&mdash; Construct all registered engines of type <code>ET</code></dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::engine_type&lt;E&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::engine_type%3CE%3E"><code>engine_type</code></a></dt>
-<dd>&mdash; Type trait to get engine type.</dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::engine_type_v" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine.html#standardese-otto::engines::engine_type_v"><code>engine_type_v</code></a></dt>
-<dd>&mdash; Shorthand for <code>engine_type&lt;E&gt;::value</code></dd>
-</dl>
-</li>
-<li id="standardese-otto::engines::from_json&lt;ET&gt;(nlohmann::jsonconst&amp;,otto::engines::EngineDispatcher&lt;ET&gt;&amp;)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_engine_dispatcher.html#standardese-otto::engines"><code>from_json</code></a></dt>
-</dl>
-</li>
 <li id="standardese-otto::engines::mode" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::engines::mode</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::engines::mode</code></h2>
 <ul class="standardese-namespace-members">
 <li id="standardese-otto::engines::mode::def" class="standardese-entity-index-item">
 <dl>
@@ -509,6 +347,158 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 </li>
 </ul>
 </li>
+<li id="standardese-otto::engines" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::engines</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::engines::AnyEngine" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines::AnyEngine"><code>AnyEngine</code></a></dt>
+<dd>&mdash; Abstract base class for Engines</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::BeatPos" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_metronome.html#standardese-otto::engines"><code>BeatPos</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::DrumSampler" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_drum-sampler.html#standardese-otto::engines::DrumSampler"><code>DrumSampler</code></a></dt>
+<dd>&mdash; A sampler with 24 individual voices, laid out over the keys.</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::DrumsEngine" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines"><code>DrumsEngine</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::EffectEngine" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines"><code>EffectEngine</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::Engine&lt;ET&gt;" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines::Engine%3CET%3E"><code>Engine</code></a></dt>
+<dd>&mdash; Engine base class</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineDispatcher&lt;ET&gt;" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine_dispatcher.html#standardese-otto::engines::EngineDispatcher%3CET%3E"><code>EngineDispatcher</code></a></dt>
+<dd>&mdash; Owns engines of type <code>ET</code>, and dispatch to them</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EnginePatch" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines::EnginePatch"><code>EnginePatch</code></a></dt>
+<dd>&mdash; An engine type and name, along with its json-serialized data.</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineScreen&lt;Engine&gt;" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines::EngineScreen%3CEngine%3E"><code>EngineScreen</code></a></dt>
+<dd>&mdash; A <code>ui::Screen</code> with a reference to the engine it belongs to.</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::EngineType" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines::EngineType"><code>EngineType</code></a></dt>
+<dd>&mdash; Engine type</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::FaustSynthEngine" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_faust-engine.html#standardese-otto::engines"><code>FaustSynthEngine</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::InputSelector" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_input_selector.html#standardese-otto::engines"><code>InputSelector</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::Metronome" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_metronome.html#standardese-otto::engines"><code>Metronome</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::Mixer" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_mixer.html#standardese-otto::engines"><code>Mixer</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::NukeSynth" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_nuke.html#standardese-otto::engines"><code>NukeSynth</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::PresetFile" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines::PresetFile"><code>PresetFile</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::Properties" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine-props.html#standardese-otto::engines"><code>Properties</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::Property&lt;T,mode_tag,_store,mode_type&gt;" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine-props.html#standardese-otto::engines"><code>Property</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::PropertyBase" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine-props.html#standardese-otto::engines"><code>PropertyBase</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::SequencerEngine" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines"><code>SequencerEngine</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::SimpleDrumVoice" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_simple-drums.html#standardese-otto::engines"><code>SimpleDrumVoice</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::SimpleDrumsEngine" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_simple-drums.html#standardese-otto::engines"><code>SimpleDrumsEngine</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::SynthEngine" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines"><code>SynthEngine</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::TapeScreen" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_tapescreen.html#standardese-otto::engines"><code>TapeScreen</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::Tapedeck" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_tapedeck.html#standardese-otto::engines"><code>Tapedeck</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::engines::create_engines&lt;ET&gt;()" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines"><code>create_engines</code></a></dt>
+<dd>&mdash; Construct all registered engines of type <code>ET</code></dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::engine_type_v" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine.html#standardese-otto::engines::engine_type_v"><code>engine_type_v</code></a></dt>
+<dd>&mdash; Type trait to get engine type.</dd>
+</dl>
+</li>
+<li id="standardese-otto::engines::from_json&lt;ET&gt;(nlohmann::jsonconst&amp;,otto::engines::EngineDispatcher&lt;ET&gt;&amp;)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_engine_dispatcher.html#standardese-otto::engines"><code>from_json</code></a></dt>
+</dl>
+</li>
 <li id="standardese-otto::engines::register_engine&lt;REngine,Args&gt;(Args&amp;&amp;...)" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_engine.html#standardese-otto::engines::register_engine%3CREngine,Args%3E(Args&amp;&amp;...)"><code>register_engine</code></a></dt>
@@ -523,7 +513,7 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 </ul>
 </li>
 <li id="standardese-otto::filesystem" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::filesystem</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::filesystem</code></h2>
 <ul class="standardese-namespace-members">
 <li id="standardese-otto::filesystem::absolute(otto::filesystem::pathconst&amp;)" class="standardese-entity-index-item">
 <dl>
@@ -883,46 +873,8 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 </li>
 </ul>
 </li>
-<li id="standardese-otto::fs" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_filesystem.html#standardese-otto"><code>fs</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::global" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::global</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::global::ErrorCode" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_globals.html#standardese-otto::global"><code>ErrorCode</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::global::audio" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_globals.html#standardese-otto::global"><code>audio</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::global::data_dir" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_globals.html#standardese-otto::global"><code>data_dir</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::global::drums" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_globals.html#standardese-otto::global"><code>drums</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::global::effect" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_globals.html#standardese-otto::global"><code>effect</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::global::error()" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_globals.html#standardese-otto::global"><code>error</code></a></dt>
-</dl>
-</li>
 <li id="standardese-otto::global::event" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::global::event</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::global::event</code></h2>
 <ul class="standardese-namespace-members">
 <li id="standardese-otto::global::event::buffersize_change" class="standardese-entity-index-item">
 <dl>
@@ -955,6 +907,39 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 </dl>
 </li>
 </ul>
+</li>
+<li id="standardese-otto::global" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::global</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::global::ErrorCode" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_globals.html#standardese-otto::global"><code>ErrorCode</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::global::audio" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_globals.html#standardese-otto::global"><code>audio</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::global::data_dir" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_globals.html#standardese-otto::global"><code>data_dir</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::global::drums" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_globals.html#standardese-otto::global"><code>drums</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::global::effect" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_globals.html#standardese-otto::global"><code>effect</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::global::error()" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_globals.html#standardese-otto::global"><code>error</code></a></dt>
+</dl>
 </li>
 <li id="standardese-otto::global::exception" class="standardese-entity-index-item">
 <dl>
@@ -1014,13 +999,8 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 </ul>
 </li>
 <li id="standardese-otto::midi" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::midi</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::midi</code></h2>
 <ul class="standardese-namespace-members">
-<li id="standardese-otto::midi" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_midi.html#standardese-otto::midi"><code></code></a></dt>
-</dl>
-</li>
 <li id="standardese-otto::midi::AnyMidiEvent" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_midi.html#standardese-otto::midi"><code>AnyMidiEvent</code></a></dt>
@@ -1063,71 +1043,8 @@ Specialize <code>mode_for_tag</code> with at least this for each new type</dd>
 </li>
 </ul>
 </li>
-<li id="standardese-otto::tape_buffer" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_tapebuffer.html#standardese-otto::tape_buffer"><code>tape_buffer</code></a></dt>
-<dd>&mdash; The buffer used for the tapedeck</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::ui::Key" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_widget.html#standardese-otto::ui::Key"><code>Key</code></a></dt>
-<dd>&mdash; Represents a physical key</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::PressedKeys" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_widget.html#standardese-otto::ui"><code>PressedKeys</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::Rotary" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_widget.html#standardese-otto::ui"><code>Rotary</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::RotaryEvent" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_widget.html#standardese-otto::ui::RotaryEvent"><code>RotaryEvent</code></a></dt>
-<dd>&mdash; Passed to <code>Screen::rotary</code></dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::Screen" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_widget.html#standardese-otto::ui::Screen"><code>Screen</code></a></dt>
-<dd>&mdash; Represents a view that covers the entire screen</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::SelectorScreen&lt;ItemType&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_screens.html#standardese-otto::ui"><code>SelectorScreen</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::Widget" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_widget.html#standardese-otto::ui"><code>Widget</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::display(otto::ui::Screen&amp;)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_mainui.html#standardese-otto::ui::display(otto::ui::Screen&amp;)"><code>display</code></a></dt>
-<dd>&mdash; Display a screen.</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::draw(vg::Canvas&amp;)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_screens.html#standardese-otto::ui"><code>draw</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::from_json(nlohmann::jsonconst&amp;)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_mainui.html#standardese-otto::ui"><code>from_json</code></a></dt>
-</dl>
-</li>
 <li id="standardese-otto::ui::impl" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::impl</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::impl</code></h2>
 <p class="standardese-brief-section">These functions are to be called only by the graphics drivers.</p>
 <ul class="standardese-namespace-members">
 <li id="standardese-otto::ui::impl::draw_frame(vg::Canvas&amp;)" class="standardese-entity-index-item">
@@ -1152,75 +1069,8 @@ global keys.</dd>
 </li>
 </ul>
 </li>
-<li id="standardese-otto::ui::init()" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_mainui.html#standardese-otto::ui"><code>init</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::is_pressed(otto::ui::Key)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_mainui.html#standardese-otto::ui::is_pressed(otto::ui::Key)"><code>is_pressed</code></a></dt>
-<dd>&mdash; Check if a key is currently pressed.</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::keypress(ui::Key)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_screens.html#standardese-otto::ui"><code>keypress</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::main_ui_loop()" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_mainui.html#standardese-otto::ui::main_ui_loop()"><code>main_ui_loop</code></a></dt>
-<dd>&mdash; The main ui loop</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::next(int)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_screens.html#standardese-otto::ui"><code>next</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::prev(int)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_screens.html#standardese-otto::ui"><code>prev</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::rotary(ui::RotaryEvent)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_screens.html#standardese-otto::ui"><code>rotary</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::select(int)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_screens.html#standardese-otto::ui"><code>select</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::to_json()" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_mainui.html#standardese-otto::ui"><code>to_json</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::vg" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::ui::vg::Box" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_canvas.html#standardese-otto::ui::vg::Box"><code>Box</code></a></dt>
-<dd>&mdash; A positioned box</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::vg::Canvas" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><code>Canvas</code></a></dt>
-<dd>&mdash; A modified NanoCanvas interface.</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::vg::Colour" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_canvas.html#standardese-otto::ui::vg"><code>Colour</code></a></dt>
-</dl>
-</li>
 <li id="standardese-otto::ui::vg::Colours" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg::Colours</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg::Colours</code></h2>
 <ul class="standardese-namespace-members">
 <li id="standardese-otto::ui::vg::Colours::Black" class="standardese-entity-index-item">
 <dl>
@@ -1269,14 +1119,8 @@ global keys.</dd>
 </li>
 </ul>
 </li>
-<li id="standardese-otto::ui::vg::Drawable" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_canvas.html#standardese-otto::ui::vg::Drawable"><code>Drawable</code></a></dt>
-<dd>&mdash; Anything that can be drawn on screen.</dd>
-</dl>
-</li>
 <li id="standardese-otto::ui::vg::Fonts" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg::Fonts</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg::Fonts</code></h2>
 <ul class="standardese-namespace-members">
 <li id="standardese-otto::ui::vg::Fonts::Bold" class="standardese-entity-index-item">
 <dl>
@@ -1314,6 +1158,54 @@ global keys.</dd>
 </dl>
 </li>
 </ul>
+</li>
+<li id="standardese-otto::ui::vg::icons" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg::icons</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::ui::vg::icons::Arrow" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_icons.html#standardese-otto::ui::vg::icons::Arrow"><code>Arrow</code></a></dt>
+<dd>&mdash; A simple arrow</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::icons::Icon" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_icons.html#standardese-otto::ui::vg::icons"><code>Icon</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::icons::Note" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_icons.html#standardese-otto::ui::vg::icons::Note"><code>Note</code></a></dt>
+<dd>&mdash; A musical note</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li id="standardese-otto::ui::vg" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::ui::vg::Box" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_canvas.html#standardese-otto::ui::vg::Box"><code>Box</code></a></dt>
+<dd>&mdash; A positioned box</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::Canvas" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_canvas.html#standardese-otto::ui::vg::Canvas"><code>Canvas</code></a></dt>
+<dd>&mdash; A modified NanoCanvas interface.</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::Colour" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_canvas.html#standardese-otto::ui::vg"><code>Colour</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::vg::Drawable" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_canvas.html#standardese-otto::ui::vg::Drawable"><code>Drawable</code></a></dt>
+<dd>&mdash; Anything that can be drawn on screen.</dd>
+</dl>
 </li>
 <li id="standardese-otto::ui::vg::HEIGHT" class="standardese-entity-index-item">
 <dl>
@@ -1375,28 +1267,6 @@ global keys.</dd>
 <dt><a href="doc_canvas.html#standardese-otto::ui::vg"><code>floats</code></a></dt>
 </dl>
 </li>
-<li id="standardese-otto::ui::vg::icons" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::vg::icons</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::ui::vg::icons::Arrow" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_icons.html#standardese-otto::ui::vg::icons::Arrow"><code>Arrow</code></a></dt>
-<dd>&mdash; A simple arrow</dd>
-</dl>
-</li>
-<li id="standardese-otto::ui::vg::icons::Icon" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_icons.html#standardese-otto::ui::vg::icons"><code>Icon</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::ui::vg::icons::Note" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_icons.html#standardese-otto::ui::vg::icons::Note"><code>Note</code></a></dt>
-<dd>&mdash; A musical note</dd>
-</dl>
-</li>
-</ul>
-</li>
 <li id="standardese-otto::ui::vg::initUtils(otto::ui::vg::Canvas&amp;)" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_drawing.html#standardese-otto::ui::vg"><code>initUtils</code></a></dt>
@@ -1410,13 +1280,8 @@ global keys.</dd>
 </ul>
 </li>
 <li id="standardese-otto::ui::widgets" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::widgets</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui::widgets</code></h2>
 <ul class="standardese-namespace-members">
-<li id="standardese-otto::ui::widgets" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_waveform_widget.html#standardese-otto::ui::widgets"><code></code></a></dt>
-</dl>
-</li>
 <li id="standardese-otto::ui::widgets::Waveform&lt;Container&gt;" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_waveform_widget.html#standardese-otto::ui::widgets::Waveform%3CContainer%3E"><code>Waveform</code></a></dt>
@@ -1445,16 +1310,210 @@ global keys.</dd>
 </li>
 </ul>
 </li>
+<li id="standardese-otto::ui" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::ui</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::ui::Key" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_widget.html#standardese-otto::ui::Key"><code>Key</code></a></dt>
+<dd>&mdash; Represents a physical key</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::PressedKeys" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_widget.html#standardese-otto::ui"><code>PressedKeys</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::Rotary" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_widget.html#standardese-otto::ui"><code>Rotary</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::RotaryEvent" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_widget.html#standardese-otto::ui::RotaryEvent"><code>RotaryEvent</code></a></dt>
+<dd>&mdash; Passed to <code>Screen::rotary</code></dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::Screen" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_widget.html#standardese-otto::ui::Screen"><code>Screen</code></a></dt>
+<dd>&mdash; Represents a view that covers the entire screen</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::SelectorScreen&lt;ItemType&gt;" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_screens.html#standardese-otto::ui"><code>SelectorScreen</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::Widget" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_widget.html#standardese-otto::ui"><code>Widget</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::display(otto::ui::Screen&amp;)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_mainui.html#standardese-otto::ui::display(otto::ui::Screen&amp;)"><code>display</code></a></dt>
+<dd>&mdash; Display a screen.</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::draw(vg::Canvas&amp;)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_screens.html#standardese-otto::ui"><code>draw</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::from_json(nlohmann::jsonconst&amp;)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_mainui.html#standardese-otto::ui"><code>from_json</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::init()" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_mainui.html#standardese-otto::ui"><code>init</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::is_pressed(otto::ui::Key)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_mainui.html#standardese-otto::ui::is_pressed(otto::ui::Key)"><code>is_pressed</code></a></dt>
+<dd>&mdash; Check if a key is currently pressed.</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::keypress(ui::Key)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_screens.html#standardese-otto::ui"><code>keypress</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::main_ui_loop()" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_mainui.html#standardese-otto::ui::main_ui_loop()"><code>main_ui_loop</code></a></dt>
+<dd>&mdash; The main ui loop</dd>
+</dl>
+</li>
+<li id="standardese-otto::ui::next(int)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_screens.html#standardese-otto::ui"><code>next</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::prev(int)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_screens.html#standardese-otto::ui"><code>prev</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::rotary(ui::RotaryEvent)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_screens.html#standardese-otto::ui"><code>rotary</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::select(int)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_screens.html#standardese-otto::ui"><code>select</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::ui::to_json()" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_mainui.html#standardese-otto::ui"><code>to_json</code></a></dt>
+</dl>
+</li>
+</ul>
+</li>
+<li id="standardese-otto::util::audio" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::util::audio</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::util::audio::AudioFrame&lt;nChannels,SampleType&gt;" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>AudioFrame</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::audio::Graph" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>Graph</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::audio::Section&lt;T&gt;" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_audio.html#standardese-otto::util::audio::Section%3CT%3E"><code>Section</code></a></dt>
+<dd>&mdash; Agregate of an in and an out point, providing operations to compare and
+mutate one dimensional sections.</dd>
+</dl>
+</li>
+<li id="standardese-otto::util::audio::add_all&lt;Rng1,Rng2&gt;(Rng1&amp;&amp;,Rng2&amp;&amp;)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>add_all</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::audio::mix(float,float,float)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>mix</code></a></dt>
+</dl>
+</li>
+</ul>
+</li>
+<li id="standardese-otto::util::math" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::util::math</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::util::math::between&lt;T&gt;(T,T,T)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_math.html#standardese-otto::util::math"><code>between</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::math::modulo&lt;T&gt;(T,T)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_math.html#standardese-otto::util::math::modulo%3CT%3E(T,T)"><code>modulo</code></a></dt>
+<dd>&mdash; Real modulo for negative <code>a</code> too</dd>
+</dl>
+</li>
+<li id="standardese-otto::util::math::round(float,int)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_math.html#standardese-otto::util::math"><code>round</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::math::split_values&lt;N&gt;(float,float,float)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_math.html#standardese-otto::util::math::split_values%3CN%3E(float,float,float)"><code>split_values</code></a></dt>
+<dd>&mdash; Split a number into <code>N</code> values between 0 and 1, each representing a Nth
+part of the range <code>[min,max]</code></dd>
+</dl>
+</li>
+<li id="standardese-otto::util::math::vec" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_math.html#standardese-otto::util::math"><code>vec</code></a></dt>
+</dl>
+</li>
+</ul>
+</li>
+<li id="standardese-otto::util::timer" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::util::timer</code></h2>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::util::timer::save_data()" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_timer.html#standardese-otto::util::timer"><code>save_data</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::timer::start(otto::util::timer::timer_id)" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_timer.html#standardese-otto::util::timer"><code>start</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::timer::time_duration" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_timer.html#standardese-otto::util::timer"><code>time_duration</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::timer::time_point" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_timer.html#standardese-otto::util::timer"><code>time_point</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::util::timer::timer_id" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_timer.html#standardese-otto::util::timer"><code>timer_id</code></a></dt>
+</dl>
+</li>
 </ul>
 </li>
 <li id="standardese-otto::util" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::util</code></h3>
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto::util</code></h2>
 <ul class="standardese-namespace-members">
-<li id="standardese-otto::util" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_jsonfile.html#standardese-otto::util"><code></code></a></dt>
-</dl>
-</li>
 <li id="standardese-otto::util::AdjacentRange&lt;Range&gt;" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_iterator.html#standardese-otto::util"><code>AdjacentRange</code></a></dt>
@@ -1539,38 +1598,6 @@ global keys.</dd>
 <dt><a href="doc_exception.html#standardese-otto::util::as_exception%3CData%3E"><code>as_exception</code></a></dt>
 <dd>&mdash; A wrapper for throwing arbitrary data</dd>
 </dl>
-</li>
-<li id="standardese-otto::util::audio" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::util::audio</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::util::audio::AudioFrame&lt;nChannels,SampleType&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>AudioFrame</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::util::audio::Graph" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>Graph</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::util::audio::Section&lt;T&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_audio.html#standardese-otto::util::audio::Section%3CT%3E"><code>Section</code></a></dt>
-<dd>&mdash; Agregate of an in and an out point, providing operations to compare and
-mutate one dimensional sections.</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::audio::add_all&lt;Rng1,Rng2&gt;(Rng1&amp;&amp;,Rng2&amp;&amp;)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>add_all</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::util::audio::mix(float,float,float)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_audio.html#standardese-otto::util::audio"><code>mix</code></a></dt>
-</dl>
-</li>
-</ul>
 </li>
 <li id="standardese-otto::util::base()" class="standardese-entity-index-item">
 <dl>
@@ -1801,43 +1828,11 @@ with category of at least <code>category</code></dd>
 <dd>&mdash; Wrap any type in a mutex, and guarantee that it is locked on every access.</dd>
 </dl>
 </li>
-<li id="standardese-otto::util::match&lt;Funcs,S,B,Ts&gt;(Funcs&amp;&amp;...)" class="standardese-entity-index-item">
+<li id="standardese-otto::util::match&lt;Var,Lambdas&gt;(Var&amp;&amp;,Lambdas...)" class="standardese-entity-index-item">
 <dl>
-<dt><a href="doc_poly-ptr.html#standardese-otto::util"><code>match</code></a></dt>
+<dt><a href="doc_type_traits.html#standardese-otto::util::match%3CVar,Lambdas%3E(Var&amp;&amp;,Lambdas...)"><code>match</code></a></dt>
+<dd>&mdash; Pattern matching for std::variant</dd>
 </dl>
-</li>
-<li id="standardese-otto::util::math" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::util::math</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::util::math::between&lt;T&gt;(T,T,T)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_math.html#standardese-otto::util::math"><code>between</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::util::math::modulo&lt;T&gt;(T,T)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_math.html#standardese-otto::util::math::modulo%3CT%3E(T,T)"><code>modulo</code></a></dt>
-<dd>&mdash; Real modulo for negative <code>a</code> too</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::math::round(float,int)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_math.html#standardese-otto::util::math"><code>round</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::util::math::split_values&lt;N&gt;(float,float,float)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_math.html#standardese-otto::util::math::split_values%3CN%3E(float,float,float)"><code>split_values</code></a></dt>
-<dd>&mdash; Split a number into <code>N</code> values between 0 and 1, each representing a Nth
-part of the range <code>[min,max]</code></dd>
-</dl>
-</li>
-<li id="standardese-otto::util::math::vec" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_math.html#standardese-otto::util::math"><code>vec</code></a></dt>
-</dl>
-</li>
-</ul>
 </li>
 <li id="standardese-otto::util::max_element&lt;Cont&gt;(Cont&amp;&amp;)" class="standardese-entity-index-item">
 <dl>
@@ -1903,11 +1898,6 @@ part of the range <code>[min,max]</code></dd>
 <li id="standardese-otto::util::poly_ptr&lt;Base,Ts&gt;" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_poly-ptr.html#standardese-otto::util"><code>poly_ptr</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::util::poly_variant&lt;Base,Types&gt;" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_poly_variant.html#standardese-otto::util"><code>poly_variant</code></a></dt>
 </dl>
 </li>
 <li id="standardese-otto::util::prev_permutation&lt;Cont&gt;(Cont&amp;&amp;)" class="standardese-entity-index-item">
@@ -2084,66 +2074,6 @@ otherwise it is <code>T2</code></dd>
 <dt><a href="doc_algorithm.html#standardese-otto::util"><code>swap_ranges</code></a></dt>
 </dl>
 </li>
-<li id="standardese-otto::util::timer" class="standardese-namespace-documentation">
-<h3 class="standardese-namespace-documentation-heading">Namespace <code>otto::util::timer</code></h3>
-<ul class="standardese-namespace-members">
-<li id="standardese-otto::util::timer::ScopedTimer" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::ScopedTimer"><code>ScopedTimer</code></a></dt>
-<dd>&mdash; A pointer to a timer, which stops and pops the timer upon destruction.</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::Timer" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::Timer"><code>Timer</code></a></dt>
-<dd>&mdash; Contains the actual timing data.</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::find_or_make(otto::util::timer::timer_id)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::find_or_make(otto::util::timer::timer_id)"><code>find_or_make</code></a></dt>
-<dd>&mdash; Find or create a child of the current top of the stack, which matches id
-<code>id</code>.</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::serialize()" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer"><code>serialize</code></a></dt>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::start(otto::util::timer::timer_id)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::start(otto::util::timer::timer_id)"><code>start</code></a></dt>
-<dd>&mdash; Start a timer with id <code>id</code>, and push it to the stack.</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::start_scoped(otto::util::timer::timer_id)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::start_scoped(otto::util::timer::timer_id)"><code>start_scoped</code></a></dt>
-<dd>&mdash; Start a timer with id <code>id</code>, and push it to the stack.</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::stop()" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::stop(otto::util::timer::Timer&amp;)"><code>stop</code></a></dt>
-<dd>&mdash; Stop the current timer, and pop it off the stack</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::tick(otto::util::timer::timer_id)" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::tick(otto::util::timer::timer_id)"><code>tick</code></a></dt>
-<dd>&mdash; Tick a timer with id <code>id</code>, and push it to the back of the stack if it is
-not there already.</dd>
-</dl>
-</li>
-<li id="standardese-otto::util::timer::timer_id" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_timer.html#standardese-otto::util::timer::timer_id"><code>timer_id</code></a></dt>
-<dd>&mdash; The type used to identify timers</dd>
-</dl>
-</li>
-</ul>
-</li>
 <li id="standardese-otto::util::to_string(JsonFile::ErrorCode)" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_jsonfile.html#standardese-otto::util::to_string(JsonFile::ErrorCode)"><code>to_string</code></a></dt>
@@ -2214,6 +2144,21 @@ not there already.</dd>
 </dl>
 </li>
 </ul>
+</li>
+<li id="standardese-otto" class="standardese-namespace-documentation">
+<h2 class="standardese-namespace-documentation-heading">Namespace <code>otto</code></h2>
+<p class="standardese-brief-section">A simple stack-based library used to time nested parts of a program.</p>
+<ul class="standardese-namespace-members">
+<li id="standardese-otto::fs" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_filesystem.html#standardese-otto"><code>fs</code></a></dt>
+</dl>
+</li>
+<li id="standardese-otto::tape_buffer" class="standardese-entity-index-item">
+<dl>
+<dt><a href="doc_tapebuffer.html#standardese-otto::tape_buffer"><code>tape_buffer</code></a></dt>
+<dd>&mdash; The buffer used for the tapedeck</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -2377,11 +2322,6 @@ the library, look at <code>core&#x2F;ui&#x2F;widgets.hpp</code> and <code>core&#
 <li id="standardese-poly-ptr.hpp" class="standardese-entity-index-item">
 <dl>
 <dt><a href="doc_poly-ptr.html#standardese-poly-ptr.hpp"><code>poly-ptr.hpp</code></a></dt>
-</dl>
-</li>
-<li id="standardese-poly_variant.hpp" class="standardese-entity-index-item">
-<dl>
-<dt><a href="doc_poly_variant.html#standardese-poly_variant.hpp"><code>poly_variant.hpp</code></a></dt>
 </dl>
 </li>
 <li id="standardese-processor.hpp" class="standardese-entity-index-item">

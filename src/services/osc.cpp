@@ -33,7 +33,7 @@ namespace otto::service::osc {
     sin.sin_port = htons(9000);
     sin.sin_addr.s_addr = INADDR_ANY;
     bind(fd, (struct sockaddr *) &sin, sizeof(struct sockaddr_in));
-    LOGI("tinyosc is now listening on port 9000.\n");
+    LOGI("tinyosc is now listening on port 9000.");
 
     while (otto::global::running()) {
       using OKey = core::ui::Key;

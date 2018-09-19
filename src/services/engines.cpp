@@ -44,6 +44,7 @@ namespace otto::service::engines {
   {
     engineGetters.try_emplace("Synth", [&]() { return (AnyEngine*) &*synth; });
 
+    register_engine<otto::engines::NukeSynth>();
     register_engine<otto::engines::quadsawSynth>();
 
     synth.init();

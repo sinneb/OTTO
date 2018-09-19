@@ -5,6 +5,7 @@
 #include "core/globals.hpp"
 
 #include "engines/synths/nuke/nuke.hpp"
+#include "engines/synths/quadsaw/quadsaw.hpp"
 
 #include "services/state.hpp"
 #include "services/ui.hpp"
@@ -43,7 +44,7 @@ namespace otto::service::engines {
   {
     engineGetters.try_emplace("Synth", [&]() { return (AnyEngine*) &*synth; });
 
-    register_engine<otto::engines::NukeSynth>();
+    register_engine<otto::engines::quadsawSynth>();
 
     synth.init();
 

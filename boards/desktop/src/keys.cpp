@@ -31,23 +31,23 @@ namespace otto::board::ui {
 
     if (mods & Modifier::alt) {
       switch (key) {
-      case Key::q:  send_midi(17); return;
-      case Key::n2: send_midi(18); return;
-      case Key::w:  send_midi(19); return;
-      case Key::n3: send_midi(20); return;
-      case Key::e:  send_midi(21); return;
-      case Key::r:  send_midi(22); return;
-      case Key::n5: send_midi(23); return;
-      case Key::t:  send_midi(24); return;
-      case Key::n6: send_midi(25); return;
-      case Key::y:  send_midi(26); return;
-      case Key::n7: send_midi(27); return;
-      case Key::u:  send_midi(28); return;
-      case Key::i:  send_midi(29); return;
-      case Key::n9: send_midi(30); return;
-      case Key::o:  send_midi(31); return;
-      case Key::n0: send_midi(32); return;
-      case Key::p:  send_midi(33); return;
+      case Key::q:  send_midi(41); return;
+      case Key::n2: send_midi(42); return;
+      case Key::w:  send_midi(43); return;
+      case Key::n3: send_midi(44); return;
+      case Key::e:  send_midi(45); return;
+      case Key::r:  send_midi(46); return;
+      case Key::n5: send_midi(47); return;
+      case Key::t:  send_midi(48); return;
+      case Key::n6: send_midi(49); return;
+      case Key::y:  send_midi(50); return;
+      case Key::n7: send_midi(51); return;
+      case Key::u:  send_midi(52); return;
+      case Key::i:  send_midi(53); return;
+      case Key::n9: send_midi(54); return;
+      case Key::o:  send_midi(55); return;
+      case Key::n0: send_midi(56); return;
+      case Key::p:  send_midi(57); return;
       default: break;
       }
     }
